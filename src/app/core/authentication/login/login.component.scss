@@ -1,0 +1,63 @@
+.outerContainer {
+	background-image: url('http://localhost:4200/assets/images/auth-bg.jpg');
+	background-position: center center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	min-height: 100dvh;
+	padding: 3rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.authContainer {
+	max-width: 1440px;
+	width: 100%;
+	height: auto;
+	border-radius: 30px;
+	display: flex;
+	width: 100%;
+	box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+	max-height: calc(100dvh - 6rem);
+	min-height: 815px;
+
+	.left {
+		// background-color: rgba(255, 255, 255, 0.8);
+		background-color: #EBFEE5;
+		border-top-left-radius: 30px;
+		border-bottom-left-radius: 30px;
+		// flex: 1 1 100%;
+		min-width: 570px;
+		padding-inline: 2.25rem;
+		padding-block: 134px;
+
+		.highlightTxt {
+			font-size: 2.25rem;
+			font-weight: 600;
+			color: #121212;
+		}
+	}
+
+	.right {
+		background-color: rgb(56 99 65 / 16%);
+		border-top-right-radius: 30px;
+		border-bottom-right-radius: 30px;
+		backdrop-filter: blur(10px);
+		flex: 1 1 100%;
+		padding: 2rem;
+		padding: 2rem;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		// background-color: #EBFEE5;
+		.highlightTxt {
+			font-size: 3rem;
+			font-weight: 800;
+			color: #ffffff;
+			text-shadow: 1px 2px 3px #000000;
+		}
+	}
+
+
+}

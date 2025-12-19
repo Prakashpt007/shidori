@@ -1,1 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
+
+// banner size 1440px w * 1024px h
+
+// 40 blur
+
+// #EBFEE5
+
+// #386341
+
+
+// Base tokens
+$primary: #3f51b5;
+// $primary: #8c68cd;
+$secondary: #43475d;
+
+@import "bootstrap/scss/bootstrap";
+
+
+body {
+	font-family: "Poppins", sans-serif;
+	font-style: normal;
+	font-weight: 400;
+}
