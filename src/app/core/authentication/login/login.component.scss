@@ -21,6 +21,18 @@
 	max-height: calc(100dvh - 6rem);
 	min-height: 815px;
 
+	.btn {
+		border-radius: 30px;
+		box-shadow: var(--bs-box-shadow) !important;
+		--bs-box-shadow: 0 0 1rem rgba(0, 0, 0, 0.15);
+		background-color: #ffffff;
+		min-width: 177px;
+		min-height: 62px;
+		font-weight: 500;
+		font-size: 20px;
+		line-height: normal;
+	}
+
 	.left {
 		// background-color: rgba(255, 255, 255, 0.8);
 		background-color: #EBFEE5;
@@ -36,6 +48,28 @@
 			font-weight: 600;
 			color: #121212;
 		}
+
+		.dimTxt {
+			font-weight: 500;
+			opacity: 0.6;
+			margin-top: 0.75rem;
+			margin-bottom: 1.5rem;
+			color: #000000;
+		}
+
+		.form-group {
+			.form-label {
+				color: #000000;
+			}
+		}
+
+		.form-control {
+			background-color: transparent;
+			border-radius: 20px;
+			border: solid 1px #000000;
+			min-height: 51px;
+		}
+
 	}
 
 	.right {

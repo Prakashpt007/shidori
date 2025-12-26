@@ -1,0 +1,41 @@
+<div class="container-fluid" style="position: sticky;top: 0;z-index: 9999;background-color: var(--bs-body-bg);padding: 16px 24px;border-radius: 20px 20px 0 0;border-bottom: solid 1px var(--bs-link-color);">
+	<div class="d-flex justify-content-between align-items-center">
+		<a [routerLink]="['/home']">
+			<h1 class="m-0"><i class="fa-solid fa-rocket" style="color: var(--bs-link-color);"></i><b>Shidori</b></h1>
+		</a>
+		<!-- <div>A Taste of Happiness, Joy, Love, & Life Across Regions</div> -->
+		<div>
+			<ul class="navLinks d-flex gap-4 m-0 p-0 list-unstyled">
+				<li>
+					<a [routerLink]="['/home']" routerLinkActive="active">Home</a>
+				</li>
+				<li>
+					<a href="#">About</a>
+				</li>
+				<li>
+					<a href="#">Services</a>
+				</li>
+				<li>
+					<a href="#">Subscription Plan</a>
+				</li>
+			</ul>
+		</div>
+
+		<div class="d-flex justify-content align-items-center gap-3">
+			<div>
+				<a href="#"><i class="fa-solid fa-location-dot" style="color: var(--bs-link-color);"></i> Choose Location</a>
+			</div>
+			<div>|</div>
+			<div>
+				<a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+			</div>
+			<div>|</div>
+			<div>
+				<a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+			</div>
+			<div>|</div>
+			<a [routerLink]="['/login']" class="btn btn-outline-primary" style="font-family: 'Poppins', sans-serif;border-radius: 30px;--bs-btn-padding-y: 0.5rem;--bs-btn-padding-x: 1.2rem;display: flex;justify-content: center;align-items: center;gap: 0.5rem;font-weight: 600;"><i class="fa-solid fa-arrow-right-to-bracket"></i>Login</a>
+			<!-- <button class="btn btn-primary">Register</button> -->
+		</div>
+	</div>
+</div>
