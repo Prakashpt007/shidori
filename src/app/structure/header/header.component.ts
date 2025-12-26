@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, inject, viewChild } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-header',
@@ -9,5 +10,18 @@ import { RouterModule } from '@angular/router';
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
+  readonly locationConfirmation = viewChild.required<ElementRef>("locationConfirmation");
+  private modalService = inject(NgbModal);
 
+
+  getLocationInfo() {
+    this.modalService.open(this.locationConfirmation(), {
+      size: 'lg', scrollable: true, centered: false, backdrop: 'static'
+    }).result.then(
+      () => {
+
+      },
+      () => { }
+    );
+  }
 }
