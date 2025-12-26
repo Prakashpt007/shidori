@@ -11,6 +11,10 @@ export const routes: Routes = [
 		loadComponent: () => import('./structure/main-container/main-container.component').then(c => c.MainContainerComponent),
 		children: [
 			{ path: "home", loadComponent: () => import('./views/home/home.component').then(c => c.HomeComponent), data: { title: "Home Page" } },
+
+			{ path: "about", loadComponent: () => import('./views/about/about.component').then(c => c.AboutComponent), data: { title: "About Page" } },
+			{ path: "services", loadComponent: () => import('./views/services/services.component').then(c => c.ServicesComponent), data: { title: "Services Page" } },
+			{ path: "subscription-plans", loadComponent: () => import('./views/subscription-plans/subscription-plans.component').then(c => c.SubscriptionPlansComponent), data: { title: "Subscription Plans Page" } },
 		]
 	},
 	{

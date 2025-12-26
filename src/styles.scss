@@ -405,6 +405,10 @@ a {
 	box-shadow: 0 0 50px var(--bs-highlight-text) inset;
 }
 
+.container-fluid {
+	max-width: 1920px;
+}
+
 .item-card {
 	width: 325px;
 	border-radius: 16px;
@@ -426,8 +430,10 @@ a {
 		width: 100%;
 		// padding-top: 62%; // similar ratio
 		// padding-top: 70%;
-		padding-top: 75.6%; // maintains 328x248 aspect ratio
+		padding-top: calc(75.6% - 62px); // maintains 328x248 aspect ratio
 		overflow: hidden;
+		// 328x248 → 75.6% height/width ratio
+		padding-top: 75.6%;
 
 		img {
 			position: absolute;
@@ -444,17 +450,41 @@ a {
 	}
 
 	// header: name + rating badge
+	// &__header {
+	// 	display: flex;
+	// 	align-items: center;
+	// 	justify-content: space-between;
+	// 	margin-bottom: 4px;
+	// }
+
+	// &__header {
+	// 	display: flex;
+	// 	align-items: center;
+	// 	justify-content: space-between;
+	// 	padding: 32px 10px 8px 10px;
+	// 	color: #ffffff;
+	// 	background-image: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.7607843137) 40%);
+	// 	margin: 0;
+	// 	position: relative;
+	// }
+
 	&__header {
+		position: absolute;
+		inset: auto 0 0 0; // stick to bottom of image
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		margin-bottom: 4px;
+		padding: 32px 10px 8px;
+		color: #ffffff;
+		background-image: linear-gradient(180deg,
+				transparent,
+				rgba(0, 0, 0, 0.76) 40%);
 	}
 
 	&__name {
 		font-size: 15px;
 		font-weight: 600;
-		color: #1c1c1c;
+		color: #ffffff;
 		margin: 0;
 		white-space: nowrap;
 		overflow: hidden;
