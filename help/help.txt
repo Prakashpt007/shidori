@@ -1,1 +1,4 @@
 npx -p @angular/cli@17 ng new shidori --directory .
+
+
+npx -p @angular/cli ng new shidori-documentation --directory .

@@ -1,0 +1,16 @@
+<div class="paddingContainerFluid" style="background-color: #ededed;">
+	<div class="container-fluid">
+		<!-- <div #scrollContainer class="state-strip" (mousedown)="onMouseDown($event)" (mouseleave)="onMouseLeave()" (mouseup)="onMouseUp()" (mousemove)="onMouseMove($event)" (wheel)="onWheel($event)">
+			<a class="btn btn-sm btn-outline-primary" style="border-radius: 999px;--bs-btn-padding-x: 1rem;" *ngFor="let item of childData()" [routerLink]="['/state', item.id]" (click)="onItemClick($event, item)">
+				{{ item.name }}
+			</a>
+		</div> -->
+
+
+		<div #scrollContainer class="state-strip" (mousedown)="onMouseDown($event)" (mouseleave)="onMouseLeave()" (mouseup)="onMouseUp()" (mousemove)="onMouseMove($event)" (wheel)="onWheel($event)">
+			<a class="state-chip" style="border-radius: 999px;--bs-btn-padding-x: 1rem;" *ngFor="let item of childData()" [routerLink]="[link(), item.id]" (click)="onItemClick($event, item)">
+				{{ item.name }}
+			</a>
+		</div>
+	</div>
+</div>

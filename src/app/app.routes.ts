@@ -1,24 +1,92 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-	{ path: "", redirectTo: "home", pathMatch: "full" },
-
-	{ path: "login", loadComponent: () => import('./core/authentication/login/login.component').then(c => c.LoginComponent), data: { title: "Login Page" } },
-	{ path: "register", loadComponent: () => import('./core/authentication/register/register.component').then(c => c.RegisterComponent), data: { title: "Register Page" } },
-
+	{
+		path: "",
+		redirectTo: "home",
+		pathMatch: "full"
+	},
+	{
+		path: "login",
+		loadComponent: () => import('./core/authentication/login/login.component').then(c => c.LoginComponent),
+		data: { title: "Login Page" }
+	},
+	{
+		path: "register",
+		loadComponent: () => import('./core/authentication/register/register.component').then(c => c.RegisterComponent),
+		data: { title: "Register Page" }
+	},
 	{
 		path: "",
 		loadComponent: () => import('./structure/main-container/main-container.component').then(c => c.MainContainerComponent),
 		children: [
-			{ path: "home", loadComponent: () => import('./views/home/home.component').then(c => c.HomeComponent), data: { title: "Home Page" } },
+			{
+				path: "home",
+				loadComponent: () => import('./views/home/home.component').then(c => c.HomeComponent),
+				data: { title: "Home Page" }
+			}
 
-			{ path: "about", loadComponent: () => import('./views/about/about.component').then(c => c.AboutComponent), data: { title: "About Page" } },
-			{ path: "services", loadComponent: () => import('./views/services/services.component').then(c => c.ServicesComponent), data: { title: "Services Page" } },
-			{ path: "subscription-plans", loadComponent: () => import('./views/subscription-plans/subscription-plans.component').then(c => c.SubscriptionPlansComponent), data: { title: "Subscription Plans Page" } },
+		]
+	},
+	{
+		path: "",
+		loadComponent: () => import('./structure/common-layout/common-layout.component').then(c => c.CommonLayoutComponent),
+		// loadComponent: () => import('./structure/main-container/main-container.component').then(c => c.MainContainerComponent),
+		children: [
+			{
+				path: "about",
+				loadComponent: () => import('./views/about/about.component').then(c => c.AboutComponent),
+				data: { title: "About Page" }
+			},
+			{
+				path: "services",
+				loadComponent: () => import('./views/services/services.component').then(c => c.ServicesComponent),
+				data: { title: "Services Page" }
+			},
+			{
+				path: "subscription-plans",
+				loadComponent: () => import('./views/subscription-plans/subscription-plans.component').then(c => c.SubscriptionPlansComponent),
+				data: { title: "Subscription Plans Page" }
+			},
+			{
+				path: "regional-cuisines",
+				loadComponent: () => import('./views/regional-cuisines/template.component').then(c => c.TemplateComponent),
+				data: { title: "Regional Cuisines" },
+				children: [
+					{
+						path: "",
+						loadComponent: () => import('./views/regional-cuisines/all-regions/all-regions.component').then(c => c.AllRegionsComponent),
+					},
+					{
+						path: "region/:id",
+						loadComponent: () => import('./views/regional-cuisines/region/region.component').then(c => c.RegionComponent),
+						data: { title: "Regional Cuisines" }
+					},
+				]
+			},
+
+			{
+				path: "international-cuisines",
+				loadComponent: () => import('./views/international-cuisines/template.component').then(c => c.TemplateComponent),
+				data: { title: "International Cuisines" },
+				children: [
+					{
+						path: "",
+						loadComponent: () => import('./views/international-cuisines/all-regions/all-regions.component').then(c => c.AllRegionsComponent),
+					},
+					{
+						path: "region/:id",
+						loadComponent: () => import('./views/international-cuisines/region/region.component').then(c => c.RegionComponent),
+						data: { title: "International Cuisines" }
+					},
+				]
+			},
+
 		]
 	},
 	{
 		path: "**",
-		loadComponent: () => import('./core/error/error-404/error-404.component').then(c => c.Error404Component), data: { title: "Error 404 Page" }
+		loadComponent: () => import('./core/error/error-404/error-404.component').then(c => c.Error404Component),
+		data: { title: "Error 404 Page" }
 	}
 ];

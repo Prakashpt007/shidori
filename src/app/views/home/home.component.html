@@ -18,12 +18,12 @@
 	</div>
 </div>
 
-<div class="container-fluid">
+<div class="container-fluid pb-3">
 	<div class="row">
 		<div class="col-12 my-5 text-center">
 			<h1 class="introTxt d-flex justify-content-center align-items-center gap-3">
 				<div>The</div>
-				<img src="assets/images/dish.svg" alt="..." class="card-img-top" style="width: 90px;height: auto;">
+				<img src="assets/images/dish.svg" alt="..." loading="lazy" class="card-img-top" style="width: 90px;height: auto;">
 				<div>Shidori</div>
 			</h1>
 			<h3 class="introTxt" style="font-size: 2rem;font-weight: 500;font-style: italic;"><span>A Taste of Happiness</span>, <span>Joy</span>, <span>Love</span>, & <span>Life Across Regions</span></h3>
@@ -43,13 +43,13 @@
 
 <div class="seperator"></div>
 
-<div class="container-fluid">
+<div class="container-fluid pt-3">
 	<div class="py-5">
 		<h4 class="mb-3 text-center subTitle">What We Serve</h4>
 		<h2 class="mb-5 text-center title">Your Favorite Food, <br />Delivery Partner</h2>
 		<div class="introCardsContainer">
 			<div class="card">
-				<img src="assets/images/easy-order-2.svg" class="card-img-top" alt="...">
+				<img src="assets/images/easy-order-2.svg" loading="lazy" class="card-img-top" alt="...">
 				<div class="card-body">
 					<h5 class="card-title">Easy To Order</h5>
 					<p class="card-text">You only need a few steps to order food</p>
@@ -57,7 +57,7 @@
 				</div>
 			</div>
 			<div class="card">
-				<img src="assets/images/fast-delivery.svg" class="card-img-top" alt="...">
+				<img src="assets/images/fast-delivery.svg" loading="lazy" class="card-img-top" alt="...">
 				<div class="card-body">
 					<h5 class="card-title">Fastest Delivery</h5>
 					<p class="card-text">Delivery that is always anytime, even faster </p>
@@ -65,7 +65,7 @@
 				</div>
 			</div>
 			<div class="card">
-				<img src="assets/images/food-quality.svg" class="card-img-top" alt="...">
+				<img src="assets/images/food-quality.svg" loading="lazy" class="card-img-top" alt="...">
 				<div class="card-body">
 					<h5 class="card-title">Best Quality</h5>
 					<p class="card-text">Not only fast for us, but quality is also number one</p>
@@ -73,7 +73,7 @@
 				</div>
 			</div>
 			<div class="card">
-				<img src="assets/images/order-customisation.svg" class="card-img-top" alt="...">
+				<img src="assets/images/order-customisation.svg" loading="lazy" class="card-img-top" alt="...">
 				<div class="card-body">
 					<h5 class="card-title">A Big Customisation</h5>
 					<p class="card-text">Customise your order exactly how you like it</p>
@@ -85,610 +85,16 @@
 </div>
 
 
-<div class="container-fluid">
-	<div class="py-5">
-		<h4 class="mb-3 text-center subTitle">Top Picks for You</h4>
-		<h2 class="mb-3 text-center title">Our Featured</h2>
-		<div class="titleBorder">
-			<div class="linebar"></div>
-			<div class="dot"></div>
-			<div class="linebar"></div>
-		</div>
+<app-our-featured-section />
 
+<app-regional-cuisines-section />
 
-		<div class="d-flex justify-content-center align-items-center flex-wrap gap-4">
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-1.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
+<app-international-cuisines-section />
 
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
+<app-special-cuisines-section />
 
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
+<app-recommendation-section />
 
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-2.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-3.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-4.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-5.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="text-center mt-3">
-			<button class="btn btn-outline-primary see-more-button">See More<i class="fa-solid fa-circle-arrow-right"></i></button>
-		</div>
-
-	</div>
-</div>
-
-
-
-<div class="container-fluid">
-	<div class="py-5">
-		<h4 class="mb-3 text-center subTitle">Flavors from Every Region</h4>
-		<h2 class="mb-3 text-center title">Regional Cuisines</h2>
-		<div class="titleBorder">
-			<div class="linebar"></div>
-			<div class="dot"></div>
-			<div class="linebar"></div>
-		</div>
-
-		<div class="d-flex justify-content-center align-items-center flex-wrap gap-4">
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-1.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-2.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-3.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-4.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-5.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="text-center mt-3">
-			<button class="btn btn-outline-primary see-more-button">See More<i class="fa-solid fa-circle-arrow-right"></i></button>
-		</div>
-	</div>
-</div>
-
-
-<div class="container-fluid">
-	<div class="py-5">
-		<h4 class="mb-3 text-center subTitle">A World of Flavors</h4>
-		<h2 class="mb-3 text-center title">International Cuisines</h2>
-		<div class="titleBorder">
-			<div class="linebar"></div>
-			<div class="dot"></div>
-			<div class="linebar"></div>
-		</div>
-
-		<div class="d-flex justify-content-center align-items-center flex-wrap gap-4">
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-1.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-2.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-3.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-4.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-5.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="text-center mt-3">
-			<button class="btn btn-outline-primary see-more-button">See More<i class="fa-solid fa-circle-arrow-right"></i></button>
-		</div>
-	</div>
-</div>
-
-
-<div class="container-fluid">
-	<div class="py-5">
-		<h4 class="mb-3 text-center subTitle">Made for Special Moments</h4>
-		<h2 class="mb-3 text-center title">Special Cuisines</h2>
-		<div class="titleBorder">
-			<div class="linebar"></div>
-			<div class="dot"></div>
-			<div class="linebar"></div>
-		</div>
-
-		<div class="d-flex justify-content-center align-items-center flex-wrap gap-4">
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-1.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-2.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-3.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-4.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-
-			<div class="item-card">
-				<div class="item-card__image">
-					<img src="assets/images/items/item-5.jpg" alt="Restaurant" />
-					<div class="item-card__header">
-						<h3 class="item-card__name">Shidori Signature Shop</h3>
-						<span class="item-card__rating">
-							4.1
-							<span class="item-card__rating-star">★</span>
-						</span>
-					</div>
-				</div>
-
-				<div class="item-card__body">
-					<div class="item-card__meta">
-						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
-						<span class="item-card__price">₹300 for two</span>
-					</div>
-
-					<div class="item-card__footer">
-						<span class="item-card__area">Mankapur, Nagpur</span>
-						<span class="item-card__distance">4.6 km</span>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="text-center mt-3">
-			<button class="btn btn-outline-primary see-more-button">See More<i class="fa-solid fa-circle-arrow-right"></i></button>
-		</div>
-	</div>
-</div>
-
-
-<div class="container-fluid">
-	<div class="py-5">
-		<h4 class="mb-3 text-center subTitle">You Might Love These</h4>
-		<h2 class="mb-3 text-center title">Recommendation</h2>
-		<div class="titleBorder">
-			<div class="linebar"></div>
-			<div class="dot"></div>
-			<div class="linebar"></div>
-		</div>
-
-		<p class="text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia magni, deserunt rem animi aspernatur quasi deleniti minus architecto incidunt blanditiis, sequi tempora possimus, qui suscipit voluptas corrupti mollitia quas laborum.</p>
-
-		<div class="d-flex justify-content-center align-items-center flex-wrap gap-4 mt-4">
-			<div class="itemcard card" style="    border-radius: 20px;
-    overflow: hidden;">
-
-				<!-- <div class="card-body">dasasdad</div> -->
-			</div>
-
-		</div>
-		<div class="text-center mt-4">
-			<button class="btn btn-outline-primary btn-lg custom-button flex center">Expolore More<i class="fa-solid fa-arrow-right-long"></i></button>
-		</div>
-	</div>
-</div>
 <!-- <br>
 		<button class="btn btn-primary">Primary Button</button> <br>
 		<button class="btn btn-secondary">Secondary Button</button> <br>

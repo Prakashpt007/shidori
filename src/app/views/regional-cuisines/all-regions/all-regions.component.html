@@ -1,0 +1,163 @@
+<div class="py-5">
+	@for (obj of regionWiseCuisinesList(); track $index) {
+	<div class="container-fluid">
+		<div class="sliderMainContainer" style="margin-bottom: 50px;">
+			<div class="d-flex justify-content-between align-items-center">
+				<h4 class="m-0">{{obj.region}}</h4>
+				<a [routerLink]="['/regional-cuisines/region', obj.id]" class="btn btn-sm btn-outline-primary">View All</a>
+				<!-- <button class="btn btn-outline-primary see-more-button">See More<i class="fa-solid fa-circle-arrow-right"></i></button> -->
+			</div>
+
+
+			<!-- <div>
+				<div class="item-class veg">Veg</div>
+				<div class="item-class vegan">Vegan</div>
+				<div class="item-class jain">Jain</div>
+				<div class="item-class nonveg">Non-Veg</div>
+				<div class="item-class egg-food">Egg Food</div>
+				<div class="item-class see-food">See Food</div>
+			</div> -->
+			<owl-carousel-o [options]="customOptions" #owlCarousel>
+				@for (item of obj.list; track $index) {
+				<ng-template carouselSlide [width]="325">
+					<div class="menuItem">
+						<div class="item-image">
+							<img [src]="item.image_url" loading="lazy" [title]="item.name" [alt]="item.name" />
+							<div class="item-header">
+								<div class="item-heading-rating">
+									<h3 class="item-name">{{item.name}}</h3>
+									<span class="item-rating">
+										{{item.rating}}
+										<span class="item-star">★</span>
+									</span>
+								</div>
+								<!-- <div class="item-description">{{item.description}}</div> -->
+							</div>
+
+							<!-- @switch (item.food_class) {
+							@case ('NON_VEG') {
+							<div class="item-class nonveg">
+								<span></span>
+								<div class="label">NON-VEG</div>
+							</div>
+
+							}
+							@case ('VEG') {
+							<div class="item-class veg">
+								<span></span>
+								<div class="label">VEG</div>
+							</div>
+							}
+							@case ('VEGAN') {
+							<div class="item-class vegan">
+								<span></span>
+								<div class="label">VEGAN</div>
+							</div>
+							}
+							@case ('JAIN') {
+							<div class="item-class jain">
+								<span></span>
+								<div class="label">JAIN</div>
+							</div>
+							}
+							@case ('EGG') {
+							<div class="item-class egg-food">
+								<span></span>
+								<div class="label">EGG FOOD</div>
+							</div>
+							}
+							@case ('SEAFOOD') {
+							<div class="item-class see-food">
+								<span></span>
+								<div class="label">SEE FOOD</div>
+							</div>
+							}
+							} -->
+							<!-- <div class="item-class" [ngClass]="{
+								'nonveg':item.food_class == 'NON_VEG',
+								'veg':item.food_class == 'VEG',
+								'vegan':item.food_class == 'VEGAN',
+								'jain':item.food_class == 'JAIN',
+								'egg-food':item.food_class == 'EGG',
+								'see-food':item.food_class == 'SEAFOOD',
+							}">
+								<span></span>
+								<div>{{item.food_class}}</div>
+							</div> -->
+
+
+
+						</div>
+						<div class="item-body">
+							<div class="item-meta">
+								<span class="item-description">{{item.description}}</span>
+							</div>
+
+							@if(item.offer!=null){
+							<div class="item-price discountable">
+								<div class="d-flex align-items-start flex-column">
+									<div class="discountLabel">{{item.offer.discount_name}}</div>
+									<div class="item-footer align-items-center">
+										<span class="item-address"><i class="fa-solid fa-location-dot"></i> {{item.address}}</span>
+									</div>
+								</div>
+								<div class="d-flex align-items-end flex-column">
+									<!-- {{getDiscountedPercentage(item.offer.value, item.base_price)}} -->
+
+									<div class="finalPrice">
+										<i class="fa-solid fa-indian-rupee-sign"></i>
+										<span>{{getDiscountedPrice(item.offer.value, item.base_price)}}</span>
+									</div>
+
+									<div>
+										<div class="cropPrice">
+											<span>
+												<i class="fa-solid fa-indian-rupee-sign"></i>
+											</span>
+											<span>{{item.base_price}}</span>
+										</div>
+									</div>
+								</div>
+							</div>
+							} @else {
+							<div class="item-price">
+								<div class="d-flex flex-column">
+									<div class="item-footer align-items-center">
+										<span class="item-address"><i class="fa-solid fa-location-dot"></i> {{item.address}}</span>
+									</div>
+								</div>
+								<div class="d-flex align-items-end flex-column">
+									<div class="finalPrice">
+										<i class="fa-solid fa-indian-rupee-sign"></i>
+										<span>{{item.base_price}}</span>
+									</div>
+								</div>
+							</div>
+							}
+
+
+
+
+						</div>
+					</div>
+				</ng-template>
+				}
+			</owl-carousel-o>
+
+			<div class="custom-nav">
+				<button type="button" class="btn btn-outline-primary btn-sm" (click)="owlCarousel.prev()">
+					<!-- <i class="fa-solid fa-angles-left"></i> -->
+					<i class="fa-solid fa-arrow-left"></i>
+					<!-- <span>Prev</span> -->
+				</button>
+				<button type="button" class="btn btn-outline-primary btn-sm" (click)="owlCarousel.next()">
+					<!-- <span>Next</span> -->
+					<!-- <i class="fa-solid fa-angles-right"></i> -->
+					<i class="fa-solid fa-arrow-right"></i>
+				</button>
+			</div>
+		</div>
+	</div>
+	}
+
+</div>

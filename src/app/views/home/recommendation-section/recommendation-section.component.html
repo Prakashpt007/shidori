@@ -1,0 +1,72 @@
+<div class="container-fluid">
+	<div class="py-5">
+		<h4 class="mb-3 text-center subTitle">You Might Love These</h4>
+		<h2 class="mb-3 text-center title">Recommendation</h2>
+		<div class="titleBorder">
+			<div class="linebar"></div>
+			<div class="dot"></div>
+			<div class="linebar"></div>
+		</div>
+
+		<p class="d-none text-center">Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia magni, deserunt rem animi aspernatur quasi deleniti minus architecto incidunt blanditiis, sequi tempora possimus, qui suscipit voluptas corrupti mollitia quas laborum.</p>
+
+		<div class="d-none d-flex justify-content-center align-items-center flex-wrap gap-4 mt-4">
+			<div class="itemcard card" style="    border-radius: 20px;
+    overflow: hidden;">
+
+				<!-- <div class="card-body">dasasdad</div> -->
+			</div>
+
+		</div>
+
+		<div class="sliderMainContainer">
+
+			<owl-carousel-o [options]="customOptions" #owlCarousel>
+				@for (item of sliderData(); track $index) {
+				<ng-template carouselSlide [width]="325">
+					<div class="item-card">
+						<div class="item-card__image">
+							<img [src]="item.image" loading="lazy" [title]="item.title" [alt]="item.title" />
+							<div class="item-card__header">
+								<h3 class="item-card__name">{{item.title}}</h3>
+								<span class="item-card__rating">
+									{{item.rating}}
+									<span class="item-card__rating-star">★</span>
+								</span>
+							</div>
+						</div>
+
+						<div class="item-card__body">
+							<div class="item-card__meta">
+								<span class="item-card__cuisines">{{item.cuisines}}</span>
+								<span class="item-card__price">{{item.price}}</span>
+							</div>
+
+							<div class="item-card__footer">
+								<span class="item-card__area">{{item.area}}</span>
+								<span class="item-card__distance">{{item.distance}}</span>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+				}
+			</owl-carousel-o>
+
+			<div class="custom-nav">
+				<button type="button" class="btn btn-outline-primary btn-sm" (click)="owlCarousel.prev()">
+					<!-- <i class="fa-solid fa-angles-left"></i> -->
+					<i class="fa-solid fa-arrow-left"></i>
+					<!-- <span>Prev</span> -->
+				</button>
+				<button type="button" class="btn btn-outline-primary btn-sm" (click)="owlCarousel.next()">
+					<!-- <span>Next</span> -->
+					<!-- <i class="fa-solid fa-angles-right"></i> -->
+					<i class="fa-solid fa-arrow-right"></i>
+				</button>
+			</div>
+		</div>
+		<div class="text-center mt-4">
+			<button class="btn btn-outline-primary btn-lg custom-button flex center">Expolore More<i class="fa-solid fa-arrow-right-long"></i></button>
+		</div>
+	</div>
+</div>

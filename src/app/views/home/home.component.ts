@@ -1,17 +1,30 @@
-import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
+import { OurFeaturedSectionComponent } from "./our-featured-section/our-featured-section.component";
+import { RegionalCuisinesSectionComponent } from "./regional-cuisines-section/regional-cuisines-section.component";
+import { InternationalCuisinesSectionComponent } from "./international-cuisines-section/international-cuisines-section.component";
+import { SpecialCuisinesSectionComponent } from "./special-cuisines-section/special-cuisines-section.component";
+import { RecommendationSectionComponent } from "./recommendation-section/recommendation-section.component";
+import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
+import { CarouselComponent } from 'ngx-owl-carousel-o';
+import { ViewChild } from '@angular/core';
+import { SliderItem } from '../../utility/interfaces/sliderItem-interface';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule],
+  imports: [CommonModule, RouterModule, OurFeaturedSectionComponent, RegionalCuisinesSectionComponent, InternationalCuisinesSectionComponent, SpecialCuisinesSectionComponent, RecommendationSectionComponent, CarouselModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+
+
+  }
 
   // // Entry point
   // getStarted() {

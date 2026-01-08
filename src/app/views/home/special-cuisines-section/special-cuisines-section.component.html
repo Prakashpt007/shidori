@@ -1,0 +1,190 @@
+<div class="container-fluid">
+	<div class="py-5">
+		<h4 class="mb-3 text-center subTitle">Made for Special Moments</h4>
+		<h2 class="mb-3 text-center title">Special Cuisines</h2>
+		<div class="titleBorder">
+			<div class="linebar"></div>
+			<div class="dot"></div>
+			<div class="linebar"></div>
+		</div>
+
+		<div class="d-none d-flex justify-content-center align-items-center flex-wrap gap-4">
+			<div class="item-card">
+				<div class="item-card__image">
+					<img src="assets/images/items/item-1.jpg" alt="Restaurant" />
+					<div class="item-card__header">
+						<h3 class="item-card__name">Shidori Signature Shop</h3>
+						<span class="item-card__rating">
+							4.1
+							<span class="item-card__rating-star">★</span>
+						</span>
+					</div>
+				</div>
+
+				<div class="item-card__body">
+					<div class="item-card__meta">
+						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
+						<span class="item-card__price">₹300 for two</span>
+					</div>
+
+					<div class="item-card__footer">
+						<span class="item-card__area">Mankapur, Nagpur</span>
+						<span class="item-card__distance">4.6 km</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="item-card">
+				<div class="item-card__image">
+					<img src="assets/images/items/item-2.jpg" alt="Restaurant" />
+					<div class="item-card__header">
+						<h3 class="item-card__name">Shidori Signature Shop</h3>
+						<span class="item-card__rating">
+							4.1
+							<span class="item-card__rating-star">★</span>
+						</span>
+					</div>
+				</div>
+
+				<div class="item-card__body">
+					<div class="item-card__meta">
+						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
+						<span class="item-card__price">₹300 for two</span>
+					</div>
+
+					<div class="item-card__footer">
+						<span class="item-card__area">Mankapur, Nagpur</span>
+						<span class="item-card__distance">4.6 km</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="item-card">
+				<div class="item-card__image">
+					<img src="assets/images/items/item-3.jpg" alt="Restaurant" />
+					<div class="item-card__header">
+						<h3 class="item-card__name">Shidori Signature Shop</h3>
+						<span class="item-card__rating">
+							4.1
+							<span class="item-card__rating-star">★</span>
+						</span>
+					</div>
+				</div>
+
+				<div class="item-card__body">
+					<div class="item-card__meta">
+						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
+						<span class="item-card__price">₹300 for two</span>
+					</div>
+
+					<div class="item-card__footer">
+						<span class="item-card__area">Mankapur, Nagpur</span>
+						<span class="item-card__distance">4.6 km</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="item-card">
+				<div class="item-card__image">
+					<img src="assets/images/items/item-4.jpg" alt="Restaurant" />
+					<div class="item-card__header">
+						<h3 class="item-card__name">Shidori Signature Shop</h3>
+						<span class="item-card__rating">
+							4.1
+							<span class="item-card__rating-star">★</span>
+						</span>
+					</div>
+				</div>
+
+				<div class="item-card__body">
+					<div class="item-card__meta">
+						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
+						<span class="item-card__price">₹300 for two</span>
+					</div>
+
+					<div class="item-card__footer">
+						<span class="item-card__area">Mankapur, Nagpur</span>
+						<span class="item-card__distance">4.6 km</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="item-card">
+				<div class="item-card__image">
+					<img src="assets/images/items/item-5.jpg" alt="Restaurant" />
+					<div class="item-card__header">
+						<h3 class="item-card__name">Shidori Signature Shop</h3>
+						<span class="item-card__rating">
+							4.1
+							<span class="item-card__rating-star">★</span>
+						</span>
+					</div>
+				</div>
+
+				<div class="item-card__body">
+					<div class="item-card__meta">
+						<span class="item-card__cuisines">Bakery, Chinese, Sichuan</span>
+						<span class="item-card__price">₹300 for two</span>
+					</div>
+
+					<div class="item-card__footer">
+						<span class="item-card__area">Mankapur, Nagpur</span>
+						<span class="item-card__distance">4.6 km</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="sliderMainContainer">
+
+			<owl-carousel-o [options]="customOptions" #owlCarousel>
+				@for (item of sliderData(); track $index) {
+				<ng-template carouselSlide [width]="325">
+					<div class="item-card">
+						<div class="item-card__image">
+							<img [src]="item.image" loading="lazy" [title]="item.title" [alt]="item.title" />
+							<div class="item-card__header">
+								<h3 class="item-card__name">{{item.title}}</h3>
+								<span class="item-card__rating">
+									{{item.rating}}
+									<span class="item-card__rating-star">★</span>
+								</span>
+							</div>
+						</div>
+
+						<div class="item-card__body">
+							<div class="item-card__meta">
+								<span class="item-card__cuisines">{{item.cuisines}}</span>
+								<span class="item-card__price">{{item.price}}</span>
+							</div>
+
+							<div class="item-card__footer">
+								<span class="item-card__area">{{item.area}}</span>
+								<span class="item-card__distance">{{item.distance}}</span>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+				}
+			</owl-carousel-o>
+
+			<div class="custom-nav">
+				<button type="button" class="btn btn-outline-primary btn-sm" (click)="owlCarousel.prev()">
+					<!-- <i class="fa-solid fa-angles-left"></i> -->
+					<i class="fa-solid fa-arrow-left"></i>
+					<!-- <span>Prev</span> -->
+				</button>
+				<button type="button" class="btn btn-outline-primary btn-sm" (click)="owlCarousel.next()">
+					<!-- <span>Next</span> -->
+					<!-- <i class="fa-solid fa-angles-right"></i> -->
+					<i class="fa-solid fa-arrow-right"></i>
+				</button>
+			</div>
+		</div>
+
+
+		<div class="text-center mt-3">
+			<button class="btn btn-outline-primary see-more-button">See More<i class="fa-solid fa-circle-arrow-right"></i></button>
+		</div>
+	</div>
+</div>

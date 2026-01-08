@@ -1,0 +1,152 @@
+{
+	"status": 200,
+	"success": true,
+	"message": "Success",
+	"data": [
+		{
+			"id": 1,
+			"image": "assets/images/items/item-1.jpg",
+			"name": "Punjabi"
+		},
+		{
+			"id": 2,
+			"image": "assets/images/items/item-2.jpg",
+			"name": "Rajasthani"
+		},
+		{
+			"id": 3,
+			"image": "assets/images/items/item-3.jpg",
+			"name": "Haryanvi"
+		},
+		{
+			"id": 4,
+			"image": "assets/images/items/item-4.jpg",
+			"name": "Uttar Pradesh"
+		},
+		{
+			"id": 5,
+			"image": "assets/images/items/item-5.jpg",
+			"name": "Uttarakhand"
+		},
+		{
+			"id": 6,
+			"image": "assets/images/items/item-6.jpg",
+			"name": "Kashmiri"
+		},
+		{
+			"id": 7,
+			"image": "assets/images/items/item-7.jpg",
+			"name": "Himachali"
+		},
+		{
+			"id": 8,
+			"image": "assets/images/items/item-8.jpg",
+			"name": "Maharashtrian"
+		},
+		{
+			"id": 9,
+			"image": "assets/images/items/item-9.jpg",
+			"name": "Gujarati"
+		},
+		{
+			"id": 10,
+			"image": "assets/images/items/item-10.jpg",
+			"name": "Goan"
+		},
+		{
+			"id": 11,
+			"image": "assets/images/items/item-12.jpg",
+			"name": "Tamil Nadu"
+		},
+		{
+			"id": 12,
+			"image": "assets/images/items/item-13.jpg",
+			"name": "Andhra"
+		},
+		{
+			"id": 13,
+			"image": "assets/images/items/item-14.jpg",
+			"name": "Telangana"
+		},
+		{
+			"id": 14,
+			"image": "assets/images/items/item-15.jpg",
+			"name": "Karnataka"
+		},
+		{
+			"id": 15,
+			"image": "assets/images/items/item-16.jpg",
+			"name": "Kerala"
+		},
+		{
+			"id": 16,
+			"image": "assets/images/items/item-17.jpg",
+			"name": "Bengali"
+		},
+		{
+			"id": 17,
+			"image": "assets/images/items/item-18.jpg",
+			"name": "Odia (Odisha)"
+		},
+		{
+			"id": 18,
+			"image": "assets/images/items/item-1.jpg",
+			"name": "Bihari"
+		},
+		{
+			"id": 19,
+			"image": "assets/images/items/item-2.jpg",
+			"name": "Jharkhand"
+		},
+		{
+			"id": 20,
+			"image": "assets/images/items/item-3.jpg",
+			"name": "Madhya Pradesh"
+		},
+		{
+			"id": 21,
+			"image": "assets/images/items/item-4.jpg",
+			"name": "Chhattisgarhi"
+		},
+		{
+			"id": 22,
+			"image": "assets/images/items/item-5.jpg",
+			"name": "Assamese"
+		},
+		{
+			"id": 23,
+			"image": "assets/images/items/item-6.jpg",
+			"name": "Meghalaya"
+		},
+		{
+			"id": 24,
+			"image": "assets/images/items/item-7.jpg",
+			"name": "Nagaland"
+		},
+		{
+			"id": 25,
+			"image": "assets/images/items/item-8.jpg",
+			"name": "Mizoram"
+		},
+		{
+			"id": 26,
+			"image": "assets/images/items/item-9.jpg",
+			"name": "Manipur"
+		},
+		{
+			"id": 27,
+			"image": "assets/images/items/item-10.jpg",
+			"name": "Tripura"
+		},
+		{
+			"id": 28,
+			"image": "assets/images/items/item-11.jpg",
+			"name": "Arunachal Pradesh"
+		},
+		{
+			"id": 29,
+			"image": "assets/images/items/item-12.jpg",
+			"name": "Sikkimese"
+		}
+	]
+}
