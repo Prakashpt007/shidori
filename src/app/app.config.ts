@@ -6,6 +6,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { provideHttpClient, withInterceptors, withInterceptorsFromDi } from '@angular/common/http';
 import { httpInterceptor } from './interceptors/http.interceptor';
 import { provideToastr } from 'ngx-toastr';
+import { provideStore } from '@ngrx/store';
+import { storeReducer } from './utility/store/store.reducer';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
@@ -13,6 +15,7 @@ export const appConfig: ApplicationConfig = {
 		provideAnimations(),
 		provideToastr(),
 		importProvidersFrom(NgbModule),
+		provideStore({ store: storeReducer }),
 		provideHttpClient(
 			withInterceptors([
 				httpInterceptor,

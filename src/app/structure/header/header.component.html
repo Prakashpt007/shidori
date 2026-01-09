@@ -24,7 +24,14 @@
 
 		<div class="d-flex justify-content align-items-center gap-3">
 			<div>
-				<button class="btn btn-sm" (click)="getLocationInfo()"><i class="fa-solid fa-location-dot" style="color: var(--bs-link-color);"></i> Choose Location</button>
+
+				<button class="btn btn-sm" (click)="getLocationInfo()"><i class="fa-solid fa-location-dot" style="color: var(--bs-link-color);"></i>
+					@if (currentLocationLabel()) {
+					{{ currentLocationLabel() }}
+					} @else{
+					Set your location
+					}
+				</button>
 			</div>
 			<div>|</div>
 			<div>
@@ -54,20 +61,68 @@
 	</div>
 	<div class="modal-body">
 		<p class="highlightText italic">“To help us deliver your favorite meals faster and show kitchens near you, please provide your location. You can either search and select your city manually, or use your current location for quick and accurate service.”</p>
-		<p class="highlightText text-center">Don’t worry — your location will be kept safe and secure.</p>
 
-		<div class="input-group mb-5 mt-5">
-			<input type="text" class="form-control" placeholder="Search your city...">
-			<button class="btn btn-secondary bg-gradient input-group-text" id="basic-addon1">Set My Location</button>
+		@if(!currentLocationLabel()){
+		<p class="highlightText text-center">Don’t worry — your location will be kept safe and secure.</p>
+		<div>
+			<div class="input-group mt-5 position-relative">
+
+				<input type="search" [disabled]="processToStore()" class="form-control" placeholder="Search your city..." [(ngModel)]="inputSearchCity" (ngModelChange)="onSearchChange($event)" (focus)="onInputFocus()" (blur)="onInputBlur($event)" autocomplete="off">
+
+				@if (showResults() && cityList().length) {
+				<div class="list-group position-absolute" style="top: 100%;left: 0;z-index: 1050;margin-top: 6px;max-height: 240px;overflow-y: auto;width: 100%;box-shadow: 0 10px 10px rgb(0 0 0 / 30%);">
+					@for (item of cityList(); track $index) {
+					<button type="button" class="list-group-item list-group-item-action" (mousedown)="onResultMouseDown($event)" (click)="setLocation(item)">
+						{{ item.city + ', ' + item.state + ' - ' + item.pincode }}
+					</button>
+					}
+				</div>
+				}
+
+
+			</div>
+
+			@if(searchCity!= ''){
+			<div class="mt-2" style="flex-basis: 100%;">
+				<button class="btn btn-secondary bg-gradient input-group-text" [disabled]="!searchCity || processToStore()" (click)="confirmLocation()">
+					@if(processToStore()){<i class="fa-solid fa-circle-notch fa-spin me-2"></i>}Set My Location - {{searchCity}}
+				</button>
+			</div>
+			}
+
+			<div class="seperatorBorder mb-4">
+				<div class="linebar"></div>
+				<div class="middle secondary">OR</div>
+				<div class="linebar"></div>
+			</div>
+			<div class="text-center mb-4">
+				<button [disabled]="processToStore()" (click)="getCurrentLocation()" class="btn btn-outline-primary my-3">@if(processToStore()){<i class="fa-solid fa-circle-notch fa-spin me-2"></i>}Use My Current Location <i class="fa-solid fa-location-crosshairs ms-2"></i></button>
+			</div>
+
 		</div>
-		<div class="seperatorBorder mb-4">
-			<div class="linebar"></div>
-			<div class="middle secondary">OR</div>
-			<div class="linebar"></div>
+
+		} @else{
+
+		<div class="card">
+			<div class="card-body p-sm-3 p-md-5">
+				<h5 class="card-subtitle mb-2 text-body-secondary">Current Location :</h5>
+				<!-- <h6 class="card-subtitle mb-2 text-body-secondary">Card subtitle</h6> -->
+				<h4>{{ currentLocationLabel() }}</h4>
+
+				<p class="highlightText m-0 mt-4">Don’t worry — your location will be kept safe and secure.</p>
+
+				<p class="m-0">still want to change location? <a role="button" class="custom-link" (click)="clearLocation()">click here</a></p>
+				<!-- <a href="#" class="card-link">Card link</a>
+				<a href="#" class="card-link">Another link</a> -->
+			</div>
 		</div>
-		<div class="text-center mb-4">
-			<button class="btn btn-outline-primary my-3">Use My Current Location <i class="fa-solid fa-location-crosshairs ms-2"></i></button>
-		</div>
+
+
+
+		}
+
+
+
 		<hr>
 		<div class="text-center"><strong>Note:</strong> This location information is only required for browsing and exploring kitchens near you.</div>
 	</div>

@@ -210,6 +210,18 @@ a {
 	&:focus {
 		color: var(--bs-link-color);
 	}
+
+}
+
+.custom-link {
+	text-decoration: underline;
+	color: var(--bs-link-color);
+
+	&:hover,
+	&:focus {
+		text-decoration: underline;
+		color: var(--bs-link-color);
+	}
 }
 
 

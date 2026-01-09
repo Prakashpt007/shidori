@@ -1,0 +1,17 @@
+{
+	"status": 200,
+	"success": true,
+	"message": "Success",
+	"data": [
+		{
+			"city": "Pune",
+			"pincode": 411032,
+			"state": "Maharashtra"
+		},
+		{
+			"city": "Pune",
+			"pincode": 411030,
+			"state": "Maharashtra"
+		}
+	]
+}

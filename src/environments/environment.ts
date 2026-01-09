@@ -1,4 +1,4 @@
-let baseUrl = "https://quantumsoft-demo-prj-jlpu.onrender.com/api";
+let baseUrl = "https://shidori/api";
 export const environment = {
 	production: false,
 	baseUrl: baseUrl,

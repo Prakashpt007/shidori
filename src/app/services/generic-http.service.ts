@@ -1,14 +1,14 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { environment } from '../../environments/environment';
 
 @Injectable({
 	providedIn: 'root'
 })
 export class GenericHttpService {
+	baseUrl: string = environment.baseUrl;
 	private http = inject(HttpClient);
-
-
 
 	constructor() { }
 
@@ -58,5 +58,9 @@ export class GenericHttpService {
 
 	getDataUsingURL(url: string,): Observable<any> {
 		return this.http.get<any>(url).pipe(catchError(this.handleError));
+	}
+
+	postDataWithBody(url: string, body: any): Observable<any> {
+		return this.http.post<any>(this.baseUrl + "/" + url, body).pipe(catchError(this.handleError));
 	}
 }
