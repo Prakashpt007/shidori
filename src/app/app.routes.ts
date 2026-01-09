@@ -82,6 +82,24 @@ export const routes: Routes = [
 				]
 			},
 
+
+			{
+				path: "special-cuisines",
+				loadComponent: () => import('./views/special-cuisines/template/template.component').then(c => c.TemplateComponent),
+				data: { title: "Special Cuisines" },
+				children: [
+					{
+						path: "",
+						loadComponent: () => import('./views/special-cuisines/all/all.component').then(c => c.AllComponent),
+					},
+					{
+						path: "type/:id",
+						loadComponent: () => import('./views/special-cuisines/cuisine-type/cuisine-type.component').then(c => c.CuisineTypeComponent),
+						data: { title: "Special Cuisines" }
+					},
+				]
+			},
+
 		]
 	},
 	{

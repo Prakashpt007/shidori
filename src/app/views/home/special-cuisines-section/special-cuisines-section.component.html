@@ -140,27 +140,14 @@
 			<owl-carousel-o [options]="customOptions" #owlCarousel>
 				@for (item of sliderData(); track $index) {
 				<ng-template carouselSlide [width]="325">
-					<div class="item-card">
-						<div class="item-card__image">
-							<img [src]="item.image" loading="lazy" [title]="item.title" [alt]="item.title" />
-							<div class="item-card__header">
-								<h3 class="item-card__name">{{item.title}}</h3>
-								<span class="item-card__rating">
-									{{item.rating}}
-									<span class="item-card__rating-star">★</span>
-								</span>
-							</div>
-						</div>
-
-						<div class="item-card__body">
-							<div class="item-card__meta">
-								<span class="item-card__cuisines">{{item.cuisines}}</span>
-								<span class="item-card__price">{{item.price}}</span>
-							</div>
-
-							<div class="item-card__footer">
-								<span class="item-card__area">{{item.area}}</span>
-								<span class="item-card__distance">{{item.distance}}</span>
+					<div class="list-item-card">
+						<div class="image">
+							<img [src]="item.image" loading="lazy" [title]="item.name" [alt]="item.name" />
+							<div class="header">
+								<h3 class="name">{{item.name}}</h3>
+								<div class="link-details mt-3">
+									<a class="btn btn-primary btn-sm" [owlRouterLink]="['/special-cuisines/type', item.id]" [stopLink]="isDragging()">Know More <i class="fa-solid fa-arrow-right"></i></a>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -184,7 +171,8 @@
 
 
 		<div class="text-center mt-3">
-			<button class="btn btn-outline-primary see-more-button">See More<i class="fa-solid fa-circle-arrow-right"></i></button>
+
+			<a [routerLink]="['/special-cuisines']" class="btn btn-outline-primary see-more-button">See More<i class="fa-solid fa-circle-arrow-right"></i></a>
 		</div>
 	</div>
 </div>

@@ -1,0 +1,57 @@
+{
+	"status": 200,
+	"success": true,
+	"message": "Success",
+	"data": [
+		{
+			"id": 1,
+			"name": "Tandoori Roti",
+			"image_url": "assets/images/items/item-1.jpg",
+			"description": "A soft, slightly chewy Indian flatbread...",
+			"food_class": "VEG",
+			"address": "Nagpur - 440034",
+			"base_price": 50,
+			"rating": 4.4
+		},
+		{
+			"id": 2,
+			"name": "Tandoori Roti",
+			"image_url": "assets/images/items/item-2.jpg",
+			"description": "A soft, slightly chewy Indian flatbread...",
+			"food_class": "VEG",
+			"address": "Nagpur - 440034",
+			"base_price": 50,
+			"rating": 4.4
+		},
+		{
+			"id": 3,
+			"name": "Tandoori Roti",
+			"image_url": "assets/images/items/item-3.jpg",
+			"description": "A soft, slightly chewy Indian flatbread...",
+			"food_class": "VEG",
+			"address": "Nagpur - 440034",
+			"base_price": 50,
+			"rating": 4.4
+		},
+		{
+			"id": 4,
+			"name": "Tandoori Roti",
+			"image_url": "assets/images/items/item-4.jpg",
+			"description": "A soft, slightly chewy Indian flatbread...",
+			"food_class": "VEG",
+			"address": "Nagpur - 440034",
+			"base_price": 50,
+			"rating": 4.4
+		},
+		{
+			"id": 5,
+			"name": "Tandoori Roti",
+			"image_url": "assets/images/items/item-5.jpg",
+			"description": "A soft, slightly chewy Indian flatbread...",
+			"food_class": "VEG",
+			"address": "Nagpur - 440034",
+			"base_price": 50,
+			"rating": 4.4
+		}
+	]
+}

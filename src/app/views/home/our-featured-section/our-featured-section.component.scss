@@ -124,3 +124,80 @@
 		height: 12px;
 	}
 }
+
+
+.item-class {
+	padding: 6px 12px;
+	border-radius: 6px;
+	font-weight: 500;
+
+	&.veg {
+		background: #E8F5E9;
+		color: #1B5E20;
+	}
+
+	&.vegan {
+		background: #E0F2F1;
+		color: #00695C;
+	}
+
+	&.jain {
+		background: #C8E6C9;
+		color: #2E7D32;
+	}
+
+	&.nonveg {
+		background: #FDECEA;
+		color: #B71C1C;
+	}
+
+	&.egg-food {
+		background: #FFF8E1;
+		color: #F57F17;
+	}
+
+	&.see-food {
+		background: #E3F2FD;
+		color: #01579B;
+	}
+}
+
+.discountLabel {
+	color: var(--bs-link-color);
+	font-weight: bold;
+}
+
+.item-price {
+	display: flex;
+	justify-content: space-between;
+}
+
+.cropPrice {
+	position: relative;
+	font-size: 12px;
+	opacity: 0.75;
+	font-weight: bold;
+	font-style: italic;
+
+	&::after {
+		border-top: 1px solid;
+		position: absolute;
+		content: "";
+		right: 0;
+		top: 50%;
+		left: 0;
+	}
+}
+
+.finalPrice {
+	font-size: 1rem;
+	font-weight: bold;
+	width: max-content;
+	// color: var(--bs-link-color);
+}
+
+.discountable {
+	.finalPrice {
+		color: var(--bs-link-color);
+	}
+}

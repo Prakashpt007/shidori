@@ -16,25 +16,40 @@
 			<div class="carousel-track">
 				@for (item of getVisibleItems(); track item.index) {
 				<div class="carousel-slide" [class.carousel-slide--offset-2]="item.offset === -2" [class.carousel-slide--offset-1]="item.offset === -1" [class.carousel-slide--offset-0]="item.offset === 0" [class.carousel-slide--offset-1-right]="item.offset === 1" [class.carousel-slide--offset-2-right]="item.offset === 2" [style.transform]="getTransform(item.offset)" [style.filter]="getOpacityFilter(item.offset)" (click)="goToItem(item.index)" [style.cursor]="item.offset === 0 ? 'default' : 'pointer'">
-					<div class="item-card">
-						<div class="item-card__image">
-							<img [src]="item.item.image" loading="lazy" [title]="item.item.title" [alt]="item.item.title" />
-							<div class="item-card__header">
-								<h3 class="item-card__name">{{ item.item.title }}</h3>
-								<span class="item-card__rating">
-									{{ item.item.rating }}
-									<span class="item-card__rating-star">★</span>
-								</span>
+
+
+					<div class="menuItem">
+						<div class="item-image">
+							<img [src]="item.item.image_url" loading="lazy" [title]="item.item.name" [alt]="item.item.name" />
+							<div class="item-header">
+								<div class="item-heading-rating">
+									<h3 class="item-name">{{item.item.name}}</h3>
+									<span class="item-rating">
+										{{item.item.rating}}
+										<span class="item-star">★</span>
+									</span>
+								</div>
 							</div>
+
+
 						</div>
-						<div class="item-card__body">
-							<div class="item-card__meta">
-								<span class="item-card__cuisines">{{ item.item.cuisines }}</span>
-								<span class="item-card__price">{{ item.item.price }}</span>
+						<div class="item-body">
+							<div class="item-meta">
+								<span class="item-description">{{item.item.description}}</span>
 							</div>
-							<div class="item-card__footer">
-								<span class="item-card__area">{{ item.item.area }}</span>
-								<span class="item-card__distance">{{ item.item.distance }}</span>
+
+							<div class="item-price">
+								<div class="d-flex flex-column">
+									<div class="item-footer align-items-center">
+										<span class="item-address"><i class="fa-solid fa-location-dot"></i> {{item.item.address}}</span>
+									</div>
+								</div>
+								<div class="d-flex align-items-end flex-column">
+									<div class="finalPrice">
+										<i class="fa-solid fa-indian-rupee-sign"></i>
+										<span>{{item.item.base_price}}</span>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -50,7 +65,7 @@
 
 	<!-- Dots -->
 	<div class="carousel-dots">
-		@for (item of items; track $index) {
+		@for (item of ourFeaturedList(); track $index) {
 		<button class="carousel-dot" [class.carousel-dot--active]="$index === currentIndex" (click)="currentIndex = $index"></button>
 		}
 	</div>

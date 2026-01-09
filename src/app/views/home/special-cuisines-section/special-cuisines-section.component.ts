@@ -1,112 +1,75 @@
-import { Component, signal, ViewChild } from '@angular/core';
+import { Component, inject, signal, ViewChild, WritableSignal } from '@angular/core';
 import { CarouselComponent, CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { SliderItem } from '../../../utility/interfaces/sliderItem-interface';
+import { HomePageCuisineCategoryList } from '../../../utility/interfaces/sliderItem-interface';
+import { ToastrService } from 'ngx-toastr';
+import { GenericHttpService } from '../../../services/generic-http.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-special-cuisines-section',
-  standalone: true,
-  imports: [CarouselModule],
-  templateUrl: './special-cuisines-section.component.html',
-  styleUrl: './special-cuisines-section.component.scss'
+	selector: 'app-special-cuisines-section',
+	standalone: true,
+	imports: [CarouselModule, RouterLink],
+	templateUrl: './special-cuisines-section.component.html',
+	styleUrl: './special-cuisines-section.component.scss'
 })
 export class SpecialCuisinesSectionComponent {
-  @ViewChild('owlCarousel', { static: false })
-  owlCarousel!: CarouselComponent;
-  customOptions: OwlOptions = {
-    loop: true,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: false,
-    dots: false,
-    navSpeed: 700,
-    nav: false,
-    navText: ['<i class="fa-solid fa-angles-left"></i> Prev', 'Next <i class="fa-solid fa-angles-right"></i>'],
 
-    autoWidth: true,
-    margin: 24,
-    autoplay: true,
-    autoplayTimeout: 5000,
-    autoplaySpeed: 700,
-    autoplayHoverPause: true,
-    autoplayMouseleaveTimeout: 5000,
-    center: true,        // keep active slide in visual center
-    stagePadding: 25,    // how much of side items you want visible
-  };
+	@ViewChild('owlCarousel', { static: false })
+	owlCarousel!: CarouselComponent;
+	customOptions: OwlOptions = {
+		loop: true,
+		mouseDrag: true,
+		touchDrag: true,
+		pullDrag: false,
+		dots: false,
+		navSpeed: 700,
+		nav: false,
+		navText: ['<i class="fa-solid fa-angles-left"></i> Prev', 'Next <i class="fa-solid fa-angles-right"></i>'],
 
-
-
-  sliderData = signal<SliderItem[]>([]);
+		autoWidth: true,
+		margin: 24,
+		autoplay: false,
+		autoplayTimeout: 5000,
+		autoplaySpeed: 700,
+		autoplayHoverPause: true,
+		autoplayMouseleaveTimeout: 5000,
+		center: true,        // keep active slide in visual center
+		stagePadding: 25    // how much of side items you want visible
+	};
 
 
-  ngOnInit() {
 
-    this.sliderData.update(prev => [
-      ...prev,
-      {
-        title: 'Item 1',
-        image: 'assets/images/items/item-1.jpg',
-        cuisines: "Bakery, Chinese, Sichuan",
-        rating: "4.1",
-        price: "₹300 for two",
-        area: "Mankapur, Nagpur",
-        distance: "4.6 km",
-      },
-      {
-        title: 'Item 2',
-        image: 'assets/images/items/item-2.jpg',
-        cuisines: "Bakery, Chinese, Sichuan",
-        rating: "4.1",
-        price: "₹300 for two",
-        area: "Mankapur, Nagpur",
-        distance: "4.6 km",
-      },
-      {
-        title: 'Item 3',
-        image: 'assets/images/items/item-3.jpg',
-        cuisines: "Bakery, Chinese, Sichuan",
-        rating: "4.1",
-        price: "₹300 for two",
-        area: "Mankapur, Nagpur",
-        distance: "4.6 km",
-      },
-      {
-        title: 'Item 4',
-        image: 'assets/images/items/item-4.jpg',
-        cuisines: "Bakery, Chinese, Sichuan",
-        rating: "4.1",
-        price: "₹300 for two",
-        area: "Mankapur, Nagpur",
-        distance: "4.6 km",
-      },
-      {
-        title: 'Item 5',
-        image: 'assets/images/items/item-5.jpg',
-        cuisines: "Bakery, Chinese, Sichuan",
-        rating: "4.1",
-        price: "₹300 for two",
-        area: "Mankapur, Nagpur",
-        distance: "4.6 km",
-      },
-      {
-        title: 'Item 6',
-        image: 'assets/images/items/item-6.jpg',
-        cuisines: "Bakery, Chinese, Sichuan",
-        rating: "4.1",
-        price: "₹300 for two",
-        area: "Mankapur, Nagpur",
-        distance: "4.6 km",
-      },
-      {
-        title: 'Item 10',
-        image: 'assets/images/items/item-10.jpg',
-        cuisines: "Bakery, Chinese, Sichuan",
-        rating: "4.1",
-        price: "₹300 for two",
-        area: "Mankapur, Nagpur",
-        distance: "4.6 km",
-      }
-    ]);
+	sliderData = signal<HomePageCuisineCategoryList[]>([]);
+	isDragging: WritableSignal<boolean> = signal(false);
 
-  }
+	regionLink = "/regional-cuisines/region";
+
+	listApi = "/assets/jsons/special-cuisine-list.json";
+
+	toastr = inject(ToastrService);
+	genericHttp = inject(GenericHttpService);
+
+	constructor() {
+
+		this.genericHttp.getDataUsingURL(this.listApi).subscribe({
+			next: (response: any) => {
+				if (response.success == 200 || response.success == true) {
+
+					this.sliderData.set(response.data);
+				} else {
+					this.toastr.error(response.message, response.status);
+				}
+
+			},
+			error: (err: any) => {
+				this.toastr.error(err.message, err.status);
+
+			},
+			complete: () => {
+				// console.log('completed');
+
+			}
+		});
+	}
 
 }

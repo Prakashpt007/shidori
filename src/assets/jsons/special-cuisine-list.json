@@ -1,0 +1,37 @@
+{
+	"status": 200,
+	"success": true,
+	"message": "Success",
+	"data": [
+		{
+			"id": 1,
+			"image": "assets/images/items/item-1.jpg",
+			"name": "Street Food"
+		},
+		{
+			"id": 2,
+			"image": "assets/images/items/item-2.jpg",
+			"name": "Biryani Special"
+		},
+		{
+			"id": 3,
+			"image": "assets/images/items/item-3.jpg",
+			"name": "Vegan Cuisine"
+		},
+		{
+			"id": 4,
+			"image": "assets/images/items/item-4.jpg",
+			"name": "Healthy Food"
+		},
+		{
+			"id": 5,
+			"image": "assets/images/items/item-4.jpg",
+			"name": "Dessert"
+		},
+		{
+			"id": 6,
+			"image": "assets/images/items/item-4.jpg",
+			"name": "Dessert"
+		}
+	]
+}
