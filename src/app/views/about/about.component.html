@@ -3,3 +3,59 @@
 		<p>about works!</p>
 	</div>
 </div>
+
+<div class="sliderMainContainer d-none">
+
+	<div class="carousel">
+		<div class="card">
+			<h3>card 1</h3>
+		</div>
+		<div class="card">
+			<h3>card 2</h3>
+		</div>
+		<div class="card">
+			<h3>card 3</h3>
+		</div>
+		<div class="card">
+			<h3>card 4</h3>
+		</div>
+		<div class="card">
+			<h3>card 5</h3>
+		</div>
+		<div class="card">
+			<h3>card 6</h3>
+		</div>
+		<div class="card">
+			<h3>card 7</h3>
+		</div>
+		<div class="card">
+			<h3>card 8</h3>
+		</div>
+		<div class="card">
+			<h3>card 9</h3>
+		</div>
+		<div class="card">
+			<h3>card 10</h3>
+		</div>
+		<div class="card">
+			<h3>card 11</h3>
+		</div>
+		<div class="card">
+			<h3>card 12</h3>
+		</div>
+	</div>
+</div>
+
+<div class="sliderMainContainer">
+	<button class="nav left" (click)="scrollPrev()">←</button>
+
+	<div #carousel class="carousel">
+		@for (item of items(); track $index) {
+		<div #card class="card">
+			{{ item }}
+		</div>
+		}
+	</div>
+
+	<button class="nav right" (click)="scrollNext()">→</button>
+</div>

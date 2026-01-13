@@ -8,6 +8,7 @@ import { httpInterceptor } from './interceptors/http.interceptor';
 import { provideToastr } from 'ngx-toastr';
 import { provideStore } from '@ngrx/store';
 import { storeReducer } from './utility/store/store.reducer';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
@@ -21,6 +22,6 @@ export const appConfig: ApplicationConfig = {
 				httpInterceptor,
 				// other interceptors, e.g. errorInterceptor, loaderInterceptor
 			])
-		),
+		), provideAnimationsAsync(),
 	]
 };

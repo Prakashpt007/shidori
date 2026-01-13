@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 // import { AuthenticationService } from '../services/authentication.service';
 
-const PUBLIC_ENDPOINTS = ['/public-kpi'];
+const PUBLIC_ENDPOINTS = ['regional-cuisine-list', 'international-cuisine-list', 'special-cuisine-list'];
 
 export const httpInterceptor: HttpInterceptorFn = (req, next) => {
 	const authService = inject(AuthenticationService);
@@ -16,6 +16,7 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
 
 	// 2) Private endpoints → check login
 	const token = authService.getAuthToken();
+
 
 	// if you want to force logout on missing token, uncomment:
 	// if (!token) {
@@ -31,6 +32,8 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
 			},
 		})
 		: req;
+
+	console.log('authReq', authReq);
 
 	return next(authReq);
 };
