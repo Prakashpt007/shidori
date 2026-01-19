@@ -33,18 +33,48 @@
 					}
 				</button>
 			</div>
+
 			<div>|</div>
+
 			<div>
-				<a href="#"><i class="fa-solid fa-magnifying-glass"></i></a>
+				<a type="button" class="iconInfoBtn"><i class="fa-solid fa-magnifying-glass"></i></a>
 			</div>
+
 			<div>|</div>
+
 			<div>
-				<a href="#"><i class="fa-solid fa-cart-shopping"></i></a>
+				@if (cartCount$ | async; as count) {
+				<a type="button" class="iconInfoBtn activeBtn" [routerLink]="['/shopping/cart']">
+					<i class="fa-solid fa-cart-arrow-down"></i>
+					<div class="itemNumber">{{ count> 5 ? "5+": count }}</div>
+				</a>
+				} @else {
+				<a type="button" class="iconInfoBtn" [routerLink]="['/shopping/cart']">
+					<i class="fa-solid fa-cart-shopping"></i>
+				</a>
+				}
+
+				<!-- <a type="button" class="iconInfoBtn"><i class="fa-solid fa-cart-shopping"></i></a> -->
 			</div>
-			<div>
-				<a href="#"><i class="fa-solid fa-heart"></i></a>
-			</div>
+
 			<div>|</div>
+
+			<div>
+
+				@if (wishlistCount$ | async; as count) {
+				<a type="button" class="iconInfoBtn activeBtn" [routerLink]="['/shopping/wishlist']">
+					<i class="fa-regular fa-heart"></i>
+					<div class="itemNumber">{{ count> 5 ? "5+": count }}</div>
+				</a>
+				} @else {
+				<a type="button" class="iconInfoBtn" [routerLink]="['/shopping/wishlist']">
+					<i class="fa-solid fa-heart"></i>
+				</a>
+				}
+			</div>
+
+			<div>|</div>
+
 			<a [routerLink]="['/login']" class="btn btn-outline-primary" style="font-family: 'Poppins', sans-serif;border-radius: 30px;--bs-btn-padding-y: 0.5rem;--bs-btn-padding-x: 1.2rem;display: flex;justify-content: center;align-items: center;gap: 0.5rem;font-weight: 600;"><i class="fa-solid fa-arrow-right-to-bracket"></i>Login</a>
 			<!-- <button class="btn btn-primary">Register</button> -->
 		</div>

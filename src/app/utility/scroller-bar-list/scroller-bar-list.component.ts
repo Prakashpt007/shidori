@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, computed, ElementRef, input, InputSignal, ViewChild } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, computed, ElementRef, inject, input, InputSignal, ViewChild } from '@angular/core';
+import { ActivatedRoute, ParamMap, Router, RouterLink } from '@angular/router';
 
 @Component({
 	selector: 'app-scroller-bar-list',
@@ -13,6 +13,7 @@ export class ScrollerBarListComponent {
 	data: InputSignal<any[]> = input<any[]>([]);
 	link: InputSignal<any> = input<any>("");
 
+
 	childData = computed(() => this.data());
 
 	@ViewChild('scrollContainer', { static: true })
@@ -24,6 +25,24 @@ export class ScrollerBarListComponent {
 	private moved = false;
 	private readonly dragThreshold = 5;
 	private readonly wheelStep = 100; // adjust speed
+
+	itemId!: number | null;
+	// Inject the ActivatedRoute service
+	private route = inject(ActivatedRoute);
+	private router = inject(Router);
+
+
+	constructor() {
+
+	}
+
+	ngOnInit() {
+		this.route.paramMap.subscribe(params => {
+			const idParam = params.get('id');
+			this.itemId = idParam !== null ? Number(idParam) : null;
+			console.log('Current User ID:', this.itemId);
+		});
+	}
 
 	// drag handlers
 	onMouseDown(event: MouseEvent) {

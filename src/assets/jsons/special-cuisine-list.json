@@ -25,13 +25,13 @@
 		},
 		{
 			"id": 5,
-			"image": "assets/images/items/item-4.jpg",
+			"image": "assets/images/items/item-5.jpg",
 			"name": "Dessert"
 		},
 		{
 			"id": 6,
-			"image": "assets/images/items/item-4.jpg",
-			"name": "Dessert"
+			"image": "assets/images/items/item-6.jpg",
+			"name": "Fusion Cuisine"
 		}
 	]
 }

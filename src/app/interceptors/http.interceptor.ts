@@ -33,7 +33,7 @@ export const httpInterceptor: HttpInterceptorFn = (req, next) => {
 		})
 		: req;
 
-	console.log('authReq', authReq);
+	// console.log('authReq', authReq);
 
 	return next(authReq);
 };

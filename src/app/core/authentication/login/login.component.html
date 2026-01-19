@@ -1,54 +1,107 @@
-<div class="container centerView">
-
-	<form [formGroup]="loginForm" class="authForm">
-		<h4 class="mb-3">Login Form</h4>
-		<div class="form-floating mb-3">
-			<input type="email" class="form-control" formControlName="email" placeholder="email">
-			<label for="floatingInput">Email</label>
-		</div>
+<div style="display: flex;width: 100%;justify-content: space-evenly;">
+	<div class="col leftPanel" style="background-image: url('../assets/images/bg/bg-5.jpg');">
+		<h4 style="color: #fff; font-size: 5rem; text-align: center; text-shadow: 2px 3px 3px rgb(0 0 0 / 60%); margin-top: 5rem; font-weight: 300;">
+			Food isn’t just food <br>it’s a feeling..!
+		</h4>
+	</div>
 
 
-		<div class="mt-3">
-			<div class="textWithHorizontalLine mb-2">
-				<span>Login with :</span>
-				<span class="line"></span>
-			</div>
-			<div class="mb-3">
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" formControlName="authType" id="inlineRadio1" [value]="true">
-					<label class="form-check-label" for="inlineRadio1">OTP</label>
+	<div class="col rightPanel centerView">
+		<div class="background-image"></div>
+		<div style="z-index: 2;margin: 2rem;">
+			<h2 style="color: #fff; font-size: 3rem; text-align: center; margin-bottom: 2rem; text-shadow: 2px 3px 3px rgb(0 0 0 / 60%);">
+				Welcome to the Shidori
+			</h2>
+
+			@if(!otpLogin()){
+			<!-- Login Form -->
+			<form [formGroup]="loginForm" class="authForm" (ngSubmit)="formSubmit()">
+				<h4 class="mb-4">Sign in to continue</h4>
+				<div class="form-floating mb-3">
+					<input type="email" class="form-control" formControlName="email" id="userEmail" placeholder="email" [ngClass]="{'is-invalid': formSubmitHandler() && f['email'].errors}">
+					<label for="userEmail">Email</label>
+
+					@if(formSubmitHandler() && f['email'].errors){
+					<div class="invalid-feedback">
+						@if(f['email'].errors['required']){<div>Please Enter Email Address</div>}
+						@if(f['email'].errors['pattern']){<div>Please Enter Valid Email Address</div>}
+						@if(f['email'].errors['minlength']){<div>Minimum 6 Characters Required</div>}
+						@if(f['email'].errors['maxlength']){<div>Maximum 145 Characters Allowed</div>}
+					</div>
+					}
 				</div>
-				<div class="form-check form-check-inline">
-					<input class="form-check-input" type="radio" formControlName="authType" id="inlineRadio2" [value]="false">
-					<label class="form-check-label" for="inlineRadio2">Password</label>
+
+				<div class="mb-3" style="color: #ffffff;">
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="inputOTP" formControlName="authType" [value]="true">
+						<label for="inputOTP">OTP</label>
+					</div>
+					<div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" id="inputPassword" formControlName="authType" [value]="false">
+						<label for="inputPassword">Password</label>
+					</div>
 				</div>
-			</div>
+
+
+				@if(loginForm.controls['authType'].value === false){
+				<div>
+					<div class="form-floating mb-3">
+						<input type="password" class="form-control" formControlName="password" [ngClass]="{'is-invalid': formSubmitHandler() && f['password'].errors}" placeholder="**********">
+						<label>Password</label>
+
+						@if(formSubmitHandler() && f['password'].errors){
+						<div class="invalid-feedback">
+							@if(f['password'].errors['required']){<div>Please Enter Password</div>}
+						</div>
+						}
+					</div>
+
+
+					<hr style="border-color: #ffffff;" />
+					<div class="d-flex justify-content-between align-items-center">
+						<button type="submit" class="btn btn-primary">Submit</button>
+						<div class="impTextLink">Not registered? <a [routerLink]="['/register']" class="custom-link">Click to Register</a></div>
+					</div>
+				</div>
+				} @else {
+				<hr style="border-color: #ffffff;" />
+				<div>
+					<button type="button" class="btn btn-primary" (click)="sendOTP()">Send OTP</button>
+					<p class="mt-2 mb-0 muted-text"><strong>Note:</strong> OTP will be sent to registered email address.</p>
+				</div>
+				}
+
+
+			</form>
+			}
+
+			<!-- OTP Form -->
+			@if(otpLogin()){
+			<form [formGroup]="otpForm" class="authForm" (ngSubmit)="otpLoginFormSubmit()">
+				<h4 style="margin-bottom: 1.5rem; display: flex; justify-content: center; align-items: center; gap: 0.5rem; color: #fff;">
+					<i class="fa-solid fa-envelope"></i> {{ maskEmail(loginForm.controls['email'].value) }}
+				</h4>
+
+				<div class="otp-container d-flex gap-2">
+					@for (i of [].constructor(otpLength); track $index ) {
+					<input type="text" maxlength="1" [formControlName]="'otp' + $index" class="otp-input form-control text-center" (input)="onInput($event, $index)" (keydown)="onKeydown($event, $index)" (paste)="onPaste($event)" />
+					}
+				</div>
+
+				@if(otpForm.invalid && otpFormSubmitHandler()){
+				<div class="invalid-feedback mt-2 text-center">
+					Please enter valid OTP.
+				</div>
+				}
+				<hr style="border-color: #ffffff;" />
+				<div class="d-flex justify-content-between align-items-center mt-3">
+					<button type="submit" [disabled]="!isValid()" class="btn btn-primary btn-sm">Verify OTP</button>
+					<button disabled type="button" class="btn btn-primary btn-sm">
+						<i class="fa-solid fa-rotate-left"></i> Re-send OTP 0.30s
+					</button>
+				</div>
+			</form>
+			}
 		</div>
-
-
-		@if(loginForm.controls['authType'].value==false){
-		<div>
-			<div class="form-floating mb-3">
-				<input type="password" class="form-control" formControlName="password" placeholder="**********">
-				<label for="floatingInput">Password</label>
-			</div>
-
-
-			<hr />
-			<div class="text center">
-				<button type="submit" class="btn btn-primary">Submit</button>
-			</div>
-		</div>
-		} @else{
-		<div class="text center">
-			<button type="button" class="btn btn-primary">Send OTP</button>
-			<p class="mt-2 mb-0 muted-text"><strong>Note:</strong> OTP will be sent to registered email address.</p>
-		</div>
-		}
-
-		<!-- {{ loginForm.controls['email'].value }}
-		{{ loginForm.controls['authType'].value }} -->
-	</form>
-
-
+	</div>
 </div>

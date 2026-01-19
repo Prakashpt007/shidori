@@ -1,10 +1,83 @@
 .authForm {
-	box-shadow: 6px 7px 10px rgba(0, 0, 0, 0.2), inset 2px 2px 5px rgba(0, 0, 0, 0.2);
-	margin: 2rem;
+
+
+	.btn-primary:not(:disabled) {
+		// box-shadow: 1px 1px 45px #ffffff;
+		box-shadow: 0px 0px 35px rgb(255 255 255 / 25%);
+
+		&:hover {
+			box-shadow: 0px 0px 35px rgb(0 0 0 / 25%);
+			// box-shadow: 1px 1px 45px #000000;
+		}
+	}
+
+	.invalid-feedback {
+		display: block;
+		color: #ffcc48;
+	}
+
+	// box-shadow: 6px 7px 10px rgba(0, 0, 0, 0.2), inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+	// margin: 2rem;
+	// padding: 3rem;
+	// border-radius: 10px;
+	// max-width: 500px;
+	// width: 100%;
+
+
+
+	// box-shadow: 6px 7px 10px rgba(0, 0, 0, 0.2), inset 2px 2px 5px rgba(0, 0, 0, 0.2);
+
+
 	padding: 3rem;
 	border-radius: 10px;
 	max-width: 500px;
 	width: 100%;
+	-webkit-backdrop-filter: blur(30px);
+	backdrop-filter: blur(20px);
+	background-color: rgba(0, 0, 0, 0.16);
+	margin: 0 auto;
+	// padding: 3rem;
+	// border-radius: 20px;
+	// max-width: 500px;
+	// width: 100%;
+	// -webkit-backdrop-filter: blur(30px);
+	// backdrop-filter: blur(20px);
+	// background-color: rgb(255 255 255);
+	// margin: 0 auto;
+
+	// box-shadow: 13px 13px 13px rgb(0 0 0 / 35%);
+
+
+	h4,
+	p,
+	.form-check-inline label,
+	.textWithHorizontalLine {
+		color: #ffffff;
+	}
+
+
+	.form-check-input {
+		~label {
+			opacity: 0.8;
+		}
+
+		&:checked {
+			~label {
+				opacity: 1;
+			}
+		}
+	}
+
+	.impTextLink {
+		font-size: 0.875rem;
+		color: #ffffff;
+
+		.custom-link {
+			color: #ffffff;
+		}
+
+	}
+
 }
 
 .centerView {
@@ -31,4 +104,156 @@
 .muted-text {
 	opacity: 0.75;
 	font-size: 0.875rem;
+}
+
+
+
+.bg-wrapper {
+	position: fixed;
+	inset: 0;
+	overflow: hidden;
+	z-index: -1;
+}
+
+.bg-track {
+	display: flex;
+	width: max-content;
+	height: 100%;
+	// animation: bgScroll 1000s linear infinite;
+}
+
+.bg-slide {
+	min-width: 100vw;
+	height: 100vh;
+	background-size: contain;
+	background-position: center;
+}
+
+@keyframes bgScroll {
+	from {
+		transform: translateX(0);
+	}
+
+	to {
+		transform: translateX(-1000vw);
+		/* 10 images */
+	}
+}
+
+
+.leftPanel {
+	background-color: #000000;
+	background-position: center center;
+	background-size: cover;
+	display: flex;
+	justify-content: center;
+	// align-items: center;
+	background-blend-mode: multiply;
+	background-color: rgb(0 0 0 / 25%);
+
+}
+
+.rightPanel {
+	background-color: #ffffff;
+	position: relative;
+
+	.authForm {
+		z-index: 2;
+	}
+
+	.background-image {
+		position: absolute;
+		left: 0;
+		right: 0;
+		z-index: 1;
+		display: block;
+		width: 100%;
+		height: 100%;
+		// -webkit-filter: blur(100px);
+		// -moz-filter: blur(100px);
+		// -o-filter: blur(100px);
+		// -ms-filter: blur(100px);
+		// filter: blur(100px);
+		background-size: auto;
+		background-color: #000000;
+		// background-image: linear-gradient(45deg, #550306, #bb6201);
+
+
+		// /* 1. Warm amber → tomato (safe pick) */
+		// background-image: linear-gradient(45deg, #8A2B06, #F07C24);
+
+		// /* 2. Deep red → golden orange (more contrast) */
+		// background-image: linear-gradient(45deg, #761212, #FF9E2C);
+
+		// /* 3. Dark brown → soft orange (subtle) */
+		// background-image: linear-gradient(45deg, #4B1D0A, #E07A3F);
+
+		// /* 4. Charcoal → orange (card pops more) */
+		// background-image: linear-gradient(45deg, #2B1A17, #F0882F);
+
+
+
+		// background-image: linear-gradient(45deg, #8A0303, #FF6A00);
+		// background-image: linear-gradient(45deg, #5C0005, #E25822);
+		// background-image: linear-gradient(45deg, #3C1B16, #F29B3F);
+		// background-image: linear-gradient(45deg, #7A2E12, #FFA149);
+
+
+		// /* 1. Fire pan (rich, punchy) */
+		// background-image: linear-gradient(135deg,
+		// 		#3a0f0b 0%,
+		// 		#b52117 35%,
+		// 		#ff7a1a 70%,
+		// 		#ffcf4a 100%);
+
+		// /* 2. Sunset kitchen (modern dribbble style) */
+		// background-image: linear-gradient(120deg,
+		// 		#2b0f17 0%,
+		// 		#9f1d3f 30%,
+		// 		#ff6a3a 65%,
+		// 		#ffd66b 100%);
+
+		// /* 4. Orange‑berry (slightly more playful) */
+		// background-image: linear-gradient(130deg,
+		// 		#351023 0%,
+		// 		#d12b35 30%,
+		// 		#ff7f2a 60%,
+		// 		#ffe27a 100%);
+
+
+		// /* 4. Orange‑berry (slightly more playful) */
+		// background-image: linear-gradient(130deg,
+		// 		#351023 0%,
+		// 		#d12b35 30%,
+		// 		#ff7f2a 60%,
+		// 		#ffe27a 100%);
+
+
+		background-image: linear-gradient(131deg, #3a0f0b 0%, #b52117 35%, #ff7a1a 70%, #ffcf4a 100%);
+
+
+
+	}
+}
+
+
+
+
+.otp-container {
+	justify-content: center;
+}
+
+.otp-input {
+	width: 50px;
+	height: 50px;
+	font-size: 1.5rem;
+	text-align: center;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+}
+
+.otp-input:focus {
+	border-color: #007bff;
+	box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+	outline: none;
 }

@@ -8,9 +8,12 @@
 
 
 		<div #scrollContainer class="state-strip" (mousedown)="onMouseDown($event)" (mouseleave)="onMouseLeave()" (mouseup)="onMouseUp()" (mousemove)="onMouseMove($event)" (wheel)="onWheel($event)">
-			<a class="state-chip" style="border-radius: 999px;--bs-btn-padding-x: 1rem;" *ngFor="let item of childData()" [routerLink]="[link(), item.id]" (click)="onItemClick($event, item)">
+
+			@for (item of childData(); track $index) {
+			<a class="state-chip" style="border-radius: 999px;--bs-btn-padding-x: 1rem;" [routerLink]="[link(), item.id]" (click)="onItemClick($event, item)">
 				{{ item.name }}
 			</a>
+			}
 		</div>
 	</div>
 </div>

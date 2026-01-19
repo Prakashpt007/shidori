@@ -10,3 +10,13 @@ export const selectUserLocation = createSelector(
 	selectStoreState,
 	(state) => state.location
 );
+
+
+export const selectWishlist = createSelector(
+	selectStoreState,
+	(state) => state.wishlist
+);
+export const selectCartlist = createSelector(
+	selectStoreState,
+	(state) => state.cartlist
+);

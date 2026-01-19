@@ -100,6 +100,24 @@ export const routes: Routes = [
 				]
 			},
 
+			{
+				path: "shopping/cart",
+				loadComponent: () => import('./views/shopping/cart/cart.component').then(c => c.CartComponent),
+				data: { title: "Shopping Cart" }
+			},
+
+			{
+				path: "shopping/wishlist",
+				loadComponent: () => import('./views/shopping/wishlist/wishlist.component').then(c => c.WishlistComponent),
+				data: { title: "Shopping Wishlist" }
+			},
+
+			{
+				path: "shopping/item-details/:id",
+				loadComponent: () => import('./views/shopping/item-details/item-details.component').then(c => c.ItemDetailsComponent),
+				data: { title: "Item Details" }
+			},
+
 		]
 	},
 	{

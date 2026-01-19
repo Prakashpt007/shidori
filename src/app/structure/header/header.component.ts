@@ -7,9 +7,10 @@ import { ToastrService } from 'ngx-toastr';
 import { map } from 'rxjs/internal/operators/map';
 import { GenericHttpService } from '../../services/generic-http.service';
 import { Store } from '@ngrx/store';
-import { AppState, setUserLocation } from '../../utility/store/store.reducer';
-import { selectUserLocation } from '../../utility/store/store.selectors';
+import { AppState, hydrateWishlist, setUserLocation } from '../../utility/store/store.reducer';
+import { selectCartlist, selectUserLocation, selectWishlist } from '../../utility/store/store.selectors';
 import { CommonModule } from '@angular/common';
+import { tap } from 'rxjs';
 
 @Component({
 	selector: 'app-header',
@@ -22,7 +23,7 @@ export class HeaderComponent {
 	readonly locationConfirmation = viewChild.required<ElementRef>("locationConfirmation");
 	private modalService = inject(NgbModal);
 	http = inject(HttpClient);
-	store = inject(Store<AppState>);
+	private store = inject(Store<AppState>);
 
 	listApi = '/assets/jsons/locations.json';
 	storeLocationApi = 'save-location';
@@ -42,6 +43,15 @@ export class HeaderComponent {
 	private suppressBlurClose = false;
 	currentLocationLabel = signal<string>('');
 
+
+	wishlistCount$ = this.store.select(selectWishlist).pipe(
+		map(ids => ids?.length ?? 0)
+	);
+
+	cartCount$ = this.store.select(selectCartlist).pipe(
+		map(ids => ids?.length ?? 0)
+	);
+
 	constructor() {
 		this.userLocation$.subscribe(loc => {
 			if (loc) {
@@ -50,6 +60,7 @@ export class HeaderComponent {
 				this.currentLocationLabel.set('');
 			}
 		});
+
 	}
 
 

@@ -63,7 +63,6 @@
 		</button>
 	</div>
 
-	<!-- Dots -->
 	<div class="carousel-dots">
 		@for (item of ourFeaturedList(); track $index) {
 		<button class="carousel-dot" [class.carousel-dot--active]="$index === currentIndex" (click)="currentIndex = $index"></button>

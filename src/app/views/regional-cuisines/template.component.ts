@@ -24,6 +24,7 @@ export class TemplateComponent {
 
 	constructor() {
 
+
 		this.genericHttp.getDataUsingURL(this.listApi).subscribe({
 			next: (response: any) => {
 				if (response.success == 200 || response.success == true) {

@@ -1,56 +1,12 @@
 .carousel {
 	width: 100%;
-	overflow-x: auto;
+	overflow: hidden;
 	margin: 3em auto;
 	display: flex;
 	gap: 1em;
-	scroll-behavior: smooth;
-	anchor-name: --carousel;
-	scroll-snap-type: x mandatory;
-	scroll-marker-group: after;
 
-	&::-webkit-scrollbar {
-		display: none;
-	}
-
-	&::scroll-button(right),
-	&::scroll-button(left) {
-		content: "\2192";
-		border: none;
-		background-color: var(--bs-primary);
-		color: #ffffff;
-		height: 30px;
-		width: 30px;
-		border-radius: 50%;
-		padding-bottom: 0.1em;
-		cursor: pointer;
-		position: fixed;
-		position-anchor: --carousel;
-		position-area: right center;
-		font-size: 1rem;
-		font-weight: bold;
-
-		&:disabled {
-			opacity: 0.5;
-			cursor: auto;
-		}
-
-	}
-
-	&::scroll-marker-group {
-		display: flex;
-		justify-content: center;
-		gap: 0.5em;
-	}
-
-
-	&::scroll-button(left) {
-		content: "\2190";
-		position-area: left center;
-	}
 
 	.card {
-		scroll-snap-align: start;
 		flex: 0 0 325px;
 		aspect-ratio: 5/3;
 		color: #fff;
@@ -60,16 +16,46 @@
 		text-align: center;
 		align-items: center;
 
-		&::scroll-marker {
-			content: '';
-			height: 1em;
-			width: 1em;
-			background-color: var(--bs-secondary);
-			border-radius: 50%;
-
-			&:target-current {
-				background-color: var(--bs-primary);
-			}
-		}
 	}
+}
+
+.divvv {
+	display: grid;
+	grid-auto-flow: column;
+	grid-auto-columns: min-content;
+	padding-top: var(--space-1);
+	padding-bottom: var(--space-1);
+	position: relative;
+	--margin-left-override: 0;
+	--container-4: 1136px;
+	--scaling: 1;
+	--space-1: calc(4px * var(--scaling));
+	--margin-left: var(--space-9);
+	--space-9: calc(64px * var(--scaling));
+	padding-left: max(var(--margin-left), calc(50% - var(--container-4) / 2));
+
+
+}
+
+
+.HiddenScroll_HiddenScroll__vX5dJ {
+	overflow: scroll;
+	-webkit-overflow-scrolling: touch;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+	overscroll-behavior-x: contain;
+}
+
+.rt-Box {
+	box-sizing: border-box;
+	display: block;
+}
+
+.rt-r-pr-5 {
+	--scaling: 1;
+	--space-5: calc(24px * var(--scaling));
+	padding-right: var(--space-5);
+	cursor: grab;
+	background-color: red;
+	height: 300px;
 }

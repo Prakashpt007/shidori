@@ -9,6 +9,8 @@ import { provideToastr } from 'ngx-toastr';
 import { provideStore } from '@ngrx/store';
 import { storeReducer } from './utility/store/store.reducer';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { StoreEffects } from './utility/store/store.effects';
+import { provideEffects } from '@ngrx/effects';
 
 export const appConfig: ApplicationConfig = {
 	providers: [
@@ -17,6 +19,7 @@ export const appConfig: ApplicationConfig = {
 		provideToastr(),
 		importProvidersFrom(NgbModule),
 		provideStore({ store: storeReducer }),
+		provideEffects(StoreEffects),
 		provideHttpClient(
 			withInterceptors([
 				httpInterceptor,
