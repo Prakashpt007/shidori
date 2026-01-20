@@ -62,56 +62,6 @@
 			"address": "Kharbi, Nagpur-440034",
 			"base_price": 900.00,
 			"rating": 5.0
-		},
-		{
-			"id": 646533,
-			"name": "Samosa",
-			"image_url": "assets/images/street-foods/samosa.jpg",
-			"description": "A flavorful Indian dish of marinated chicken, traditionally cooked in a clay oven (tandoor), featuring a vibrant red-orange hue from spices like Kashmiri chili and paprika, a tangy yogurt base with ginger-garlic, and smoky depth from spices like cumin and garam masala, resulting in juicy, tender meat with charred edges, often served with naan and mint chutney. Key ingredients include chicken (drumsticks or thighs), thick yogurt, lemon juice, ginger-garlic paste, and a blend of spices (coriander, cumin, turmeric, chili powder, garam masala). ",
-			"food_class": "VEG",
-			"address": "Kharbi, Nagpur-440034",
-			"base_price": 50.00,
-			"rating": 4.7
-		},
-		{
-			"id": 75757554,
-			"name": "Bhel Puri",
-			"image_url": "assets/images/street-foods/bhel.jpg",
-			"description": "A soft, slightly chewy Indian flatbread made from whole wheat flour (atta) and leavening agents (baking powder/soda, yogurt) for a fluffy texture, often finished with butter or ghee, traditionally cooked in a clay tandoor but easily made on a hot griddle (tawa) by applying water to one side and cooking directly on flame for charring. Key ingredients include flour, salt, yogurt, oil, and leavening, with optional sugar, while the process involves kneading a soft dough, resting it, rolling it thick, and cooking on high heat for characteristic spots.",
-			"food_class": "VEG",
-			"address": "Kharbi, Nagpur-440034",
-			"base_price": 50.00,
-			"rating": 4.5
-		},
-		{
-			"id": 8678000,
-			"name": "Pani Puri",
-			"image_url": "assets/images/street-foods/pani-puri.jpg",
-			"description": "A flavorful Indian curry featuring chickpeas simmered in a spiced tomato-onion gravy with ginger, garlic, and a blend of aromatic spices like cumin, coriander, turmeric, and garam masala, resulting in a hearty, tangy, and savory dish often garnished with fresh cilantro and lemon juice. Key ingredients include chickpeas (dried or canned), onions, tomatoes, ginger, garlic, green chilies, oil/ghee, and spices, making it a popular vegetarian staple served with rice or flatbreads.",
-			"food_class": "VEG",
-			"address": "Kharbi, Nagpur-440034",
-			"base_price": 30.00,
-			"rating": 4.4
-		},
-		{
-			"id": 4246662,
-			"name": "Vada Pav",
-			"image_url": "assets/images/street-foods/vada-pav.jpg",
-			"description": "A rich, creamy North Indian lentil dish that achieves its classic buttery flavor without the use of onions or garlic, adhering to the dietary restrictions of Jain cuisine. The deep, earthy flavor comes from slow-cooked whole black gram (urad dal) and kidney beans (rajma), simmered in a spiced tomato base and finished with cream and butter. ",
-			"food_class": "VEG",
-			"address": "Kharbi, Nagpur-440034",
-			"base_price": 80.00,
-			"rating": 4.6
-		},
-		{
-			"id": 500789,
-			"name": "Dosa",
-			"image_url": "assets/images/street-foods/dosa.jpg",
-			"description": "A rich, creamy North Indian lentil dish that achieves its classic buttery flavor without the use of onions or garlic, adhering to the dietary restrictions of Jain cuisine. The deep, earthy flavor comes from slow-cooked whole black gram (urad dal) and kidney beans (rajma), simmered in a spiced tomato base and finished with cream and butter. ",
-			"food_class": "VEG",
-			"address": "Kharbi, Nagpur-440034",
-			"base_price": 120.00,
-			"rating": 4.8
 		}
 	]
 }

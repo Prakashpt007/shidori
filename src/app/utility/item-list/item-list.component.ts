@@ -1,4 +1,4 @@
-import { Component, inject, input, signal, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, input, QueryList, signal, ViewChild, ViewChildren } from '@angular/core';
 import { CarouselComponent, CarouselModule, OwlOptions, SlidesOutputData } from 'ngx-owl-carousel-o';
 import { ToastrService } from 'ngx-toastr';
 import { GenericHttpService } from '../../services/generic-http.service';
@@ -28,14 +28,14 @@ export class ItemListComponent {
 		nav: true,
 		navSpeed: 700,
 		autoWidth: true,
-		margin: 32,
+		margin: 28,
 		autoplay: true,
 		autoplayTimeout: 5000,
 		autoplaySpeed: 700,
 		autoplayHoverPause: true,
 		autoplayMouseleaveTimeout: 5000,
-		center: false,
-		stagePadding: 25,
+		center: true,
+		stagePadding: 0,
 		rewind: true,
 		slideBy: 1
 	};
@@ -70,12 +70,7 @@ export class ItemListComponent {
 		this.store.select(selectCartlist).subscribe(ids => {
 			this.cartlistIds = new Set(ids ?? []);
 		});
-
-
 	}
-
-
-
 
 	ngOnInit() {
 
@@ -212,5 +207,59 @@ export class ItemListComponent {
 		// navigate or open modal as you like
 		this.router.navigate(['/shopping/item-details', id]);
 		console.log('View details', id);
+	}
+
+
+	//----------------------- Drag to scroll functionality -----------------------//
+	@ViewChildren('slider')
+	sliders!: QueryList<ElementRef<HTMLDivElement>>;
+
+	private isDown: boolean[] = [];
+	private startX: number[] = [];
+	private scrollLeft: number[] = [];
+
+	onMouseDown(e: MouseEvent, idx: number) {
+		const slider = this.sliders.get(idx)?.nativeElement;
+		if (!slider) return;
+
+		this.isDown[idx] = true;
+		slider.classList.add('active');
+		this.startX[idx] = e.pageX - slider.offsetLeft;
+		this.scrollLeft[idx] = slider.scrollLeft;
+
+		// disable snap while dragging so it doesn’t fight
+		slider.style.scrollSnapType = 'none';
+		e.preventDefault();
+	}
+
+	onMouseLeave(idx: number) {
+		this.endDrag(idx);
+	}
+
+	onMouseUp(idx: number) {
+		this.endDrag(idx);
+	}
+
+	private endDrag(idx: number) {
+		const slider = this.sliders.get(idx)?.nativeElement;
+		if (!slider) return;
+
+		this.isDown[idx] = false;
+		slider.classList.remove('active');
+
+		// re‑enable snap so it finishes on the nearest card
+		slider.style.scrollSnapType = 'x mandatory';
+	}
+
+	onMouseMove(e: MouseEvent, idx: number) {
+		if (!this.isDown[idx]) return;
+
+		const slider = this.sliders.get(idx)?.nativeElement;
+		if (!slider) return;
+
+		e.preventDefault();
+		const x = e.pageX - slider.offsetLeft;
+		const walk = (x - this.startX[idx]) * 1; // same as your JS
+		slider.scrollLeft = this.scrollLeft[idx] - walk;
 	}
 }

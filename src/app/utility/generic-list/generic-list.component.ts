@@ -20,13 +20,15 @@ export class GenericListComponent {
 	owlCarousel!: CarouselComponent;
 
 	customOptions: OwlOptions = {
-		loop: true,              // change to true if you want infinite
+		loop: true,
 		mouseDrag: true,
 		touchDrag: true,
 		pullDrag: false,
 		dots: false,
-		nav: true,
 		navSpeed: 700,
+		nav: false,
+		navText: ['<i class="fa-solid fa-angles-left"></i> Prev', 'Next <i class="fa-solid fa-angles-right"></i>'],
+
 		autoWidth: true,
 		margin: 24,
 		autoplay: true,
@@ -34,12 +36,8 @@ export class GenericListComponent {
 		autoplaySpeed: 700,
 		autoplayHoverPause: true,
 		autoplayMouseleaveTimeout: 5000,
-		center: true,
-		stagePadding: 0,
-		mergeFit: true,
-		merge: true,
-		rewind: true,
-		slideBy: 1,
+		center: true,        // keep active slide in visual center
+		stagePadding: 0    // how much of side items you want visible
 	};
 
 

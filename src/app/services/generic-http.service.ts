@@ -61,6 +61,7 @@ export class GenericHttpService {
 	}
 
 	postDataWithBody(url: string, body: any): Observable<any> {
-		return this.http.post<any>(this.baseUrl + "/" + url, body).pipe(catchError(this.handleError));
+		// return this.http.post<any>(this.baseUrl + "/" + url, body).pipe(catchError(this.handleError));
+		return this.http.post<any>(url, body).pipe(catchError(this.handleError));
 	}
 }

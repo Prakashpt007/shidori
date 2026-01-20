@@ -5,17 +5,17 @@
 	"data": [
 		{
 			"id": 1,
-			"image": "assets/images/items/item-1.jpg",
+			"image": "assets/images/street-foods/samosa.jpg",
 			"name": "Street Food"
 		},
 		{
 			"id": 2,
-			"image": "assets/images/items/item-2.jpg",
+			"image": "assets/images/biryani-special/hyderabadi-dum-biryani.jpg",
 			"name": "Biryani Special"
 		},
 		{
 			"id": 3,
-			"image": "assets/images/items/item-3.jpg",
+			"image": "assets/images/vegan/aloo-gobhi.jpg",
 			"name": "Vegan Cuisine"
 		},
 		{

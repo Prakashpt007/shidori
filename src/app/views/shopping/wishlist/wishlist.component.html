@@ -1,3 +1,98 @@
 <div class="genContainerFluid">
-	<p>wishlist works!</p>
+	<section class="wishlist container-fluid py-4">
+
+		<!-- Header -->
+		<div class="d-flex justify-content-between align-items-center mb-3">
+			<div>
+				<h3 class="mb-0">My Wishlist</h3>
+				<small class="text-muted">
+					{{ wishlistItems().length }} saved items
+				</small>
+			</div>
+
+			<button class="btn btn-sm btn-primary" [disabled]="!wishlistItems().length" (click)="moveAllToCart()">
+				Move all to cart
+			</button>
+		</div>
+
+		<!-- Empty -->
+		@if (!wishlistItems().length) {
+		<div class="empty text-center py-5">
+			<h5 class="mb-2">No saved dishes yet</h5>
+			<p class="text-muted mb-3">
+				Tap the heart on any dish to save it here.
+			</p>
+			<a [routerLink]="['/home']" class="btn btn-outline-primary">
+				Browse menu
+			</a>
+		</div>
+		}
+
+		<!-- List -->
+		@if (wishlistItems().length) {
+		<div class="wishlist-list">
+			@for (item of wishlistItems(); track $index) {
+
+			<div class="wishlist-row d-flex">
+				<!-- Image -->
+				<div class="wishlist-thumb">
+					<img [src]="item.image_url" [alt]="item.name" class="img-fluid rounded-3" />
+				</div>
+
+				<!-- Info -->
+				<div class="wishlist-info flex-grow-1">
+					<div class="d-flex justify-content-between align-items-start">
+						<div>
+							<h6 class="mb-1">{{ item.id }} - {{ item.name }}</h6>
+
+							<div class="d-flex align-items-center mb-1">
+								<span class="rating-badge me-2">
+									★ {{ item.rating }}
+								</span>
+								<span class="text-muted small">
+									{{ item.food_class }}
+								</span>
+							</div>
+
+							<p class="text-muted small mb-1 line-clamp-2">
+								{{ item.description }}
+							</p>
+
+							<div class="text-muted small mb-2">
+								<i class="bi bi-geo-alt me-1"></i>{{ item.address }}
+							</div>
+						</div>
+
+						<div class="text-end">
+							<div class="price fw-semibold">
+								₹{{ item.base_price | number:'1.0-0' }}
+							</div>
+							<!-- Optional: show if already in cart -->
+							<small *ngIf="getCartlistItem(item.id)" class="text-success">
+								In your cart
+							</small>
+						</div>
+					</div>
+
+					<!-- Actions -->
+					<div class="d-flex flex-wrap gap-2 mt-2">
+						<button class="btn btn-sm btn-outline-secondary" (click)="viewDetails(item)">
+							View details
+						</button>
+
+						<button class="btn btn-sm btn-primary" [disabled]="getCartlistItem(item.id)" (click)="moveToCart(item)">
+							{{ getCartlistItem(item.id) ? 'Go to cart' : 'Add to cart' }}
+						</button>
+
+						<button class="btn btn-sm btn-link text-danger p-0 ms-auto" (click)="removeFromWishlist(item.id)">
+							Remove
+						</button>
+					</div>
+				</div>
+			</div>
+
+			}
+		</div>
+		}
+	</section>
 </div>

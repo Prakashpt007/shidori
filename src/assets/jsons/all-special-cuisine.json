@@ -8,44 +8,74 @@
 			"region": "Street Food",
 			"list": [
 				{
-					"id": 1,
-					"name": "Tandoori Chicken",
-					"image_url": "assets/images/items/item-1.jpg",
+					"id": 646533,
+					"name": "Samosa",
+					"image_url": "assets/images/street-foods/samosa.jpg",
 					"description": "A flavorful Indian dish of marinated chicken, traditionally cooked in a clay oven (tandoor), featuring a vibrant red-orange hue from spices like Kashmiri chili and paprika, a tangy yogurt base with ginger-garlic, and smoky depth from spices like cumin and garam masala, resulting in juicy, tender meat with charred edges, often served with naan and mint chutney. Key ingredients include chicken (drumsticks or thighs), thick yogurt, lemon juice, ginger-garlic paste, and a blend of spices (coriander, cumin, turmeric, chili powder, garam masala). ",
-					"food_class": "NON_VEG",
+					"food_class": "VEG",
 					"address": "Kharbi, Nagpur-440034",
-					"base_price": 300.00,
-					"rating": 4.5
+					"base_price": 50.00,
+					"rating": 4.7
 				},
 				{
-					"id": 2,
-					"name": "Tandoori Roti",
-					"image_url": "assets/images/items/item-2.jpg",
+					"id": 75757554,
+					"name": "Bhel Puri",
+					"image_url": "assets/images/street-foods/bhel.jpg",
 					"description": "A soft, slightly chewy Indian flatbread made from whole wheat flour (atta) and leavening agents (baking powder/soda, yogurt) for a fluffy texture, often finished with butter or ghee, traditionally cooked in a clay tandoor but easily made on a hot griddle (tawa) by applying water to one side and cooking directly on flame for charring. Key ingredients include flour, salt, yogurt, oil, and leavening, with optional sugar, while the process involves kneading a soft dough, resting it, rolling it thick, and cooking on high heat for characteristic spots.",
 					"food_class": "VEG",
 					"address": "Kharbi, Nagpur-440034",
-					"base_price": 50,
-					"rating": 3.2
+					"base_price": 50.00,
+					"rating": 4.5
 				},
 				{
-					"id": 3,
-					"name": "Chana Masala",
-					"image_url": "assets/images/items/item-3.jpg",
+					"id": 8678000,
+					"name": "Pani Puri",
+					"image_url": "assets/images/street-foods/pani-puri.jpg",
 					"description": "A flavorful Indian curry featuring chickpeas simmered in a spiced tomato-onion gravy with ginger, garlic, and a blend of aromatic spices like cumin, coriander, turmeric, and garam masala, resulting in a hearty, tangy, and savory dish often garnished with fresh cilantro and lemon juice. Key ingredients include chickpeas (dried or canned), onions, tomatoes, ginger, garlic, green chilies, oil/ghee, and spices, making it a popular vegetarian staple served with rice or flatbreads.",
-					"food_class": "VEGAN",
+					"food_class": "VEG",
 					"address": "Kharbi, Nagpur-440034",
-					"base_price": 250,
-					"rating": 4.0
+					"base_price": 30.00,
+					"rating": 4.4
 				},
 				{
-					"id": 4,
-					"name": "Jain Dal Makhani",
-					"image_url": "assets/images/items/item-4.jpg",
+					"id": 112133,
+					"name": "Poha",
+					"image_url": "assets/images/street-foods/poha.jpg",
 					"description": "A rich, creamy North Indian lentil dish that achieves its classic buttery flavor without the use of onions or garlic, adhering to the dietary restrictions of Jain cuisine. The deep, earthy flavor comes from slow-cooked whole black gram (urad dal) and kidney beans (rajma), simmered in a spiced tomato base and finished with cream and butter. ",
-					"food_class": "JAIN",
+					"food_class": "VEG",
 					"address": "Kharbi, Nagpur-440034",
-					"base_price": 500,
+					"base_price": 50.00,
 					"rating": 4.3
+				},
+				{
+					"id": 4246662,
+					"name": "Vada Pav",
+					"image_url": "assets/images/street-foods/vada-pav.jpg",
+					"description": "A rich, creamy North Indian lentil dish that achieves its classic buttery flavor without the use of onions or garlic, adhering to the dietary restrictions of Jain cuisine. The deep, earthy flavor comes from slow-cooked whole black gram (urad dal) and kidney beans (rajma), simmered in a spiced tomato base and finished with cream and butter. ",
+					"food_class": "VEG",
+					"address": "Kharbi, Nagpur-440034",
+					"base_price": 80.00,
+					"rating": 4.6
+				},
+				{
+					"id": 500789,
+					"name": "Dosa",
+					"image_url": "assets/images/street-foods/dosa.jpg",
+					"description": "A rich, creamy North Indian lentil dish that achieves its classic buttery flavor without the use of onions or garlic, adhering to the dietary restrictions of Jain cuisine. The deep, earthy flavor comes from slow-cooked whole black gram (urad dal) and kidney beans (rajma), simmered in a spiced tomato base and finished with cream and butter. ",
+					"food_class": "VEG",
+					"address": "Kharbi, Nagpur-440034",
+					"base_price": 120.00,
+					"rating": 4.8
+				},
+				{
+					"id": 877676,
+					"name": "Kachori",
+					"image_url": "assets/images/street-foods/kachori.jpg",
+					"description": "A rich, creamy North Indian lentil dish that achieves its classic buttery flavor without the use of onions or garlic, adhering to the dietary restrictions of Jain cuisine. The deep, earthy flavor comes from slow-cooked whole black gram (urad dal) and kidney beans (rajma), simmered in a spiced tomato base and finished with cream and butter. ",
+					"food_class": "VEG",
+					"address": "Kharbi, Nagpur-440034",
+					"base_price": 50.00,
+					"rating": 5.0
 				}
 			]
 		},
@@ -54,34 +84,64 @@
 			"region": "Biryani Special",
 			"list": [
 				{
-					"id": 6,
-					"name": "Dal Baati Churma",
-					"image_url": "assets/images/items/item-5.jpg",
-					"description": "Baked wheat balls (Baati) with lentil curry (Dal) and a sweet crumbly mixture (Churma) - the signature dish.",
-					"food_class": "VEG",
-					"address": "Kitchen Address",
-					"base_price": 300,
-					"rating": 4.1
+					"id": 67444535,
+					"name": "Hyderabadi Dum Biryani",
+					"image_url": "assets/images/biryani-special/hyderabadi-dum-biryani.jpg",
+					"description": "A flavorful Indian dish of marinated chicken, traditionally cooked in a clay oven (tandoor), featuring a vibrant red-orange hue from spices like Kashmiri chili and paprika, a tangy yogurt base with ginger-garlic, and smoky depth from spices like cumin and garam masala, resulting in juicy, tender meat with charred edges, often served with naan and mint chutney. Key ingredients include chicken (drumsticks or thighs), thick yogurt, lemon juice, ginger-garlic paste, and a blend of spices (coriander, cumin, turmeric, chili powder, garam masala). ",
+					"food_class": "NON_VEG",
+					"address": "Kharbi, Nagpur-440034",
+					"base_price": 800.00,
+					"rating": 4.7
 				},
 				{
-					"id": 7,
-					"name": "Laal Maas",
-					"image_url": "assets/images/items/item-6.jpg",
-					"description": "A fiery red meat curry (lamb) with yogurt, garlic, and hot red chilies.",
-					"food_class": "VEG",
-					"address": "Kitchen Address",
-					"base_price": 300,
-					"rating": 4.1
+					"id": 978646544,
+					"name": "Chicken Tikka Biryani",
+					"image_url": "assets/images/biryani-special/chicken-tikka-biryani.jpg",
+					"description": "A flavorful Indian dish of marinated chicken, traditionally cooked in a clay oven (tandoor), featuring a vibrant red-orange hue from spices like Kashmiri chili and paprika, a tangy yogurt base with ginger-garlic, and smoky depth from spices like cumin and garam masala, resulting in juicy, tender meat with charred edges, often served with naan and mint chutney. Key ingredients include chicken (drumsticks or thighs), thick yogurt, lemon juice, ginger-garlic paste, and a blend of spices (coriander, cumin, turmeric, chili powder, garam masala). ",
+					"food_class": "NON_VEG",
+					"address": "Kharbi, Nagpur-440034",
+					"base_price": 650.00,
+					"rating": 4.5
 				},
 				{
-					"id": 8,
-					"name": "Gatte ki Sabzi",
-					"image_url": "assets/images/items/item-7.jpg",
-					"description": "Gram flour dumplings (gatte) in a tangy yogurt-based gravy, a vegetarian staple.",
-					"food_class": "VEG",
-					"address": "Kitchen Address",
-					"base_price": 300,
-					"rating": 4.1
+					"id": 23232444,
+					"name": "Curry Meat Lamb Biryani",
+					"image_url": "assets/images/biryani-special/curry-meat-lamb-biryani.jpg",
+					"description": "A flavorful Indian dish of marinated chicken, traditionally cooked in a clay oven (tandoor), featuring a vibrant red-orange hue from spices like Kashmiri chili and paprika, a tangy yogurt base with ginger-garlic, and smoky depth from spices like cumin and garam masala, resulting in juicy, tender meat with charred edges, often served with naan and mint chutney. Key ingredients include chicken (drumsticks or thighs), thick yogurt, lemon juice, ginger-garlic paste, and a blend of spices (coriander, cumin, turmeric, chili powder, garam masala). ",
+					"food_class": "NON_VEG",
+					"address": "Kharbi, Nagpur-440034",
+					"base_price": 840.00,
+					"rating": 4.6
+				},
+				{
+					"id": 643553,
+					"name": "Egg Biryani",
+					"image_url": "assets/images/biryani-special/egg-biryani.jpg",
+					"description": "A flavorful Indian dish of marinated chicken, traditionally cooked in a clay oven (tandoor), featuring a vibrant red-orange hue from spices like Kashmiri chili and paprika, a tangy yogurt base with ginger-garlic, and smoky depth from spices like cumin and garam masala, resulting in juicy, tender meat with charred edges, often served with naan and mint chutney. Key ingredients include chicken (drumsticks or thighs), thick yogurt, lemon juice, ginger-garlic paste, and a blend of spices (coriander, cumin, turmeric, chili powder, garam masala). ",
+					"food_class": "NON_VEG",
+					"address": "Kharbi, Nagpur-440034",
+					"base_price": 550.00,
+					"rating": 4.5
+				},
+				{
+					"id": 746544,
+					"name": "Kolkata Style Dum Biryani",
+					"image_url": "assets/images/biryani-special/kolkata-style-dum-biryani.jpg",
+					"description": "A flavorful Indian dish of marinated chicken, traditionally cooked in a clay oven (tandoor), featuring a vibrant red-orange hue from spices like Kashmiri chili and paprika, a tangy yogurt base with ginger-garlic, and smoky depth from spices like cumin and garam masala, resulting in juicy, tender meat with charred edges, often served with naan and mint chutney. Key ingredients include chicken (drumsticks or thighs), thick yogurt, lemon juice, ginger-garlic paste, and a blend of spices (coriander, cumin, turmeric, chili powder, garam masala). ",
+					"food_class": "NON_VEG",
+					"address": "Kharbi, Nagpur-440034",
+					"base_price": 700.00,
+					"rating": 4.7
+				},
+				{
+					"id": 7444424,
+					"name": "Murgh Tikka Biryani",
+					"image_url": "assets/images/biryani-special/murgh-tikka-biryani.jpg",
+					"description": "A flavorful Indian dish of marinated chicken, traditionally cooked in a clay oven (tandoor), featuring a vibrant red-orange hue from spices like Kashmiri chili and paprika, a tangy yogurt base with ginger-garlic, and smoky depth from spices like cumin and garam masala, resulting in juicy, tender meat with charred edges, often served with naan and mint chutney. Key ingredients include chicken (drumsticks or thighs), thick yogurt, lemon juice, ginger-garlic paste, and a blend of spices (coriander, cumin, turmeric, chili powder, garam masala). ",
+					"food_class": "NON_VEG",
+					"address": "Kharbi, Nagpur-440034",
+					"base_price": 900.00,
+					"rating": 5.0
 				}
 			]
 		},
@@ -90,16 +150,31 @@
 			"region": "Vegan Special",
 			"list": [
 				{
-					"id": 8,
-					"name": "Gatte ki Sabzi",
-					"image_url": "assets/images/items/item-7.jpg",
-					"description": "Gram flour dumplings (gatte) in a tangy yogurt-based gravy, a vegetarian staple.",
-					"food_class": "VEG",
-					"address": "Kitchen Address",
-					"base_price": 300,
-					"rating": 4.1
+					"id": 896867653,
+					"name": "Aalu Gobi",
+					"image_url": "assets/images/vegan/aloo-gobhi.jpg",
+					"description": "A flavorful Indian dish of marinated chicken, traditionally cooked in a clay oven (tandoor), featuring a vibrant red-orange hue from spices like Kashmiri chili and paprika, a tangy yogurt base with ginger-garlic, and smoky depth from spices like cumin and garam masala, resulting in juicy, tender meat with charred edges, often served with naan and mint chutney. Key ingredients include chicken (drumsticks or thighs), thick yogurt, lemon juice, ginger-garlic paste, and a blend of spices (coriander, cumin, turmeric, chili powder, garam masala). ",
+					"food_class": "VEGAN",
+					"address": "Kharbi, Nagpur-440034",
+					"base_price": 420.00,
+					"rating": 4.7
 				}
 			]
+		},
+		{
+			"id": 3,
+			"region": "Healthy Food",
+			"list": []
+		},
+		{
+			"id": 3,
+			"region": "Desserts",
+			"list": []
+		},
+		{
+			"id": 3,
+			"region": "Fusion Cuisine",
+			"list": []
 		}
 	]
 }
