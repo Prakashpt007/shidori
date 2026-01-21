@@ -1,4 +1,3 @@
-// store.reducer.ts
 import { createAction, createReducer, on, props } from '@ngrx/store';
 
 export interface UserLocation {
@@ -11,13 +10,15 @@ export interface UserLocation {
 export interface State {
 	location: UserLocation | null;
 	wishlist: number[];
-	cartlist: number[];
+	cartlist: number[];                  // ids
+	cartQuantities: { [id: number]: number }; // qty per id
 }
 
 export const initialState: State = {
 	location: null,
 	wishlist: [],
 	cartlist: [],
+	cartQuantities: {}
 };
 
 //---------------------- Actions -------------------------------//
@@ -86,6 +87,35 @@ export const hydrateCartlistSuccess = createAction(
 	props<{ ids: number[] }>()
 );
 
+// cart quantities
+export const incrementCartQuantity = createAction(
+	'[Cartlist] Increment Quantity',
+	props<{ id: number }>()
+);
+
+export const decrementCartQuantity = createAction(
+	'[Cartlist] Decrement Quantity',
+	props<{ id: number }>()
+);
+
+export const removeCartQuantity = createAction(
+	'[Cartlist] Remove Quantity',
+	props<{ id: number }>()
+);
+
+// quantities storage
+export const hydrateCartQuantities = createAction('[CartQty] Hydrate');
+
+export const hydrateCartQuantitiesSuccess = createAction(
+	'[CartQty] Hydrate Success',
+	props<{ quantities: { [id: number]: number } }>()
+);
+
+export const setCartQuantities = createAction(
+	'[CartQty] Set All',
+	props<{ quantities: { [id: number]: number } }>()
+);
+
 //---------------------- Reducer -------------------------------//
 
 export const storeReducer = createReducer(
@@ -94,13 +124,13 @@ export const storeReducer = createReducer(
 	// location
 	on(setUserLocation, (state, { value }) => ({
 		...state,
-		location: value,
+		location: value
 	})),
 
 	// wishlist: replace whole list (API/localStorage)
 	on(setWishlist, (state, { ids }) => ({
 		...state,
-		wishlist: [...ids],
+		wishlist: [...ids]
 	})),
 
 	// wishlist: add single id
@@ -108,13 +138,13 @@ export const storeReducer = createReducer(
 		...state,
 		wishlist: state.wishlist.includes(id)
 			? state.wishlist
-			: [...state.wishlist, id],
+			: [...state.wishlist, id]
 	})),
 
 	// wishlist: remove single id
 	on(removeFromWishlist, (state, { id }) => ({
 		...state,
-		wishlist: state.wishlist.filter(itemId => itemId !== id),
+		wishlist: state.wishlist.filter(itemId => itemId !== id)
 	})),
 
 	// wishlist: toggle
@@ -122,19 +152,19 @@ export const storeReducer = createReducer(
 		...state,
 		wishlist: state.wishlist.includes(id)
 			? state.wishlist.filter(itemId => itemId !== id)
-			: [...state.wishlist, id],
+			: [...state.wishlist, id]
 	})),
 
 	// wishlist: hydrate success (from localStorage)
 	on(hydrateWishlistSuccess, (state, { ids }) => ({
 		...state,
-		wishlist: [...ids],
+		wishlist: [...ids]
 	})),
 
 	// cartlist: replace whole list (API/localStorage)
 	on(setCartlist, (state, { ids }) => ({
 		...state,
-		cartlist: [...ids],       // fixed: was Cartlist
+		cartlist: [...ids]
 	})),
 
 	// cartlist: add single id
@@ -142,27 +172,106 @@ export const storeReducer = createReducer(
 		...state,
 		cartlist: state.cartlist.includes(id)
 			? state.cartlist
-			: [...state.cartlist, id],
+			: [...state.cartlist, id]
 	})),
 
 	// cartlist: remove single id
 	on(removeFromCartlist, (state, { id }) => ({
 		...state,
-		cartlist: state.cartlist.filter(itemId => itemId !== id),
+		cartlist: state.cartlist.filter(itemId => itemId !== id)
 	})),
 
-	// cartlist: toggle
-	on(toggleCartlistItem, (state, { id }) => ({
+	// cartlist: toggle + quantities
+	on(toggleCartlistItem, (state, { id }) => {
+		const inCart = state.cartlist.includes(id);
+
+		if (inCart) {
+			// remove from cart and its quantity
+			const { [id]: _, ...restQty } = state.cartQuantities;
+			return {
+				...state,
+				cartlist: state.cartlist.filter(itemId => itemId !== id),
+				cartQuantities: restQty
+			};
+		}
+
+		// add to cart, always start qty at 1
+		return {
+			...state,
+			cartlist: [...state.cartlist, id],
+			cartQuantities: {
+				...state.cartQuantities,
+				[id]: 1
+			}
+		};
+	}),
+
+	// quantity ++
+	on(incrementCartQuantity, (state, { id }) => ({
 		...state,
+		cartQuantities: {
+			...state.cartQuantities,
+			[id]: (state.cartQuantities[id] ?? 0) + 1
+		},
 		cartlist: state.cartlist.includes(id)
-			? state.cartlist.filter(itemId => itemId !== id)
-			: [...state.cartlist, id],
+			? state.cartlist
+			: [...state.cartlist, id]
 	})),
 
-	// cartlist: hydrate success (from localStorage)
-	on(hydrateCartlistSuccess, (state, { ids }) => ({
+	// quantity -- (remove if goes to 0)
+	on(decrementCartQuantity, (state, { id }) => {
+		const current = state.cartQuantities[id] ?? 0;
+
+		if (current <= 1) {
+			const { [id]: _, ...restQty } = state.cartQuantities;
+			return {
+				...state,
+				cartlist: state.cartlist.filter(itemId => itemId !== id),
+				cartQuantities: restQty
+			};
+		}
+
+		return {
+			...state,
+			cartQuantities: {
+				...state.cartQuantities,
+				[id]: current - 1
+			}
+		};
+	}),
+
+	// explicit remove qty (used when deleting / moving to wishlist)
+	on(removeCartQuantity, (state, { id }) => {
+		const { [id]: _, ...restQty } = state.cartQuantities;
+		return {
+			...state,
+			cartlist: state.cartlist.filter(itemId => itemId !== id),
+			cartQuantities: restQty
+		};
+	}),
+
+	// cartlist: hydrate success (ids) – init qty=1 if missing
+	on(hydrateCartlistSuccess, (state, { ids }) => {
+		const baseQty: { [id: number]: number } = { ...state.cartQuantities };
+		ids.forEach(id => {
+			if (!baseQty[id]) baseQty[id] = 1;
+		});
+		return {
+			...state,
+			cartlist: [...ids],
+			cartQuantities: baseQty
+		};
+	}),
+
+	// quantities hydrate / set
+	on(hydrateCartQuantitiesSuccess, (state, { quantities }) => ({
 		...state,
-		cartlist: [...ids],
+		cartQuantities: { ...quantities }
+	})),
+
+	on(setCartQuantities, (state, { quantities }) => ({
+		...state,
+		cartQuantities: { ...quantities }
 	}))
 );
 

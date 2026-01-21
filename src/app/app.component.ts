@@ -1,6 +1,6 @@
 import { Component, Inject, inject, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { AppState, hydrateCartlist, hydrateWishlist } from './utility/store/store.reducer';
+import { AppState, hydrateCartlist, hydrateCartQuantities, hydrateWishlist } from './utility/store/store.reducer';
 import { RouterOutlet } from '@angular/router';
 
 
@@ -18,5 +18,6 @@ export class AppComponent {
 	ngOnInit(): void {
 		this.store.dispatch(hydrateWishlist());
 		this.store.dispatch(hydrateCartlist());
+		this.store.dispatch(hydrateCartQuantities());
 	}
 }

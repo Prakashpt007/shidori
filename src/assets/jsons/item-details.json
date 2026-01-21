@@ -1,0 +1,15 @@
+{
+	"status": 200,
+	"success": true,
+	"message": "Success",
+	"data": {
+		"id": 7444424,
+		"name": "Murgh Tikka Biryani",
+		"image_url": "assets/images/biryani-special/murgh-tikka-biryani.jpg",
+		"description": "A flavorful Indian dish of marinated chicken, traditionally cooked in a clay oven (tandoor), featuring a vibrant red-orange hue from spices like Kashmiri chili and paprika, a tangy yogurt base with ginger-garlic, and smoky depth from spices like cumin and garam masala, resulting in juicy, tender meat with charred edges, often served with naan and mint chutney. Key ingredients include chicken (drumsticks or thighs), thick yogurt, lemon juice, ginger-garlic paste, and a blend of spices (coriander, cumin, turmeric, chili powder, garam masala). ",
+		"food_class": "NON_VEG",
+		"address": "Kharbi, Nagpur-440034",
+		"base_price": 900.00,
+		"rating": 5.0
+	}
+}

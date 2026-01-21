@@ -1935,6 +1935,94 @@ a {
 	}
 }
 
+.item-details {
+	.item-class {
+		display: flex;
+		align-items: baseline;
+		gap: 4px;
+		padding: 3px 6px;
+		border-radius: 3px;
+		font-size: 12px;
+		font-weight: 500;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		background: rgba(248, 250, 252, 0.96);
+		color: #475569;
+		border: 1px solid rgba(148, 163, 184, 0.5);
+
+		span {
+			width: 9px;
+			height: 9px;
+			border-radius: 100%;
+			background: #cbd5f5;
+		}
+
+		.label {
+			line-height: 1;
+		}
+
+		&.nonveg {
+			border-color: rgba(220, 38, 38, 0.55);
+			background: #fef2f2;
+			color: #b91c1c;
+
+			span {
+				background: #dc2626;
+			}
+		}
+
+		&.veg {
+			border-color: rgba(22, 163, 74, 0.55);
+			background: #ecfdf3;
+			color: #166534;
+
+			span {
+				background: #16a34a;
+			}
+		}
+
+		&.vegan {
+			border-color: rgba(34, 197, 94, 0.55);
+			background: #ecfdf5;
+			color: #15803d;
+
+			span {
+				background: #22c55e;
+			}
+		}
+
+		&.jain {
+			border-color: rgba(59, 130, 246, 0.55);
+			background: #eff6ff;
+			color: #1d4ed8;
+
+			span {
+				background: #3b82f6;
+			}
+		}
+
+		&.egg-food {
+			border-color: rgba(234, 179, 8, 0.65);
+			background: #fefce8;
+			color: #854d0e;
+
+			span {
+				background: #eab308;
+			}
+		}
+
+		&.see-food {
+			border-color: rgba(6, 182, 212, 0.6);
+			background: #ecfeff;
+			color: #0e7490;
+
+			span {
+				background: #06b6d4;
+			}
+		}
+	}
+}
+
 @media only screen and (max-width: 768px) {
 
 	.sliderMainContainer,

@@ -1,4 +1,3 @@
-// store.selectors.ts
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { State } from './store.reducer';
 
@@ -11,12 +10,22 @@ export const selectUserLocation = createSelector(
 	(state) => state.location
 );
 
-
 export const selectWishlist = createSelector(
 	selectStoreState,
 	(state) => state.wishlist
 );
+
 export const selectCartlist = createSelector(
 	selectStoreState,
 	(state) => state.cartlist
+);
+
+export const selectCartQuantities = createSelector(
+	selectStoreState,
+	(state) => state.cartQuantities
+);
+
+export const selectCartQuantityForId = (id: number) => createSelector(
+	selectCartQuantities,
+	qtyMap => qtyMap[id] ?? 0
 );

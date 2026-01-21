@@ -1,10 +1,9 @@
+// wishlist-storage.service.ts
 import { Injectable } from '@angular/core';
 
 const WISHLIST_KEY = 'ck_wishlist_ids';
 
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class WishlistStorageService {
 	load(): number[] {
 		try {

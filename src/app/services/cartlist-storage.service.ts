@@ -1,10 +1,9 @@
+// cartlist-storage.service.ts
 import { Injectable } from '@angular/core';
 
 const CARTLIST_KEY = 'ck_cartlist_ids';
 
-@Injectable({
-	providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class CartlistStorageService {
 	load(): number[] {
 		try {

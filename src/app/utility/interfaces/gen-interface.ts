@@ -9,3 +9,17 @@ export interface Item {
 	base_price: number;
 	rating: number;
 }
+
+
+export interface ItemDetails {
+	id: number;
+	name: string;
+	image_url: string;
+	description: string | null;
+	food_class: string | null;
+	address: string | null;
+	base_price: number;
+	rating: number | null;
+	rating_count?: number | null;
+	prep_time?: number | null;
+}

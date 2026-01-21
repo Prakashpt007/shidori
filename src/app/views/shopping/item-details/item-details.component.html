@@ -1,3 +1,142 @@
 <div class="genContainerFluid">
-	<p>item-details works!</p>
+
+
+
+	<!-- Loading state (optional) -->
+	@if (loadingData()) {
+	<div class="item-details item-details--loading">
+		<div class="skeleton skeleton-img"></div>
+		<div class="skeleton skeleton-text"></div>
+		<div class="skeleton skeleton-text short"></div>
+	</div>
+	}
+
+	<!-- Error state -->
+	@if (!loadingData() && errorMessage()) {
+	<div class="alert alert-danger d-flex align-items-center my-3" role="alert">
+		<div>
+			{{ errorMessage()?.name }} {{ errorMessage()?.message }}
+		</div>
+	</div>
+	}
+
+	<!-- Content -->
+	@if (!loadingData() && dataItem()) {
+	<div class="item-details">
+		<!-- Left: image -->
+		<div class="item-details__image">
+			<img [src]="dataItem().image_url" [alt]="dataItem().name" loading="lazy" />
+
+			<!-- @if (dataItem().rating) {
+			<div class="item-details__rating-badge" [ngClass]="getRating(dataItem().rating!)">
+				<i class="fa-solid fa-star"></i>
+				<span>{{ dataItem().rating | number:'1.1-1' }}</span>
+				<span class="count">
+					({{ dataItem().rating_count || 120 | number:'1.0-0':'en-IN' }})
+				</span>
+			</div>
+			} -->
+		</div>
+
+		<!-- Right: content -->
+		<div class="item-details__content">
+			<div class="item-details__header">
+				<h1 class="title">{{ dataItem().name }}</h1>
+
+				<div class="item-details__meta-top">
+					<!-- food class chip -->
+					<div class="item-class" [ngClass]="foodClass(dataItem().food_class)">
+						<span></span>
+						<div class="label">
+							{{ foodClassLabel(dataItem().food_class) }}
+						</div>
+					</div>
+
+					<!-- price -->
+					<div class="price">
+						₹{{ dataItem().base_price | number:'1.0-0' }}
+					</div>
+				</div>
+			</div>
+
+			<p class="desc">
+				{{ dataItem().description }}
+			</p>
+
+			<div class="item-details__meta-bottom">
+				<div class="meta">
+					<i class="fa-solid fa-location-dot"></i>
+					<span>{{ dataItem().address }}</span>
+				</div>
+
+				@if (dataItem().prep_time) {
+				<div class="meta">
+					<i class="fa-regular fa-clock"></i>
+					<span>{{ dataItem().prep_time }} mins</span>
+				</div>
+				}
+			</div>
+
+			<div class="item-details__actions">
+				<!-- Cart quantity control -->
+				<ng-container *ngIf="cartlistIds.has(dataItem().id); else addToCartBtn">
+
+
+					<div class="input-group btn-group-sm qty-control w-auto">
+
+						@if(getCartQtyForItem(dataItem().id) === 1) {
+						<button class="btn btn-outline-secondary qty-btn" type="button" data-type="minus" (click)="deleteFromCart()">
+							<i class="fa-solid fa-trash-can"></i>
+						</button>
+						} @else {
+						<button class="btn btn-outline-secondary qty-btn" type="button" data-type="minus" (click)="decrementCart()">
+							-
+						</button>
+						}
+
+						<button class="btn btn-outline-secondary qty-value" style="pointer-events: none;">
+							{{ getCartQtyForItem(dataItem().id) }}
+						</button>
+
+						<button class="btn btn-outline-secondary qty-btn" type="button" data-type="plus" (click)="addOrIncrementCart()">
+							+
+						</button>
+					</div>
+
+					<a role="button" class="link-underline-primary link-offset-2 custom-link" (click)="deleteFromCart()">
+						Delete from cart
+					</a>
+
+				</ng-container>
+
+				<!-- Add to cart when not in cart -->
+				<ng-template #addToCartBtn>
+					<button type="button" class="pill btn-sm pill--primary" (click)="addOrIncrementCart()">
+						<span>Add to cart</span>
+						<i class="fa-solid fa-bag-shopping"></i>
+					</button>
+				</ng-template>
+
+				<!-- Wishlist: also removes from cart + qty -->
+				<button type="button" class="pill btn-sm pill--light" (click)="saveToWishlistAndRemoveFromCart()">
+					<ng-container *ngIf="!wishlistIds.has(dataItem().id); else filledHeart">
+						<i class="fa-regular fa-heart"></i>
+					</ng-container>
+					<ng-template #filledHeart>
+						<i class="fa-solid fa-heart"></i>
+					</ng-template>
+
+					<span>
+						{{
+						wishlistIds.has(dataItem().id)
+						? 'Remove from wishlist'
+						: 'Save to wishlist'
+						}}
+					</span>
+				</button>
+			</div>
+		</div>
+	</div>
+	}
+
 </div>
