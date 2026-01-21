@@ -1,5 +1,5 @@
 <div class="genContainerFluid">
-	<section class="wishlist container-fluid py-4">
+	<section class="wishlist container py-4">
 
 		<!-- Header -->
 		<div class="d-flex justify-content-between align-items-center mb-3">
@@ -10,7 +10,7 @@
 				</small>
 			</div>
 
-			<button class="btn btn-sm btn-primary" [disabled]="!wishlistItems().length" (click)="moveAllToCart()">
+			<button class="btn btn-sm btn-outline-secondary" [disabled]="!wishlistItems().length" (click)="moveAllToCart()">
 				Move all to cart
 			</button>
 		</div>
@@ -30,63 +30,86 @@
 
 		<!-- List -->
 		@if (wishlistItems().length) {
-		<div class="wishlist-list">
+		<div class="wishlist-grid">
 			@for (item of wishlistItems(); track $index) {
 
-			<div class="wishlist-row d-flex">
+			<div class="wishlist-row">
 				<!-- Image -->
 				<div class="wishlist-thumb">
-					<img [src]="item.image_url" [alt]="item.name" class="img-fluid rounded-3" />
+					<img [src]="item.image_url" [alt]="item.name" />
 				</div>
 
 				<!-- Info -->
-				<div class="wishlist-info flex-grow-1">
+				<div class="wishlist-info">
 					<div class="d-flex justify-content-between align-items-start">
 						<div>
-							<h6 class="mb-1">{{ item.id }} - {{ item.name }}</h6>
+							<div class="d-flex justify-content-between align-items-start">
+								<h6 class=" mb-1">{{ item.name }}</h6>
 
-							<div class="d-flex align-items-center mb-1">
-								<span class="rating-badge me-2">
-									★ {{ item.rating }}
-								</span>
-								<span class="text-muted small">
-									{{ item.food_class }}
-								</span>
+								<div class="text-end">
+									<div class="price fw-semibold">
+										₹{{ item.base_price | number:'1.0-0' }}
+									</div>
+
+								</div>
+							</div>
+
+							<div class="d-flex align-items-center">
+								<!-- RATING -->
+								<div class="rating-chip" *ngIf="item.rating" [ngClass]="getRating(item.rating)">
+									<i class="fa-solid fa-star"></i>
+									<span>{{ item.rating | number: '1.1-1' }}</span>
+									<span class="count">({{ 98445 | number: '1.0':'en-IN' }})</span>
+								</div>
+								<!-- FOOD CLASS -->
+								<div class="item-class" [ngClass]="foodClass(item.food_class)">
+									<span></span>
+									<div class="label">{{ foodClassLabel(item.food_class) }}</div>
+								</div>
 							</div>
 
 							<p class="text-muted small mb-1 line-clamp-2">
 								{{ item.description }}
 							</p>
 
-							<div class="text-muted small mb-2">
+							<!-- <div class="text-muted small mb-2">
 								<i class="bi bi-geo-alt me-1"></i>{{ item.address }}
+							</div> -->
+
+							<div class="meta-row"><span class="meta"><i class="fa-solid fa-location-dot"></i> {{ item.address }}</span>
 							</div>
 						</div>
 
-						<div class="text-end">
-							<div class="price fw-semibold">
-								₹{{ item.base_price | number:'1.0-0' }}
-							</div>
-							<!-- Optional: show if already in cart -->
-							<small *ngIf="getCartlistItem(item.id)" class="text-success">
-								In your cart
-							</small>
-						</div>
+
 					</div>
 
 					<!-- Actions -->
-					<div class="d-flex flex-wrap gap-2 mt-2">
-						<button class="btn btn-sm btn-outline-secondary" (click)="viewDetails(item)">
-							View details
-						</button>
+					<div class="wishlist-actions">
+						<div class="left-actions">
+							<button class="btn btn-sm btn-outline-secondary" (click)="viewDetails(item)">
+								<span class="icon"><i class="fa-regular fa-eye"></i></span>
+								<span class="label">View details</span>
+							</button>
 
-						<button class="btn btn-sm btn-primary" [disabled]="getCartlistItem(item.id)" (click)="moveToCart(item)">
-							{{ getCartlistItem(item.id) ? 'Go to cart' : 'Add to cart' }}
-						</button>
-
-						<button class="btn btn-sm btn-link text-danger p-0 ms-auto" (click)="removeFromWishlist(item.id)">
-							Remove
-						</button>
+							@if (getCartlistItem(item.id)) {
+							<!-- Optional: show if already in cart -->
+							<button [routerLink]="['/shopping/cart']" class="btn btn-sm text-success">
+								<span class="icon"><i class="fa-solid fa-circle-check"></i></span>
+								<span class="label">Added to Cart</span>
+							</button>
+							} @else {
+							<button class="btn btn-sm btn-outline-secondary" [disabled]="getCartlistItem(item.id)" (click)="moveToCart(item)">
+								<span class="icon"><i class="fa-solid fa-bag-shopping"></i></span>
+								<span class="label">Add to cart</span>
+							</button>
+							}
+						</div>
+						<div class="right-actions">
+							<button class="btn btn-danger" (click)="removeFromWishlist(item.id)">
+								<span class="icon"><i class="fa-solid fa-trash-can"></i></span>
+								<span class="label">Delete</span>
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>

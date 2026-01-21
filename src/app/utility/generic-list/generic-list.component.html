@@ -69,9 +69,9 @@
 
 					<div class="dish-card-soft__top-row">
 						<!-- FOOD CLASS -->
-						<div class="item-class" [ngClass]="getFoodClassClass(item.food_class)">
+						<div class="item-class" [ngClass]="foodClass(item.food_class)">
 							<span></span>
-							<div class="label">{{ getFoodClassLabel(item.food_class) }}</div>
+							<div class="label">{{ foodClassLabel(item.food_class) }}</div>
 						</div>
 
 						<!-- WISHLIST ICON -->
@@ -84,7 +84,7 @@
 					</div>
 
 					<!-- RATING -->
-					<div class="rating-chip" *ngIf="item.rating" [ngClass]="getRatingClass(item.rating)">
+					<div class="rating-chip" *ngIf="item.rating" [ngClass]="getRating(item.rating)">
 						<i class="fa-solid fa-star"></i>
 						<span>{{ item.rating | number: '1.1-1' }}</span>
 						<span class="count">({{ item.rating_count || 98445 | number: '1.0':'en-IN' }})</span>

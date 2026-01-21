@@ -1,0 +1,63 @@
+<div class="dish-card-soft">
+	<div class="dish-card-soft__image">
+		<img [src]="data()?.image_url" [alt]="data()?.name" loading="lazy" />
+
+		<div class="dish-card-soft__top-row">
+			<!-- FOOD CLASS -->
+			<div class="item-class" [ngClass]="foodClass(data()?.food_class)">
+				<span></span>
+				<div class="label">{{ foodClassLabel(data()?.food_class) }}</div>
+			</div>
+
+			<!-- wishlist icon -->
+			<button type="button" class="icon-circle" (click)="toggleWishlist(data()?.id)">
+				@if (isInWishlist()) {
+				<i class="fa-solid fa-heart"></i>
+				} @else {
+				<i class="fa-regular fa-heart"></i>
+				}
+			</button>
+		</div>
+
+		<!-- RATING -->
+		@if(data()?.rating){
+		<div class="rating-chip" [ngClass]="getRating(data()?.rating)">
+			<i class="fa-solid fa-star"></i>
+			<span>{{ data()?.rating | number: '1.1-1' }}</span>
+			<!-- <span class="count">({{ data()?.rating_count || 98445 | number: '1.0':'en-IN' }})</span> -->
+		</div>
+		}
+
+	</div>
+
+	<div class="dish-card-soft__content">
+		<div class="title-row">
+			<h3 class="title" [title]="data()?.name">{{ data()?.name }}</h3>
+			<span class="price">₹{{ data()?.base_price }}</span>
+		</div>
+
+		<p class="desc">
+			{{ data()?.description }}
+		</p>
+
+		<div class="meta-row">
+			<span class="meta">
+				<i class="fa-solid fa-location-dot"></i>
+				{{ data()?.address }}
+			</span>
+		</div>
+	</div>
+
+	<div class="dish-card-soft__footer">
+		<button type="button" class="pill pill--light" (click)="viewDetails(data()?.id)">
+			<i class="fa-regular fa-eye"></i>
+			<span>View details</span>
+		</button>
+
+		<!-- cart pill -->
+		<button type="button" class="pill pill--primary" (click)="toggleCartlist(data()?.id)" [class.pill--active]="isInCartlist()">
+			<span>{{ isInCartlist() ? 'In cart' : 'Add to cart' }}</span>
+			<i class="fa-solid fa-bag-shopping"></i>
+		</button>
+	</div>
+</div>

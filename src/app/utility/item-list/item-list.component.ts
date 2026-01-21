@@ -7,50 +7,27 @@ import { Store } from '@ngrx/store';
 import { selectCartlist, selectWishlist } from '../store/store.selectors';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { GenericFunctionService } from '../../services/generic-function.service';
+import { ItemComponent } from '../components/item/item.component';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
 	selector: 'app-item-list',
 	standalone: true,
-	imports: [CommonModule, CarouselModule, RouterLink],
+	imports: [CommonModule, CarouselModule, RouterLink, ItemComponent],
 	templateUrl: './item-list.component.html',
 	styleUrl: './item-list.component.scss'
 })
 export class ItemListComponent {
-	@ViewChild('owlCarousel', { static: false })
-	owlCarousel!: CarouselComponent;
-
-	customOptions: OwlOptions = {
-		loop: false,              // change to true if you want infinite
-		mouseDrag: true,
-		touchDrag: true,
-		pullDrag: false,
-		dots: false,
-		nav: true,
-		navSpeed: 700,
-		autoWidth: true,
-		margin: 28,
-		autoplay: true,
-		autoplayTimeout: 5000,
-		autoplaySpeed: 700,
-		autoplayHoverPause: true,
-		autoplayMouseleaveTimeout: 5000,
-		center: true,
-		stagePadding: 0,
-		rewind: true,
-		slideBy: 1
-	};
-
-
 	private toastr = inject(ToastrService);
-	private router = inject(Router);
 	private genericHttp = inject(GenericHttpService);
 	private store = inject(Store<AppState>);
 
 	wishlist$ = this.store.select(state => state.store.wishlist);
 	cartlist$ = this.store.select(state => state.store.cartlist);
 
-	private cartlistIds = new Set<number>();
-	private wishlistIds = new Set<number>();
+	cartlistIds = new Set<number>();
+	wishlistIds = new Set<number>();
 
 	listApi = input<any>('');
 	viewAllRouteLink = input<any>('');
@@ -61,15 +38,26 @@ export class ItemListComponent {
 
 	constructor() {
 
+		// console.log('sss');
+
+		// this.store.select(selectWishlist).subscribe(ids => {
+		// 	this.wishlistIds = new Set(ids ?? []);
+		// });
+
+
+		// this.store.select(selectCartlist).subscribe(ids => {
+		// 	this.cartlistIds = new Set(ids ?? []);
+		// });
+
 		// Get Wishlist Array
-		this.store.select(selectWishlist).subscribe(ids => {
-			this.wishlistIds = new Set(ids ?? []);
-		});
+		this.store.select(selectWishlist)
+			.pipe(takeUntilDestroyed())
+			.subscribe(ids => this.wishlistIds = new Set(ids ?? []));
 
 		// Get Cartlist Array
-		this.store.select(selectCartlist).subscribe(ids => {
-			this.cartlistIds = new Set(ids ?? []);
-		});
+		this.store.select(selectCartlist)
+			.pipe(takeUntilDestroyed())
+			.subscribe(ids => this.cartlistIds = new Set(ids ?? []));
 	}
 
 	ngOnInit() {
@@ -85,31 +73,13 @@ export class ItemListComponent {
 		this.genericHttp.getDataUsingURL(url).subscribe({
 			next: (response: any) => {
 				if (response.success == 200 || response.success == true) {
-
 					this.itemList.set(response.data);
 
-					if (this.itemList().length > 4) {
-						this.customOptions = {
-							...this.customOptions,
-							loop: true,
-							autoplay: true,
-							center: true
-						}
-					} else {
-						this.customOptions = {
-							...this.customOptions,
-							loop: false,
-							autoplay: false,
-							center: false,
-							nav: false,
-							dots: false
-						}
-					}
 				} else {
 					this.toastr.error(response.message, response.status);
-					this.loadingData.set(false);
 				}
 
+				this.loadingData.set(false);
 			},
 			error: (err: any) => {
 				this.toastr.error(err.message, err.status);
@@ -124,89 +94,13 @@ export class ItemListComponent {
 		});
 	}
 
-	getDiscountedPercentage(discountValue: number, basePrice: number): string {
-		if (basePrice <= 0) return "0%";
-
-		const percentage = (discountValue / basePrice) * 100;
-		const capped = Math.min(Math.max(percentage, 0), 100);
-
-		return `${Math.round(capped)}%`;
-	}
-
-	getDiscountedPrice(discountValue: number, basePrice: number): string {
-		if (basePrice <= 0) return "0";
-		const discountedPrice = basePrice - discountValue;
-		const finalPrice = Math.max(discountedPrice, 0);
-		return finalPrice.toFixed(2);
-	}
 
 	getWishlistItem(id: number): boolean {
 		return this.wishlistIds.has(id);
 	}
 
-	toggleWishlist(id: number) {
-		this.store.dispatch(toggleWishlistItem({ id }));
-	}
-
 	getCartlistItem(id: number): boolean {
 		return this.cartlistIds.has(id);
-	}
-
-	toggleCartlist(id: number) {
-		this.store.dispatch(toggleCartlistItem({ id }));
-	}
-
-	// Food class CSS class
-	getFoodClassClass(foodClass: string | null | undefined): string {
-		switch (foodClass) {
-			case 'NON_VEG':
-				return 'nonveg';
-			case 'VEG':
-				return 'veg';
-			case 'VEGAN':
-				return 'vegan';
-			case 'JAIN':
-				return 'jain';
-			case 'EGG':
-				return 'egg-food';
-			case 'SEAFOOD':
-				return 'see-food';
-			default:
-				return '';
-		}
-	}
-
-	// Food class label
-	getFoodClassLabel(foodClass: string | null | undefined): string {
-		switch (foodClass) {
-			case 'NON_VEG':
-				return 'NON-VEG';
-			case 'VEG':
-				return 'VEG';
-			case 'VEGAN':
-				return 'VEGAN';
-			case 'JAIN':
-				return 'JAIN';
-			case 'EGG':
-				return 'EGG FOOD';
-			case 'SEAFOOD':
-				return 'SEAFOOD';
-			default:
-				return foodClass ?? '';
-		}
-	}
-
-	// Rating color class
-	getRatingClass(rating: number): string {
-		if (rating >= 4.5) return 'rating--high';
-		if (rating >= 3.5) return 'rating--mid';
-		return 'rating--low';
-	}
-
-	viewDetails(id: number) {
-		// navigate or open modal as you like
-		this.router.navigate(['/shopping/item-details', id]);
-		console.log('View details', id);
 	}
 
 
@@ -262,4 +156,44 @@ export class ItemListComponent {
 		const walk = (x - this.startX[idx]) * 1; // same as your JS
 		slider.scrollLeft = this.scrollLeft[idx] - walk;
 	}
+
+	onTouchStart(e: TouchEvent, idx: number) {
+		const slider = this.sliders.get(idx)?.nativeElement;
+		if (!slider) return;
+
+		// only single-finger drag; ignore pinch, etc.
+		if (e.touches.length !== 1) return;
+
+		this.isDown[idx] = true;
+		slider.classList.add('active');
+
+		const touch = e.touches[0];
+		const rect = slider.getBoundingClientRect();
+
+		// simulate your mouse coordinates
+		this.startX[idx] = touch.clientX - rect.left;
+		this.scrollLeft[idx] = slider.scrollLeft;
+
+		slider.style.scrollSnapType = 'none';
+		e.preventDefault();
+	}
+
+	onTouchMove(e: TouchEvent, idx: number) {
+		if (!this.isDown[idx]) return;
+
+		const slider = this.sliders.get(idx)?.nativeElement;
+		if (!slider) return;
+
+		if (e.touches.length !== 1) return;
+
+		const touch = e.touches[0];
+		const rect = slider.getBoundingClientRect();
+
+		const x = touch.clientX - rect.left;
+		const walk = (x - this.startX[idx]) * 1; // same speed factor as mouse
+		slider.scrollLeft = this.scrollLeft[idx] - walk;
+
+		e.preventDefault();
+	}
+
 }

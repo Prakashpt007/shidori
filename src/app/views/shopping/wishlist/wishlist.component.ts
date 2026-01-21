@@ -6,18 +6,10 @@ import { addToCartlist, AppState, removeFromWishlist, toggleCartlistItem, toggle
 import { GenericHttpService } from '../../../services/generic-http.service';
 import { selectCartlist, selectWishlist } from '../../../utility/store/store.selectors';
 import { CommonModule } from '@angular/common';
+import { Item } from '../../../utility/interfaces/gen-interface';
+import { GenericFunctionService } from '../../../services/generic-function.service';
 
 
-export interface WishlistItem {
-	id: number;
-	name: string;
-	image_url: string;
-	description: string;
-	food_class: string; // 'VEGAN' | 'VEG' | 'NON_VEG'
-	address: string;
-	base_price: number;
-	rating: number;
-}
 
 
 @Component({
@@ -29,7 +21,7 @@ export interface WishlistItem {
 })
 export class WishlistComponent {
 	// signals
-	wishlistItems = signal<WishlistItem[]>([]);
+	wishlistItems = signal<Item[]>([]);
 	loadingData = signal<boolean>(false);
 	errorMessage = signal<{ name: string; message: string } | null>(null);
 
@@ -49,6 +41,7 @@ export class WishlistComponent {
 	private toastr = inject(ToastrService);
 	private router = inject(Router);
 	private genericHttp = inject(GenericHttpService);
+	private genFn = inject(GenericFunctionService);
 
 	constructor() {
 		// keep local Sets in sync with store (used by getWishlistItem/getCartlistItem)
@@ -80,7 +73,7 @@ export class WishlistComponent {
 			.subscribe({
 				next: (response: any) => {
 					if (response.success === 200 || response.success === true) {
-						this.wishlistItems.set(response.data as WishlistItem[]);
+						this.wishlistItems.set(response.data as Item[]);
 					} else {
 						this.toastr.error(response.message, response.status);
 					}
@@ -112,13 +105,14 @@ export class WishlistComponent {
 		this.store.dispatch(toggleCartlistItem({ id }));
 	}
 
-	trackById = (_: number, item: WishlistItem) => item.id;
+	trackById = (_: number, item: Item) => item.id;
 
-	viewDetails(item: WishlistItem) {
-		this.router.navigate(['/menu', item.id]);
+	viewDetails(item: Item) {
+		this.router.navigate(['/shopping/item-details', item.id]);
 	}
 
-	moveToCart(item: WishlistItem) {
+
+	moveToCart(item: Item) {
 		// add to cart
 		this.store.dispatch(toggleCartlistItem({ id: item.id }));
 		// remove from wishlist
@@ -146,5 +140,27 @@ export class WishlistComponent {
 		this.store.dispatch(removeFromWishlist({ id }));
 		this.wishlistItems.set(this.wishlistItems().filter(i => i.id !== id));
 		this.toastr.info('Removed from wishlist');
+	}
+
+	// Food class CSS class
+	foodClass(foodClass: string | null | undefined): string {
+		return this.genFn.getFoodClass(foodClass);
+	}
+
+	// Food class label
+	foodClassLabel(foodClass: string | null | undefined): string {
+		return this.genFn.getFoodClassLabel(foodClass);
+	}
+
+	// // Rating color class
+	// getRatingClass(rating: number): string {
+	// 	if (rating >= 4.5) return 'rating--high';
+	// 	if (rating >= 3.5) return 'rating--mid';
+	// 	return 'rating--low';
+	// }
+
+	// Rating color class for every 0.5 increment
+	getRating(rating: number): string {
+		return this.genFn.getRatingClass(rating);
 	}
 }

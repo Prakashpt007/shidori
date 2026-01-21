@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { selectCartlist, selectWishlist } from '../store/store.selectors';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { GenericFunctionService } from '../../services/generic-function.service';
 
 @Component({
 	selector: 'app-generic-list',
@@ -44,6 +45,7 @@ export class GenericListComponent {
 	private toastr = inject(ToastrService);
 	private router = inject(Router);
 	private genericHttp = inject(GenericHttpService);
+	private genFn = inject(GenericFunctionService);
 	private store = inject(Store<AppState>);
 
 	wishlist$ = this.store.select(state => state.store.wishlist);
@@ -144,50 +146,25 @@ export class GenericListComponent {
 	}
 
 	// Food class CSS class
-	getFoodClassClass(foodClass: string | null | undefined): string {
-		switch (foodClass) {
-			case 'NON_VEG':
-				return 'nonveg';
-			case 'VEG':
-				return 'veg';
-			case 'VEGAN':
-				return 'vegan';
-			case 'JAIN':
-				return 'jain';
-			case 'EGG':
-				return 'egg-food';
-			case 'SEAFOOD':
-				return 'see-food';
-			default:
-				return '';
-		}
+	foodClass(foodClass: string | null | undefined): string {
+		return this.genFn.getFoodClass(foodClass);
 	}
 
 	// Food class label
-	getFoodClassLabel(foodClass: string | null | undefined): string {
-		switch (foodClass) {
-			case 'NON_VEG':
-				return 'NON-VEG';
-			case 'VEG':
-				return 'VEG';
-			case 'VEGAN':
-				return 'VEGAN';
-			case 'JAIN':
-				return 'JAIN';
-			case 'EGG':
-				return 'EGG FOOD';
-			case 'SEAFOOD':
-				return 'SEAFOOD';
-			default:
-				return foodClass ?? '';
-		}
+	foodClassLabel(foodClass: string | null | undefined): string {
+		return this.genFn.getFoodClassLabel(foodClass);
 	}
 
-	// Rating color class
-	getRatingClass(rating: number): string {
-		if (rating >= 4.5) return 'rating--high';
-		if (rating >= 3.5) return 'rating--mid';
-		return 'rating--low';
+	// // Rating color class
+	// getRatingClass(rating: number): string {
+	// 	if (rating >= 4.5) return 'rating--high';
+	// 	if (rating >= 3.5) return 'rating--mid';
+	// 	return 'rating--low';
+	// }
+
+	// Rating color class for every 0.5 increment
+	getRating(rating: number): string {
+		return this.genFn.getRatingClass(rating);
 	}
 
 	viewDetails(id: number) {

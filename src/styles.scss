@@ -110,16 +110,26 @@ body {
 
 [data-bs-theme="dark"] {
 	--bs-body-color: #e0e0e0;
-	--bs-body-bg: #121212;
+	--bs-body-bg: #1e222d;
 
-	--bg-support-color: #2e2e2e;
-	--bg-support-color-light: #3a3a3a;
+	--bg-support-color: #000000;
+	--bg-support-color-light: #323232;
 	--bs-highlight-text: #ffffff;
 
 
 	.btn-outline-primary {
 		--bs-btn-color: var(--bs-link-color);
 		--bs-btn-border-color: var(--bs-link-color);
+	}
+
+	.headerContainer {
+		background-color: var(--bg-support-color);
+	}
+
+	.homeContainer {
+		.innerContainer {
+			background-color: var(--bg-support-color);
+		}
 	}
 }
 
@@ -1502,53 +1512,6 @@ a {
 		}
 	}
 
-	/* Rating chip */
-	.rating-chip {
-		position: absolute;
-		left: 14px;
-		bottom: 12px;
-		padding: 4px 10px;
-		border-radius: 999px;
-		font-size: 12px;
-		display: inline-flex;
-		align-items: center;
-		gap: 4px;
-
-		i {
-			font-size: 11px;
-		}
-
-		.count {
-			opacity: 0.8;
-		}
-
-		&.rating--high {
-			background: #ecfdf3;
-			color: #166534;
-
-			i {
-				color: #16a34a;
-			}
-		}
-
-		&.rating--mid {
-			background: #fffbeb;
-			color: #854d0e;
-
-			i {
-				color: #eab308;
-			}
-		}
-
-		&.rating--low {
-			background: #fef2f2;
-			color: #b91c1c;
-
-			i {
-				color: #ef4444;
-			}
-		}
-	}
 
 
 	// shimmer animation
@@ -1559,6 +1522,111 @@ a {
 
 		100% {
 			background-position: 200px 0;
+		}
+	}
+
+}
+
+/* Rating chip */
+.rating-chip {
+	position: absolute;
+	left: 14px;
+	bottom: 12px;
+	padding: 4px 10px;
+	border-radius: 999px;
+	font-size: 12px;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+
+	i {
+		font-size: 11px;
+	}
+
+	.count {
+		opacity: 0.8;
+	}
+
+	// 0 – 5 rating in 0.5 steps
+
+	&.rating--0 {
+		background-color: #fef2f2; // very light red
+		color: #991b1b;
+
+		i {
+			color: #b91c1c;
+		}
+	}
+
+	&.rating--1 {
+		background-color: #fee2e2;
+		color: #b91c1c;
+
+		i {
+			color: #ef4444;
+		}
+	}
+
+	&.rating--1-5 {
+		background-color: #fee2e2;
+		color: #b91c1c;
+
+		i {
+			color: #f87171;
+		}
+	}
+
+	&.rating--2 {
+		background-color: #fef3c7; // light yellow
+		color: #78350f;
+
+		i {
+			color: #f59e0b;
+		}
+	}
+
+	&.rating--2-5 {
+		background-color: #fef9c3;
+		color: #713f12;
+
+		i {
+			color: #facc15;
+		}
+	}
+
+	&.rating--3 {
+		background-color: #fef9c3; // yellow
+		color: #92400e;
+
+		i {
+			color: #fbbf24;
+		}
+	}
+
+	&.rating--3-5 {
+		background-color: #dcfce7; // light green
+		color: #166534;
+
+		i {
+			color: #22c55e;
+		}
+	}
+
+	&.rating--4 {
+		background-color: #bbf7d0; // green
+		color: #14532d;
+
+		i {
+			color: #16a34a;
+		}
+	}
+
+	&.rating--4-5 {
+		background-color: #ecfdf5; // bright green
+		color: #065f46;
+
+		i {
+			color: #10b981;
 		}
 	}
 
@@ -1644,10 +1712,261 @@ a {
 	padding: 16px 24px;
 }
 
+
+.wishlist-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(444px, 1fr));
+	gap: 1.5rem;
+
+	.wishlist-row {
+		display: flex;
+		gap: 1rem;
+		padding: 14px;
+		background: #fff;
+		border-radius: 12px;
+		box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+		transition: transform 0.2s ease, box-shadow 0.2s ease;
+	}
+
+	.wishlist-thumb {
+		flex-shrink: 0;
+		width: 120px;
+		min-height: 120px;
+		max-height: 136px;
+		border-radius: 10px;
+		overflow: hidden;
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.wishlist-info {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+
+		h6 {
+			font-size: 15px;
+			font-weight: 600;
+			margin-bottom: 4px;
+		}
+
+		.item-class {
+			display: flex;
+			align-items: baseline;
+			gap: 4px;
+			padding: 3px 6px;
+			border-radius: 3px;
+			font-size: 9px;
+			font-weight: 500;
+			text-transform: uppercase;
+			letter-spacing: 0.06em;
+			background: rgba(248, 250, 252, 0.96);
+			color: #475569;
+			border: 1px solid rgba(148, 163, 184, 0.5);
+
+			span {
+				width: 6px;
+				height: 6px;
+				border-radius: 100%;
+				background: #cbd5f5;
+			}
+
+			.label {
+				line-height: 1;
+			}
+
+			&.nonveg {
+				border-color: rgba(220, 38, 38, 0.55);
+				background: #fef2f2;
+				color: #b91c1c;
+
+				span {
+					background: #dc2626;
+				}
+			}
+
+			&.veg {
+				border-color: rgba(22, 163, 74, 0.55);
+				background: #ecfdf3;
+				color: #166534;
+
+				span {
+					background: #16a34a;
+				}
+			}
+
+			&.vegan {
+				border-color: rgba(34, 197, 94, 0.55);
+				background: #ecfdf5;
+				color: #15803d;
+
+				span {
+					background: #22c55e;
+				}
+			}
+
+			&.jain {
+				border-color: rgba(59, 130, 246, 0.55);
+				background: #eff6ff;
+				color: #1d4ed8;
+
+				span {
+					background: #3b82f6;
+				}
+			}
+
+			&.egg-food {
+				border-color: rgba(234, 179, 8, 0.65);
+				background: #fefce8;
+				color: #854d0e;
+
+				span {
+					background: #eab308;
+				}
+			}
+
+			&.see-food {
+				border-color: rgba(6, 182, 212, 0.6);
+				background: #ecfeff;
+				color: #0e7490;
+
+				span {
+					background: #06b6d4;
+				}
+			}
+		}
+
+		.meta-row {
+			font-size: 12px;
+			color: #6b7280;
+
+			.meta {
+				display: inline-flex;
+				align-items: center;
+				gap: 4px;
+			}
+		}
+
+		.price {
+			font-size: 16px;
+			font-weight: 700;
+			color: #b12704;
+		}
+
+		.rating-badge {
+			background: #f1f5f9;
+			border-radius: 999px;
+			padding: 2px 8px;
+			font-size: 12px;
+			font-weight: 500;
+		}
+
+		.line-clamp-2 {
+			font-size: 13px;
+			color: #6b7280;
+			margin: 4px 0 8px;
+			display: -webkit-box;
+			-webkit-line-clamp: 1;
+			-webkit-box-orient: vertical;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+
+		/* Rating chip */
+		.rating-chip {
+			padding: 2px 10px;
+			border-radius: 999px;
+			font-size: 12px;
+			display: flex;
+			align-items: baseline;
+			gap: 4px;
+			border: none;
+			background-color: transparent;
+			line-height: 12px;
+			margin-right: 5px;
+			position: relative;
+			left: unset;
+			top: unset;
+			bottom: unset;
+
+
+		}
+	}
+
+	.wishlist-actions {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-top: 1rem;
+		justify-content: space-between;
+
+		.btn {
+			display: flex;
+			gap: 0.25rem;
+			justify-content: center;
+			align-items: center;
+			--bs-btn-padding-y: 0.25rem;
+			--bs-btn-padding-x: 0.75rem;
+			--bs-btn-font-size: 0.75rem;
+			border-radius: 15px;
+		}
+
+		.left-actions {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+
+		.right-actions {
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+	}
+
+	.empty {
+		border-radius: 16px;
+		border: 1px dashed rgba(148, 163, 184, 0.5);
+		background: linear-gradient(180deg, #f8fafc, #ffffff);
+	}
+}
+
 @media only screen and (max-width: 768px) {
 
 	.sliderMainContainer,
 	.paddingContainerFluid {
 		padding: 0 12px;
+	}
+}
+
+
+@media only screen and (max-width: 600px) {
+	.genContainerFluid {
+		max-width: 1920px;
+		margin: 0 auto;
+		padding: 12px;
+	}
+
+	.wishlist-grid {
+		grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+
+
+		.wishlist-thumb {
+			width: 100px;
+			min-height: 80px;
+			max-height: 80px;
+		}
+
+		.wishlist-actions {
+			margin-top: 0.5rem;
+
+			.label {
+				display: none;
+			}
+		}
 	}
 }
