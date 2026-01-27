@@ -15,7 +15,7 @@ import { ToastrService } from 'ngx-toastr';
 export class TemplateComponent {
 
 	regionalCuisineList = signal<any[]>([]);
-	regionLink = "/regional-cuisines/region";
+	regionLink = "/regional-cuisines/type";
 
 	listApi = "/assets/jsons/regional-cuisine-list.json";
 

@@ -63,8 +63,8 @@ export const routes: Routes = [
 						loadComponent: () => import('./views/regional-cuisines/all-regions/all-regions.component').then(c => c.AllRegionsComponent),
 					},
 					{
-						path: "region/:id",
-						loadComponent: () => import('./views/regional-cuisines/region/region.component').then(c => c.RegionComponent),
+						path: "type/:id",
+						loadComponent: () => import('./views/regional-cuisines/cuisine-type/cuisine-type.component').then(c => c.CuisineTypeComponent),
 						data: { title: "Regional Cuisines" }
 					},
 				]
@@ -80,8 +80,8 @@ export const routes: Routes = [
 						loadComponent: () => import('./views/international-cuisines/all-regions/all-regions.component').then(c => c.AllRegionsComponent),
 					},
 					{
-						path: "region/:id",
-						loadComponent: () => import('./views/international-cuisines/region/region.component').then(c => c.RegionComponent),
+						path: "type/:id",
+						loadComponent: () => import('./views/international-cuisines/cuisine-type/cuisine-type.component').then(c => c.CuisineTypeComponent),
 						data: { title: "International Cuisines" }
 					},
 				]

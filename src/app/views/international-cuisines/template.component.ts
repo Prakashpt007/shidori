@@ -11,7 +11,7 @@ import { ScrollerBarListComponent } from '../../utility/scroller-bar-list/scroll
 	styleUrl: './template.component.scss'
 })
 export class TemplateComponent {
-	regionLink = "/international-cuisines/region";
+	regionLink = "/international-cuisines/type";
 	regionalCuisineList = signal<any[]>([]);
 	ngOnInit() {
 		this.regionalCuisineList.update(prev => [
