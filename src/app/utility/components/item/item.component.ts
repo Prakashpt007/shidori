@@ -1,5 +1,5 @@
 import { Component, inject, input, InputSignal } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { GenericFunctionService } from '../../../services/generic-function.service';
 import { AppState, toggleCartlistItem, toggleWishlistItem } from '../../store/store.reducer';
 import { Store } from '@ngrx/store';
@@ -9,7 +9,7 @@ import { Item } from '../../interfaces/gen-interface';
 @Component({
 	selector: 'app-item',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [CommonModule, RouterModule],
 	templateUrl: './item.component.html',
 	styleUrl: './item.component.scss'
 })

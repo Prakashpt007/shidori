@@ -1,0 +1,50 @@
+.headerContainer {
+	position: sticky;
+	top: 0;
+	background-color: var(--bs-body-bg);
+	padding: 8px 16px;
+	/* Reduced padding on mobile */
+	border-radius: 20px 20px 0 0;
+	border-bottom: solid 1px var(--bs-link-color);
+	z-index: 3;
+	margin-bottom: 1rem;
+}
+
+.headerContainer .navbar-nav .nav-link {
+	padding: 0.5rem 1rem;
+	/* Standard nav padding */
+	font-weight: 500;
+}
+
+.headerContainer .navbar-toggler {
+	border: none;
+	padding: 0.25rem;
+}
+
+.headerContainer .navbar-toggler:focus {
+	box-shadow: none;
+	/* Clean focus */
+}
+
+@media (max-width: 991.98px) {
+	.headerContainer {
+		padding: 12px 16px;
+	}
+
+	.headerContainer .gap-4 {
+		gap: 1rem !important;
+	}
+
+	.headerContainer .iconInfoBtn {
+		padding: 0.5rem;
+		/* Larger touch targets */
+	}
+
+	/* Stack icons vertically if too squeezed */
+	.headerContainer .d-flex.gap-3 {
+		flex-wrap: wrap;
+		gap: 0.75rem;
+	}
+}
+
+/* Your existing .iconInfoBtn, .itemNumber, .active styles remain */

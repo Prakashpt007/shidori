@@ -95,7 +95,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.75rem 1.5rem;
-	font-size: 0.9rem;
+	font-size: 1rem;
 	color: #6b7280;
 
 	.meta {
@@ -104,7 +104,7 @@
 		gap: 6px;
 
 		i {
-			font-size: 0.9rem;
+			font-size: 1rem;
 			color: #64748b;
 		}
 	}
@@ -115,7 +115,67 @@
 	display: flex;
 	flex-wrap: wrap;
 	gap: 0.75rem;
-	align-items: center;
+	align-items: flex-start;
+	justify-content: space-between;
+
+	.item-details__actions-left {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	.item-details__actions-right {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		gap: 0.4rem;
+		text-align: right;
+	}
+
+	.qty-label-row {
+		display: flex;
+		align-items: baseline;
+		gap: 0.5rem;
+		font-size: 0.8rem;
+		color: #6b7280;
+
+		.qty-label {
+			font-weight: 600;
+			color: #0f172a;
+		}
+
+		.qty-hint {
+			font-size: 0.75rem;
+			opacity: 0.8;
+		}
+	}
+
+	.qty-control {
+		.qty-btn {
+			min-width: 36px;
+			font-weight: 600;
+		}
+
+		.qty-value {
+			min-width: 42px;
+			font-weight: 600;
+			pointer-events: none;
+		}
+	}
+
+	.custom-link,
+	.subtle-link {
+		font-size: 0.85rem;
+		color: #6b7280;
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 3px;
+		cursor: pointer;
+
+		&:hover {
+			color: #ef4444;
+		}
+	}
 
 	.pill {
 		display: inline-flex;
@@ -123,10 +183,13 @@
 		gap: 0.5rem;
 		border-radius: 999px;
 		padding: 0.55rem 1.3rem;
-		font-size: 0.9rem;
+		font-size: 0.95rem;
 		border: 1px solid transparent;
 		cursor: pointer;
-		transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+		transition:
+			background-color 0.15s ease,
+			color 0.15s ease,
+			border-color 0.15s ease;
 
 		&--primary {
 			background: transparent;
@@ -140,6 +203,18 @@
 			}
 		}
 
+		&--secondary-action {
+			padding-inline: 0.9rem;
+			font-size: 0.85rem;
+			border-color: #e5e7eb;
+			color: #6b7280;
+
+			&:hover {
+				border-color: #ef4444;
+				color: #b91c1c;
+			}
+		}
+
 		&--light {
 			background: #f8fafc;
 			color: #0f172a;
@@ -147,6 +222,11 @@
 		}
 	}
 }
+
+.item-details__checkout-link {
+	margin-top: 1rem;
+}
+
 
 /* reuse your existing item-class styles here if you want the same chips */
 

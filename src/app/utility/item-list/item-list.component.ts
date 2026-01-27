@@ -36,6 +36,8 @@ export class ItemListComponent {
 	loadingData = signal<boolean>(false);
 	errorMessage = signal<{ name: string, message: string } | null>(null);
 
+	private isTouchDevice = false;
+
 	constructor() {
 
 		// console.log('sss');
@@ -66,6 +68,10 @@ export class ItemListComponent {
 
 			this.getList(this.listApi());
 		}
+
+		this.isTouchDevice =
+			'ontouchstart' in window ||
+			navigator.maxTouchPoints > 0;
 	}
 
 	getList(url: string) {
@@ -109,10 +115,15 @@ export class ItemListComponent {
 	sliders!: QueryList<ElementRef<HTMLDivElement>>;
 
 	private isDown: boolean[] = [];
+	private isDragging: boolean[] = [];
 	private startX: number[] = [];
 	private scrollLeft: number[] = [];
+	private dragThreshold = 5;
 
+	// -------------------- MOUSE -------------------- //
 	onMouseDown(e: MouseEvent, idx: number) {
+		if (this.isTouchDevice) return;
+
 		const slider = this.sliders.get(idx)?.nativeElement;
 		if (!slider) return;
 
@@ -121,79 +132,40 @@ export class ItemListComponent {
 		this.startX[idx] = e.pageX - slider.offsetLeft;
 		this.scrollLeft[idx] = slider.scrollLeft;
 
-		// disable snap while dragging so it doesn’t fight
 		slider.style.scrollSnapType = 'none';
 		e.preventDefault();
 	}
 
-	onMouseLeave(idx: number) {
-		this.endDrag(idx);
-	}
-
-	onMouseUp(idx: number) {
-		this.endDrag(idx);
-	}
-
-	private endDrag(idx: number) {
-		const slider = this.sliders.get(idx)?.nativeElement;
-		if (!slider) return;
-
-		this.isDown[idx] = false;
-		slider.classList.remove('active');
-
-		// re‑enable snap so it finishes on the nearest card
-		slider.style.scrollSnapType = 'x mandatory';
-	}
-
 	onMouseMove(e: MouseEvent, idx: number) {
-		if (!this.isDown[idx]) return;
+		if (this.isTouchDevice || !this.isDown[idx]) return;
 
 		const slider = this.sliders.get(idx)?.nativeElement;
 		if (!slider) return;
 
 		e.preventDefault();
 		const x = e.pageX - slider.offsetLeft;
-		const walk = (x - this.startX[idx]) * 1; // same as your JS
+		const walk = x - this.startX[idx];
 		slider.scrollLeft = this.scrollLeft[idx] - walk;
 	}
 
-	onTouchStart(e: TouchEvent, idx: number) {
-		const slider = this.sliders.get(idx)?.nativeElement;
-		if (!slider) return;
-
-		// only single-finger drag; ignore pinch, etc.
-		if (e.touches.length !== 1) return;
-
-		this.isDown[idx] = true;
-		slider.classList.add('active');
-
-		const touch = e.touches[0];
-		const rect = slider.getBoundingClientRect();
-
-		// simulate your mouse coordinates
-		this.startX[idx] = touch.clientX - rect.left;
-		this.scrollLeft[idx] = slider.scrollLeft;
-
-		slider.style.scrollSnapType = 'none';
-		e.preventDefault();
+	onMouseUp(idx: number) {
+		if (this.isTouchDevice) return;
+		this.endDrag(idx);
 	}
 
-	onTouchMove(e: TouchEvent, idx: number) {
-		if (!this.isDown[idx]) return;
+	onMouseLeave(idx: number) {
+		if (this.isTouchDevice) return;
+		this.endDrag(idx);
+	}
 
+	// -------------------- COMMON -------------------- //
+	private endDrag(idx: number) {
 		const slider = this.sliders.get(idx)?.nativeElement;
 		if (!slider) return;
 
-		if (e.touches.length !== 1) return;
-
-		const touch = e.touches[0];
-		const rect = slider.getBoundingClientRect();
-
-		const x = touch.clientX - rect.left;
-		const walk = (x - this.startX[idx]) * 1; // same speed factor as mouse
-		slider.scrollLeft = this.scrollLeft[idx] - walk;
-
-		e.preventDefault();
+		this.isDown[idx] = false;
+		slider.classList.remove('active');
+		slider.style.scrollSnapType = 'x mandatory';
 	}
 
 }

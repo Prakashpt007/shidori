@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { GenericFunctionService } from '../../../services/generic-function.service';
-import { AppState, decrementCartQuantity, incrementCartQuantity, removeCartQuantity, removeFromCartlist, toggleCartlistItem, toggleWishlistItem } from '../../../utility/store/store.reducer';
+import { AppState, CartQuantityItem, decrementCartQuantity, incrementCartQuantity, removeCartQuantity, removeFromCartlist, toggleCartlistItem, toggleWishlistItem } from '../../../utility/store/store.reducer';
 import { selectCartlist, selectCartQuantities, selectWishlist } from '../../../utility/store/store.selectors';
 import { GenericHttpService } from '../../../services/generic-http.service';
 import { CommonModule } from '@angular/common';
@@ -21,7 +21,7 @@ export class ItemDetailsComponent {
 
 	cartlistIds = new Set<number>();
 	wishlistIds = new Set<number>();
-	cartQuantities: { [id: number]: number } = {};
+	cartQuantities = new Map<number, number>();
 
 	detailsApiUrl: string = 'assets/jsons/item-details.json';
 
@@ -46,10 +46,14 @@ export class ItemDetailsComponent {
 			.pipe(takeUntilDestroyed())
 			.subscribe(ids => this.cartlistIds = new Set(ids ?? []));
 
-		// cart quantities
+		// cart quantities (array -> Map for easy lookup)
 		this.store.select(selectCartQuantities)
 			.pipe(takeUntilDestroyed())
-			.subscribe(map => this.cartQuantities = map ?? {});
+			.subscribe((items: CartQuantityItem[] | null) => {
+				const map = new Map<number, number>();
+				(items ?? []).forEach(q => map.set(q.id, q.quantity));
+				this.cartQuantities = map;
+			});
 	}
 
 	ngOnInit() {
@@ -81,7 +85,7 @@ export class ItemDetailsComponent {
 	// quantity helpers / actions
 
 	getCartQtyForItem(id: number): number {
-		return this.cartQuantities?.[id] ?? 0;
+		return this.cartQuantities.get(id) ?? 0;
 	}
 
 	addOrIncrementCart() {

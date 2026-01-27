@@ -2057,4 +2057,21 @@ a {
 			}
 		}
 	}
+
+
+	.wrapper {
+
+		scroll-snap-type: x mandatory;
+		// /* key */
+		scroll-behavior: smooth;
+
+
+		.dish-card-soft {
+			scroll-snap-align: center;
+
+			min-width: 100%;
+			width: 100%;
+		}
+
+	}
 }

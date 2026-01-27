@@ -1,22 +1,23 @@
 // cart-quantities-storage.service.ts
 import { Injectable } from '@angular/core';
+import { CartQuantityItem } from '../utility/store/store.reducer';
 
 const CART_QTY_KEY = 'ck_cart_quantities';
 
 @Injectable({ providedIn: 'root' })
 export class CartQuantitiesStorageService {
-	load(): { [id: number]: number } {
+	load(): CartQuantityItem[] {
 		try {
 			const raw = localStorage.getItem(CART_QTY_KEY);
-			return raw ? JSON.parse(raw) as { [id: number]: number } : {};
+			return raw ? JSON.parse(raw) as CartQuantityItem[] : [];
 		} catch {
-			return {};
+			return [];
 		}
 	}
 
-	save(map: { [id: number]: number }): void {
+	save(list: CartQuantityItem[]): void {
 		try {
-			localStorage.setItem(CART_QTY_KEY, JSON.stringify(map));
+			localStorage.setItem(CART_QTY_KEY, JSON.stringify(list));
 		} catch {
 			// ignore storage errors
 		}

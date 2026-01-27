@@ -49,10 +49,10 @@
 	</div>
 
 	<div class="dish-card-soft__footer">
-		<button type="button" class="pill pill--light" (click)="viewDetails(data()?.id)">
+		<a [routerLink]="['/shopping/item-details', data()?.id]" type="button" class="pill pill--light">
 			<i class="fa-regular fa-eye"></i>
 			<span>View details</span>
-		</button>
+		</a>
 
 		<!-- cart pill -->
 		<button type="button" class="pill pill--primary" (click)="toggleCartlist(data()?.id)" [class.pill--active]="isInCartlist()">

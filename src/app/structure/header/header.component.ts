@@ -4,13 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs/internal/operators/map';
+import { map } from 'rxjs/operators';
 import { GenericHttpService } from '../../services/generic-http.service';
 import { Store } from '@ngrx/store';
-import { AppState, hydrateWishlist, setUserLocation } from '../../utility/store/store.reducer';
+import { AppState, setUserLocation, UserLocation } from '../../utility/store/store.reducer';
 import { selectCartlist, selectUserLocation, selectWishlist } from '../../utility/store/store.selectors';
 import { CommonModule } from '@angular/common';
-import { tap } from 'rxjs';
 
 @Component({
 	selector: 'app-header',
@@ -20,17 +19,16 @@ import { tap } from 'rxjs';
 	styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
-	readonly locationConfirmation = viewChild.required<ElementRef>("locationConfirmation");
+	readonly locationConfirmation = viewChild.required<ElementRef>('locationConfirmation');
 	private modalService = inject(NgbModal);
-	http = inject(HttpClient);
+	private http = inject(HttpClient);
 	private store = inject(Store<AppState>);
+	private toastr = inject(ToastrService);
+	private genericHttp = inject(GenericHttpService);
 
 	listApi = '/assets/jsons/locations.json';
 	storeLocationApi = 'save-location';
 	selectedCity: any | null = null;
-
-	toastr = inject(ToastrService);
-	genericHttp = inject(GenericHttpService);
 
 	inputSearchCity = '';
 	searchCity = ''; // final selected string
@@ -39,10 +37,8 @@ export class HeaderComponent {
 	userLocation$ = this.store.select(selectUserLocation);
 
 	processToStore = signal<boolean>(false);
-
 	private suppressBlurClose = false;
 	currentLocationLabel = signal<string>('');
-
 
 	wishlistCount$ = this.store.select(selectWishlist).pipe(
 		map(ids => ids?.length ?? 0)
@@ -53,53 +49,51 @@ export class HeaderComponent {
 	);
 
 	constructor() {
+		// Single subscription: update header label + inputs from store
 		this.userLocation$.subscribe(loc => {
 			if (loc) {
-				this.currentLocationLabel.set(`${loc.city}, ${loc.state} - ${loc.pincode}`);
+				const label = `${loc.city}, ${loc.state} - ${loc.pincode}`;
+				this.currentLocationLabel.set(label);
+				this.searchCity = label;
+				this.inputSearchCity = label;
 			} else {
 				this.currentLocationLabel.set('');
 			}
 		});
-
 	}
 
-
-
 	ngOnInit() {
-		// 1) from NgRx (if already in store)
-		this.userLocation$.subscribe(loc => {
-			if (loc) {
-				const label = `${loc.city}, ${loc.state} - ${loc.pincode}`;
-				this.searchCity = label;
-				this.inputSearchCity = label;
-			}
-		});
+		// Hydrate from local/session storage only if store has no location yet
+		this.userLocation$.pipe(
+			map(loc => !!loc)
+		).subscribe(hasLoc => {
+			if (hasLoc || this.searchCity) return;
 
-		// 2) fallback from localStorage/sessionStorage
-		if (!this.searchCity) {
 			const raw =
 				localStorage.getItem('user_location') ??
 				sessionStorage.getItem('user_location');
-			if (raw) {
-				try {
-					const saved = JSON.parse(raw);
-					const label = `${saved.city}, ${saved.state} - ${saved.pincode}`;
-					this.searchCity = label;
-					this.inputSearchCity = label;
 
-					this.store.dispatch(
-						setUserLocation({
-							value: {
-								city: saved.city,
-								state: saved.state,
-								pincode: +saved.pincode,
-								detection_method: saved.detection_method ?? 'manual',
-							},
-						})
-					);
-				} catch { }
+			if (!raw) return;
+
+			try {
+				const saved = JSON.parse(raw) as UserLocation;
+				const value: UserLocation = {
+					city: saved.city,
+					state: saved.state,
+					pincode: +saved.pincode,
+					detection_method: saved.detection_method ?? 'manual'
+				};
+
+				const label = `${value.city}, ${value.state} - ${value.pincode}`;
+				this.searchCity = label;
+				this.inputSearchCity = label;
+
+				// Push into store so rest of app uses same source of truth
+				this.store.dispatch(setUserLocation({ value }));
+			} catch {
+				// ignore parse errors
 			}
-		}
+		});
 	}
 
 	onSearchChange(searchTxt: string): void {
@@ -122,16 +116,14 @@ export class HeaderComponent {
 		}
 	}
 
-	onInputBlur(event: FocusEvent): void {
+	onInputBlur(_: FocusEvent): void {
 		if (this.suppressBlurClose) {
-			// Click on result; keep open until click handler runs
 			return;
 		}
 		this.showResults.set(false);
 	}
 
 	onResultMouseDown(event: MouseEvent): void {
-		// prevent blur from closing the list before click
 		this.suppressBlurClose = true;
 		event.preventDefault();
 	}
@@ -154,7 +146,6 @@ export class HeaderComponent {
 			},
 			complete: () => {
 				this.showResults.set(this.cityList().length > 0);
-				// allow blur to close again after result click finishes
 				setTimeout(() => (this.suppressBlurClose = false), 0);
 			},
 		});
@@ -165,10 +156,9 @@ export class HeaderComponent {
 		this.searchCity = label;
 		this.inputSearchCity = label;
 
-		this.selectedCity = item;  // keep full object
+		this.selectedCity = item;
 		this.showResults.set(false);
 	}
-
 
 	confirmLocation(): void {
 		if (!this.selectedCity) {
@@ -176,25 +166,18 @@ export class HeaderComponent {
 			return;
 		}
 
-		console.log('Confirm location:', this.searchCity);
-
 		this.inputSearchCity = this.searchCity;
 
 		this.storeLocation(
 			this.selectedCity.city,
 			this.selectedCity.state,
 			this.selectedCity.pincode,
-			'manual' // or 'browser' / 'geolocation'
+			'manual'
 		);
 	}
 
 	storeLocation(city: string, state: string, pincode: number, detection_method: string) {
-		const body = {
-			city,
-			state,
-			pincode,
-			detection_method,
-		};
+		const body = { city, state, pincode, detection_method };
 
 		this.processToStore.set(true);
 
@@ -203,31 +186,21 @@ export class HeaderComponent {
 				if (res.success === true || res.success === 200) {
 					this.toastr.success('Location saved successfully', 'Location');
 
-					this.store.dispatch(
-						setUserLocation({ value: { city, state, pincode, detection_method } })
-					);
-
-					// save to localStorage
-					localStorage.setItem('user_location', JSON.stringify({ city, state, pincode, detection_method }));
+					const value: UserLocation = { city, state, pincode, detection_method };
+					this.store.dispatch(setUserLocation({ value }));
+					localStorage.setItem('user_location', JSON.stringify(value));
 					this.modalService.dismissAll();
-
 				} else {
 					this.toastr.error(res.message || 'Failed to save location');
 				}
 			},
 			error: (err: any) => {
 				this.toastr.error(err.message || 'Error saving location');
-				this.processToStore.set(false);
 
-				// Temporary store
-				this.store.dispatch(
-					setUserLocation({ value: { city, state, pincode, detection_method } })
-				);
-
-				// save to localStorage
-				sessionStorage.setItem('user_location', JSON.stringify({ city, state, pincode, detection_method }));
+				const value: UserLocation = { city, state, pincode, detection_method };
+				this.store.dispatch(setUserLocation({ value }));
+				sessionStorage.setItem('user_location', JSON.stringify(value));
 				this.modalService.dismissAll();
-
 			},
 			complete: () => {
 				this.inputSearchCity = '';
@@ -239,18 +212,17 @@ export class HeaderComponent {
 		});
 	}
 
-
 	getLocationInfo() {
 		this.modalService.open(this.locationConfirmation(), {
-			size: 'lg', scrollable: true, centered: false, backdrop: 'static'
+			size: 'lg',
+			scrollable: true,
+			centered: false,
+			backdrop: 'static'
 		}).result.then(
-			() => {
-
-			},
+			() => { },
 			() => { }
 		);
 	}
-
 
 	clearLocation() {
 		this.store.dispatch(
@@ -275,36 +247,23 @@ export class HeaderComponent {
 		this.currentLocationLabel.set('');
 	}
 
-
-	// 1. Get GPS coords (Geolocation API)
 	getCurrentLocation() {
+		console.log('getCurrentLocation');
 		navigator.geolocation.getCurrentPosition(
 			(position) => {
 				const lat = position.coords.latitude;
 				const lng = position.coords.longitude;
 
-				// 2. Reverse geocode → city + pincode
 				this.extractCityPincode(lat, lng).subscribe(result => {
-					console.log('result', result);
-
-					this.storeLocation(result.city, result.state, result.pincode, 'auto')
-
-					// {
-					// 	"latitude": 21.081240423189808,
-					// 	"longitude": 79.06451691313532,
-					// 	"city": "Nagpur",
-					// 	"pincode": "440025",
-					// 	"address_string": "Nagpur, Nagpur Urban Taluka, Nagpur, Maharashtra, 440025, India"
-					// }
-
-					// this.saveUserLocation(result);
+					this.storeLocation(result.city, result.state, +result.pincode, 'auto');
 				});
 			}
 		);
 	}
 
-	// 3. Reverse geocode (Free Nominatim API)
 	extractCityPincode(lat: number, lng: number) {
+		console.log('extractCityPincode => ', lat, lng);
+
 		const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}&zoom=18&addressdetails=1`;
 
 		return this.http.get<any>(url).pipe(
@@ -323,5 +282,4 @@ export class HeaderComponent {
 			})
 		);
 	}
-
 }

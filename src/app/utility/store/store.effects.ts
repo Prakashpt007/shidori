@@ -1,9 +1,30 @@
+// store.effects.ts
 import { Injectable, inject } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map, tap, withLatestFrom } from 'rxjs/operators';
-import { AppState, decrementCartQuantity, hydrateCartlist, hydrateCartlistSuccess, hydrateCartQuantities, hydrateCartQuantitiesSuccess, hydrateWishlist, hydrateWishlistSuccess, incrementCartQuantity, removeCartQuantity, setCartlist, setCartQuantities, setWishlist, toggleCartlistItem, toggleWishlistItem } from './store.reducer';
-import { selectCartlist, selectCartQuantities, selectWishlist } from './store.selectors';
+import {
+	AppState,
+	decrementCartQuantity,
+	hydrateCartlist,
+	hydrateCartlistSuccess,
+	hydrateCartQuantities,
+	hydrateCartQuantitiesSuccess,
+	hydrateWishlist,
+	hydrateWishlistSuccess,
+	incrementCartQuantity,
+	removeCartQuantity,
+	setCartlist,
+	setCartQuantities,
+	setWishlist,
+	toggleCartlistItem,
+	toggleWishlistItem
+} from './store.reducer';
+import {
+	selectCartlist,
+	selectCartQuantities,
+	selectWishlist
+} from './store.selectors';
 import { WishlistStorageService } from '../../services/wishlist-storage.service';
 import { CartlistStorageService } from '../../services/cartlist-storage.service';
 import { CartQuantitiesStorageService } from '../../services/cart-quantities-storage.service';
@@ -16,7 +37,7 @@ export class StoreEffects {
 	private cartlistStorage = inject(CartlistStorageService);
 	private cartQtyStorage = inject(CartQuantitiesStorageService);
 
-	// Load wishlist from localStorage
+	// Load wishlist
 	hydrateWishlist$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(hydrateWishlist),
@@ -27,7 +48,7 @@ export class StoreEffects {
 		)
 	);
 
-	// Load cart ids from localStorage
+	// Load cart ids
 	hydrateCartlist$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(hydrateCartlist),
@@ -38,7 +59,7 @@ export class StoreEffects {
 		)
 	);
 
-	// Save wishlist to localStorage on changes
+	// Save wishlist
 	persistWishlist$ = createEffect(
 		() =>
 			this.actions$.pipe(
@@ -49,7 +70,7 @@ export class StoreEffects {
 		{ dispatch: false }
 	);
 
-	// Save cart ids to localStorage on changes
+	// Save cart ids
 	persistCartlist$ = createEffect(
 		() =>
 			this.actions$.pipe(
@@ -60,7 +81,7 @@ export class StoreEffects {
 		{ dispatch: false }
 	);
 
-	// Load quantities from localStorage
+	// Load quantities (array)
 	hydrateCartQuantities$ = createEffect(() =>
 		this.actions$.pipe(
 			ofType(hydrateCartQuantities),
@@ -71,7 +92,7 @@ export class StoreEffects {
 		)
 	);
 
-	// Save quantities to localStorage on changes
+	// Save quantities on changes
 	persistCartQuantities$ = createEffect(
 		() =>
 			this.actions$.pipe(
@@ -83,7 +104,7 @@ export class StoreEffects {
 					setCartQuantities
 				),
 				withLatestFrom(this.store.select(selectCartQuantities)),
-				tap(([_, quantities]) => this.cartQtyStorage.save(quantities ?? {}))
+				tap(([_, quantities]) => this.cartQtyStorage.save(quantities ?? []))
 			),
 		{ dispatch: false }
 	);

@@ -17,6 +17,11 @@ export const routes: Routes = [
 		data: { title: "Register Page" }
 	},
 	{
+		path: "onboarding",
+		loadComponent: () => import('./core/onboarding/onboarding.component').then(c => c.OnboardingComponent),
+		data: { title: "Onboarding Page" }
+	},
+	{
 		path: "",
 		loadComponent: () => import('./structure/main-container/main-container.component').then(c => c.MainContainerComponent),
 		children: [

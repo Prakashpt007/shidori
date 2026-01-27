@@ -1,3 +1,4 @@
+// store.reducer.ts
 import { createAction, createReducer, on, props } from '@ngrx/store';
 
 export interface UserLocation {
@@ -7,19 +8,25 @@ export interface UserLocation {
 	detection_method: string;
 }
 
+export interface CartQuantityItem {
+	id: number;
+	quantity: number;
+}
+
 export interface State {
 	location: UserLocation | null;
 	wishlist: number[];
-	cartlist: number[];                  // ids
-	cartQuantities: { [id: number]: number }; // qty per id
+	cartlist: number[];                 // ids
+	cartQuantities: CartQuantityItem[]; // array of {id, quantity}
 }
 
 export const initialState: State = {
 	location: null,
 	wishlist: [],
 	cartlist: [],
-	cartQuantities: {}
+	cartQuantities: []
 };
+
 
 //---------------------- Actions -------------------------------//
 
@@ -108,12 +115,12 @@ export const hydrateCartQuantities = createAction('[CartQty] Hydrate');
 
 export const hydrateCartQuantitiesSuccess = createAction(
 	'[CartQty] Hydrate Success',
-	props<{ quantities: { [id: number]: number } }>()
+	props<{ quantities: CartQuantityItem[] }>()
 );
 
 export const setCartQuantities = createAction(
 	'[CartQty] Set All',
-	props<{ quantities: { [id: number]: number } }>()
+	props<{ quantities: CartQuantityItem[] }>()
 );
 
 //---------------------- Reducer -------------------------------//
@@ -186,92 +193,108 @@ export const storeReducer = createReducer(
 		const inCart = state.cartlist.includes(id);
 
 		if (inCart) {
-			// remove from cart and its quantity
-			const { [id]: _, ...restQty } = state.cartQuantities;
+			// remove from cart + quantities
 			return {
 				...state,
 				cartlist: state.cartlist.filter(itemId => itemId !== id),
-				cartQuantities: restQty
+				cartQuantities: state.cartQuantities.filter(q => q.id !== id)
 			};
 		}
 
-		// add to cart, always start qty at 1
+		// add: id + quantity=1
 		return {
 			...state,
 			cartlist: [...state.cartlist, id],
-			cartQuantities: {
+			cartQuantities: [
 				...state.cartQuantities,
-				[id]: 1
-			}
+				{ id, quantity: 1 }
+			]
 		};
 	}),
 
 	// quantity ++
-	on(incrementCartQuantity, (state, { id }) => ({
-		...state,
-		cartQuantities: {
-			...state.cartQuantities,
-			[id]: (state.cartQuantities[id] ?? 0) + 1
-		},
-		cartlist: state.cartlist.includes(id)
+	on(incrementCartQuantity, (state, { id }) => {
+		const existsInCart = state.cartlist.includes(id);
+		const nextCartlist = existsInCart
 			? state.cartlist
-			: [...state.cartlist, id]
-	})),
+			: [...state.cartlist, id];
+
+		const existing = state.cartQuantities.find(q => q.id === id);
+
+		let nextQuantities;
+		if (existing) {
+			nextQuantities = state.cartQuantities.map(q =>
+				q.id === id ? { ...q, quantity: q.quantity + 1 } : q
+			);
+		} else {
+			nextQuantities = [...state.cartQuantities, { id, quantity: 1 }];
+		}
+
+		return {
+			...state,
+			cartlist: nextCartlist,
+			cartQuantities: nextQuantities
+		};
+	}),
 
 	// quantity -- (remove if goes to 0)
 	on(decrementCartQuantity, (state, { id }) => {
-		const current = state.cartQuantities[id] ?? 0;
+		const existing = state.cartQuantities.find(q => q.id === id);
+		if (!existing) return state;
 
-		if (current <= 1) {
-			const { [id]: _, ...restQty } = state.cartQuantities;
+		if (existing.quantity <= 1) {
+			// quantity would go to 0 → remove from both
 			return {
 				...state,
 				cartlist: state.cartlist.filter(itemId => itemId !== id),
-				cartQuantities: restQty
+				cartQuantities: state.cartQuantities.filter(q => q.id !== id)
 			};
 		}
 
 		return {
 			...state,
-			cartQuantities: {
-				...state.cartQuantities,
-				[id]: current - 1
-			}
+			cartQuantities: state.cartQuantities.map(q =>
+				q.id === id ? { ...q, quantity: q.quantity - 1 } : q
+			)
 		};
 	}),
 
-	// explicit remove qty (used when deleting / moving to wishlist)
-	on(removeCartQuantity, (state, { id }) => {
-		const { [id]: _, ...restQty } = state.cartQuantities;
-		return {
-			...state,
-			cartlist: state.cartlist.filter(itemId => itemId !== id),
-			cartQuantities: restQty
-		};
-	}),
+	// explicit remove (delete button)
+	on(removeCartQuantity, (state, { id }) => ({
+		...state,
+		cartlist: state.cartlist.filter(itemId => itemId !== id),
+		cartQuantities: state.cartQuantities.filter(q => q.id !== id)
+	})),
 
-	// cartlist: hydrate success (ids) – init qty=1 if missing
+	// cartlist: hydrate success (ids) – ensure quantity exists
 	on(hydrateCartlistSuccess, (state, { ids }) => {
-		const baseQty: { [id: number]: number } = { ...state.cartQuantities };
+		const baseQty = [...state.cartQuantities];
+
+		const existingIds = new Set(baseQty.map(q => q.id));
+		const added: CartQuantityItem[] = [];
+
 		ids.forEach(id => {
-			if (!baseQty[id]) baseQty[id] = 1;
+			if (!existingIds.has(id)) {
+				added.push({ id, quantity: 1 });
+			}
 		});
+
 		return {
 			...state,
 			cartlist: [...ids],
-			cartQuantities: baseQty
+			cartQuantities: [...baseQty, ...added]
 		};
 	}),
 
 	// quantities hydrate / set
 	on(hydrateCartQuantitiesSuccess, (state, { quantities }) => ({
 		...state,
-		cartQuantities: { ...quantities }
+		cartQuantities: [...quantities]
 	})),
 
 	on(setCartQuantities, (state, { quantities }) => ({
 		...state,
-		cartQuantities: { ...quantities }
+		cartQuantities: [...quantities]
 	}))
 );
 

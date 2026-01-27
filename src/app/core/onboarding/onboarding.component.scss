@@ -1,0 +1,58 @@
+.page {
+	height: 100dvh;
+	background-color: #000000;
+	background-image: linear-gradient(131deg, #3a0f0b 0%, #b52117 35%, #ff7a1a 70%, #ffcf);
+	color: currentColor;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 1rem;
+	text-align: center;
+
+	h4 {
+		color: #ffffff;
+		font-size: clamp(1.25rem, 4vw, 4rem);
+	}
+
+	.btn {
+		position: fixed;
+		bottom: 24px;
+		z-index: 1;
+
+		&.left {
+			left: 24px;
+		}
+
+		&.right {
+			right: 24px;
+		}
+	}
+}
+
+ul.onboarding-dots {
+	position: fixed;
+	bottom: 24px;
+	list-style: none;
+	display: flex;
+	margin: 0;
+	padding: 0;
+	gap: 1rem;
+	justify-self: anchor-center;
+	align-items: center;
+
+	li {
+		margin-block: 1rem;
+		width: 10px;
+		height: 10px;
+		background-color: #ffffff;
+		border-radius: 50%;
+		opacity: 0.5;
+
+		&.active {
+			width: 18px;
+			height: 18px;
+			opacity: 1;
+		}
+	}
+}

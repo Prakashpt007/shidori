@@ -78,12 +78,56 @@
 			</div>
 
 			<div class="item-details__actions">
+				<div>
+					@if(getCartQtyForItem(dataItem().id) > 0) {
+
+					<p class="mb-2">Quantity:</p>
+
+					<div class="input-group qty-control w-auto">
+						@if(getCartQtyForItem(dataItem().id) === 1) {
+						<button class="btn btn-outline-secondary qty-btn" type="button" data-type="minus" (click)="deleteFromCart()">
+							<i class="fa-solid fa-trash-can"></i>
+						</button>
+						} @else {
+						<button class="btn btn-outline-secondary qty-btn" type="button" data-type="minus" (click)="decrementCart()">
+							-
+						</button>
+						}
+
+						<button class="btn btn-outline-secondary qty-value" style="pointer-events: none;">
+							{{ getCartQtyForItem(dataItem().id) }}
+						</button>
+
+
+						@if(getCartQtyForItem(dataItem().id) == 10) {
+						<button class="btn btn-outline-secondary qty-btn" type="button" data-type="plus" disabled>
+							+
+						</button>
+						} @else {
+						<button class="btn btn-outline-secondary qty-btn" type="button" data-type="plus" (click)="addOrIncrementCart()">
+							+
+						</button>
+						}
+					</div>
+					} @else {
+
+					<button type="button" class="pill btn-sm pill--primary" (click)="addOrIncrementCart()">
+						<span>Add to cart</span>
+						<i class="fa-solid fa-bag-shopping"></i>
+					</button>
+					}
+
+				</div>
+
+
+
+
+
 				<!-- Cart quantity control -->
-				<ng-container *ngIf="cartlistIds.has(dataItem().id); else addToCartBtn">
+				<!-- <ng-container *ngIf="cartlistIds.has(dataItem().id); else addToCartBtn">
 
 
-					<div class="input-group btn-group-sm qty-control w-auto">
-
+					<div class="input-group qty-control w-auto">
 						@if(getCartQtyForItem(dataItem().id) === 1) {
 						<button class="btn btn-outline-secondary qty-btn" type="button" data-type="minus" (click)="deleteFromCart()">
 							<i class="fa-solid fa-trash-can"></i>
@@ -107,33 +151,50 @@
 						Delete from cart
 					</a>
 
-				</ng-container>
+				</ng-container> -->
 
 				<!-- Add to cart when not in cart -->
-				<ng-template #addToCartBtn>
+				<!-- <ng-template #addToCartBtn>
 					<button type="button" class="pill btn-sm pill--primary" (click)="addOrIncrementCart()">
 						<span>Add to cart</span>
 						<i class="fa-solid fa-bag-shopping"></i>
 					</button>
-				</ng-template>
+				</ng-template> -->
 
 				<!-- Wishlist: also removes from cart + qty -->
-				<button type="button" class="pill btn-sm pill--light" (click)="saveToWishlistAndRemoveFromCart()">
-					<ng-container *ngIf="!wishlistIds.has(dataItem().id); else filledHeart">
-						<i class="fa-regular fa-heart"></i>
-					</ng-container>
-					<ng-template #filledHeart>
-						<i class="fa-solid fa-heart"></i>
-					</ng-template>
 
-					<span>
-						{{
-						wishlistIds.has(dataItem().id)
-						? 'Remove from wishlist'
-						: 'Save to wishlist'
-						}}
-					</span>
-				</button>
+				<div style="display: grid;align-content: center;text-align: center;gap: 6px;">
+					@if(getCartQtyForItem(dataItem().id) > 0) {
+					<a role="button" class="link-underline-primary link-offset-2 custom-link" (click)="deleteFromCart()">
+						Delete from cart
+					</a>
+					}
+					<button type="button" class="pill btn-sm pill--light" (click)="saveToWishlistAndRemoveFromCart()">
+						<ng-container *ngIf="!wishlistIds.has(dataItem().id); else filledHeart">
+							<i class="fa-regular fa-heart"></i>
+						</ng-container>
+						<ng-template #filledHeart>
+							<i class="fa-solid fa-heart"></i>
+						</ng-template>
+
+						<span>
+							{{
+							wishlistIds.has(dataItem().id)
+							? 'Remove from wishlist'
+							: 'Save to wishlist'
+							}}
+						</span>
+					</button>
+				</div>
+
+
+
+
+			</div>
+
+
+			<div>
+				<button type="button" class="pill btn btn-outline-secondary btn-sm pill--light">Checkout</button>
 			</div>
 		</div>
 	</div>
