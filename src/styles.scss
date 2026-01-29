@@ -76,6 +76,58 @@ body {
 		border-bottom: none;
 		border-radius: 0.3125rem;
 	}
+
+	//--------------------
+
+	--scrollbar-thumb-hover-color: rgba(100, 100, 100, 0.8);
+	--scrollbar-thumb-active-color: rgba(80, 80, 80, 0.8);
+	--scrollbar-thumb-color: rgba(120, 120, 120, 0.8);
+
+	&::-webkit-scrollbar {
+		background-color: transparent;
+		border-radius: 0;
+		height: 5px;
+		width: 8px
+	}
+
+	&::-webkit-scrollbar-thumb {
+		background-color: transparent
+	}
+
+	&::-webkit-scrollbar-thumb:active {
+		background-color: transparent
+	}
+
+	&:hover::-webkit-scrollbar {
+		background-color: transparent
+	}
+
+	&:hover::-webkit-scrollbar-thumb {
+		background-color: var(--scrollbar-thumb-color);
+		background-clip: padding-box;
+		border-radius: 4px;
+		padding: 100px 0 0
+	}
+
+	&::-webkit-scrollbar:hover {
+		background-color: transparent
+	}
+
+	&::-webkit-scrollbar:active {
+		background-color: transparent
+	}
+
+	&::-webkit-scrollbar-thumb:hover {
+		background-color: var(--scrollbar-thumb-hover-color)
+	}
+
+	&::-webkit-scrollbar-thumb:active {
+		background-color: var(--scrollbar-thumb-active-color)
+	}
+
+	&::-webkit-scrollbar-corner {
+		background: transparent
+	}
 }
 
 
@@ -146,14 +198,66 @@ h6 {
 	// font-family: "Open Sans", sans-serif;
 }
 
+
 .headerContainer {
+	container-type: scroll-state;
 	position: sticky;
 	top: 0;
 	background-color: var(--bs-body-bg);
-	padding: 16px 24px;
-	border-radius: 20px 20px 0 0;
+	padding: 8px 16px;
+	/* Reduced padding on mobile */
+	// border-radius: 20px 20px 0 0;
 	border-bottom: solid 1px var(--bs-link-color);
 	z-index: 3;
+
+	* {
+		transition: padding 0.3s ease-in-out, font-size 0.3s ease-in-out;
+	}
+
+
+	.navbar-nav {
+		.nav-link {
+			padding: 0.5rem 1rem;
+			/* Standard nav padding */
+			font-weight: 500;
+		}
+	}
+
+	.navbar-toggler {
+		border: none;
+		padding: 0.25rem;
+
+		&:focus {
+			box-shadow: none;
+			/* Clean focus */
+		}
+
+	}
+}
+
+/* When sticky header is stuck at top */
+@container scroll-state(stuck: top) {
+	.headerContainer {
+
+
+		.navbar {
+			padding: 0;
+		}
+
+		.navbar-brand {
+			padding: 0;
+
+
+			h1 {
+				font-size: 2rem;
+			}
+		}
+
+		.btn {
+			--bs-btn-padding-y: 0.3rem !important;
+			--bs-btn-font-size: 0.875rem !important;
+		}
+	}
 }
 
 
@@ -1174,7 +1278,7 @@ a {
 	display: flex;
 	justify-content: flex-start;
 	align-items: center;
-	gap: 2rem;
+	// gap: 2rem;
 	/* flex-flow: row; */
 	flex-wrap: nowrap;
 	width: 100%;
@@ -1215,7 +1319,7 @@ a {
 
 	border: 1px solid rgb(0 0 0 / 16%);
 	// box-shadow: 0 0 20px 15px #00000017;
-	margin: 20px 0 25px;
+	margin: 20px 1rem 25px;
 
 
 
@@ -1224,6 +1328,18 @@ a {
 		box-shadow 0.3s ease-in-out,
 		border-color 0.3s ease-in-out,
 		background 0.3s ease-in-out;
+
+	&.inFavorite {
+		border-color: rgba(var(--bs-link-color-rgb), 0.60);
+		box-shadow: 0 10px 15px rgba(var(--bs-link-color-rgb), 0.15);
+	}
+
+	&.inCart {
+		border-color: rgba(22, 163, 74, 0.60);
+		box-shadow: 0 10px 15px rgba(22, 163, 74, 0.15);
+	}
+
+
 
 	&:hover {
 		// transform: translateY(-4px);
@@ -1237,6 +1353,8 @@ a {
 			transform: scale(1.2) rotate(5deg);
 		}
 	}
+
+
 
 	/* IMAGE */
 	&__image {
@@ -1385,6 +1503,25 @@ a {
 
 				&:hover {
 					background-color: var(--bs-link-color);
+					// transform: translateY(-1px);
+					color: #ffffff;
+				}
+
+				&.pill--active {
+					background-color: #16a34a;
+					color: #ffffff;
+					border-color: #16a34a;
+				}
+			}
+
+			&--secondary {
+				background: transparent;
+				color: var(--bs-secondary);
+				border-color: var(--bs-secondary);
+				font-weight: 500;
+
+				&:hover {
+					background-color: var(--bs-secondary);
 					// transform: translateY(-1px);
 					color: #ffffff;
 				}
@@ -2021,6 +2158,27 @@ a {
 			}
 		}
 	}
+}
+
+@media (max-width: 991.98px) {
+	.headerContainer {
+		padding: 12px 16px;
+
+		.gap-4 {
+			gap: 1rem !important;
+		}
+
+		.iconInfoBtn {
+			padding: 0.5rem;
+			/* Larger touch targets */
+		}
+
+		.d-flex.gap-3 {
+			flex-wrap: wrap;
+			gap: 0.75rem;
+		}
+	}
+
 }
 
 @media only screen and (max-width: 768px) {

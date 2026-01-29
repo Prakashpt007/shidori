@@ -1,4 +1,4 @@
-<div class="dish-card-soft">
+<div class="dish-card-soft" [class.inCart]="isInCartlist()" [class.inFavorite]="isInWishlist()">
 	<div class="dish-card-soft__image">
 		<img [src]="data()?.image_url" [alt]="data()?.name" loading="lazy" />
 
@@ -55,7 +55,7 @@
 		</a>
 
 		<!-- cart pill -->
-		<button type="button" class="pill pill--primary" (click)="toggleCartlist(data()?.id)" [class.pill--active]="isInCartlist()">
+		<button type="button" class="pill pill--secondary" (click)="toggleCartlist(data()?.id)" [class.pill--active]="isInCartlist()">
 			<span>{{ isInCartlist() ? 'In cart' : 'Add to cart' }}</span>
 			<i class="fa-solid fa-bag-shopping"></i>
 		</button>

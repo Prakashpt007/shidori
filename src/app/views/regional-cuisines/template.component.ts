@@ -4,6 +4,7 @@ import { ScrollerBarListComponent } from '../../utility/scroller-bar-list/scroll
 import { RouterModule } from '@angular/router';
 import { GenericHttpService } from '../../services/generic-http.service';
 import { ToastrService } from 'ngx-toastr';
+import { GenFiltersComponent } from "../../utility/gen-filters/gen-filters.component";
 
 @Component({
 	selector: 'app-template',

@@ -1,0 +1,12 @@
+.custom-select {
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	// {
+	// 	    margin-left: auto;
+	// }
+
+	&::after {
+		margin-left: auto;
+	}
+}

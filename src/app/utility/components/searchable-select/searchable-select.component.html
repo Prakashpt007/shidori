@@ -1,0 +1,24 @@
+<div class="dropdown">
+	<button class="dropdown-toggle custom-select" [ngClass]="[buttonClass, dropdownWidthClass]" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+		{{ selectedLabel || placeholder }}
+	</button>
+
+	<ul class="dropdown-menu p-2" [ngClass]="[dropdownWidthClass]" style="max-height: 250px; overflow-y: auto;">
+		<li class="mb-2">
+			<input type="text" class="form-control" placeholder="Search..." [(ngModel)]="searchText" (input)="onSearchChange()" />
+		</li>
+		<li>
+			<hr class="dropdown-divider">
+		</li>
+
+		<li *ngFor="let opt of filteredOptions()">
+			<button class="dropdown-item" type="button" (click)="selectOption(opt)">
+				{{ opt.label }}
+			</button>
+		</li>
+
+		<li *ngIf="!filteredOptions().length" class="px-3 py-2 text-muted">
+			No results
+		</li>
+	</ul>
+</div>

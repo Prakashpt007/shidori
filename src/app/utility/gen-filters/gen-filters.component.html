@@ -1,0 +1,273 @@
+<div class="genFilter">
+	<!-- <button class="filterBtn btn btn-primary btn-sm">
+		<div class="icon">
+			<i class="fa-solid fa-filter"></i>
+		</div>
+		<div class="label">Filters
+		</div>
+	</button> -->
+
+
+	<button class="filterBtn left btn btn-primary btn-sm" (click)="openFilterModal()">
+		<div class="icon">
+			<i class="fa-solid fa-filter"></i>
+		</div>
+		<div class="label">Filters
+		</div>
+	</button>
+
+	<!-- <button class="filterBtn right btn btn-primary btn-sm">
+		<div class="icon">
+			<i class="fa-solid fa-filter"></i>
+		</div>
+		<div class="label">Filters
+		</div>
+	</button> -->
+</div>
+
+
+<ng-template #filterModal let-c="close" let-d="dismiss">
+	<div class="modal-header" style="--bs-modal-header-padding:0.5rem 1rem;">
+		<h5 class="modal-title">Filters</h5>
+		<button type="button" class="btn-close" aria-label="Close" (click)="d('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<div class="filter-layout">
+			<div class="filter-tabs">
+				<button type="button" *ngFor="let sec of sections" class="filter-tab-btn" [class.active]="activeSection === sec.key" (click)="setActiveSection(sec.key)">
+					{{ sec.label }}
+				</button>
+			</div>
+
+			<!-- right content -->
+			<div class="filter-content" [formGroup]="filterForm">
+
+				<!-- Dietary -->
+				<div *ngIf="activeSection === 'dietaryPreferences'">
+					<h6 class="mb-3">Dietary Preferences</h6>
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of dietaryPreferencesList">
+							<input class="form-check-input" type="radio" formControlName="dietaryPreferences" [id]="'diet_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'diet_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+
+						<div *ngIf="filterForm.get('dietaryPreferences')?.value === 'other'" class="mt-2">
+							<input type="text" class="form-control" placeholder="Specify other dietary preference" formControlName="dietaryPreferences_other" />
+							<div class="text-danger small mt-1" *ngIf="filterForm.get('dietaryPreferences_other')?.touched &&
+                  filterForm.get('dietaryPreferences_other')?.hasError('required')">
+								This field is required.
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Cuisine -->
+				<div *ngIf="activeSection === 'cuisineTypes'">
+					<h6 class="mb-3">Cuisine Types</h6>
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of cuisineTypesList">
+							<input class="form-check-input" type="radio" formControlName="cuisineTypes" [id]="'cuis_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'cuis_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+
+						<div *ngIf="filterForm.get('cuisineTypes')?.value === 'other'" class="mt-2">
+							<input type="text" class="form-control" placeholder="Specify other cuisine" formControlName="cuisineTypes_other" />
+							<div class="text-danger small mt-1" *ngIf="filterForm.get('cuisineTypes_other')?.touched &&
+                      filterForm.get('cuisineTypes_other')?.hasError('required')">
+								This field is required.
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Meal Types (checkbox example) -->
+				<div *ngIf="activeSection === 'mealTypes'">
+					<h6 class="mb-3">Meal Types</h6>
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of mealTypesList">
+							<input class="form-check-input" type="radio" formControlName="mealTypes" [id]="'meal_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'meal_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<!-- Portion -->
+				<div *ngIf="activeSection === 'portion'">
+					<h6 class="mb-3">Portion Size</h6>
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of portionList">
+							<input class="form-check-input" type="radio" formControlName="portion" [id]="'portion_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'portion_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<!-- Spice -->
+				<div *ngIf="activeSection === 'spice'">
+					<h6 class="mb-3">Spice Level</h6>
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of spiceList">
+							<input class="form-check-input" type="radio" formControlName="spice" [id]="'spice_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'spice_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<!-- Health & Nutrition -->
+				<div *ngIf="activeSection === 'HealthAndNutrition'">
+					<h6 class="mb-3">Health & Nutrition</h6>
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of HealthAndNutritionList">
+							<input class="form-check-input" type="radio" formControlName="HealthAndNutrition" [id]="'health_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'health_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+
+						<!-- Low-Calorie value -->
+						<div *ngIf="filterForm.get('HealthAndNutrition')?.value === 'low-calorie'" class="mt-3">
+							<label class="form-label mb-1">Max calories per serving</label>
+							<input type="number" class="form-control" placeholder="e.g., 300" formControlName="HealthAndNutrition_lowCalorieValue" />
+							<div class="text-danger small mt-1" *ngIf="filterForm.get('HealthAndNutrition_lowCalorieValue')?.touched &&
+                  filterForm.get('HealthAndNutrition_lowCalorieValue')?.hasError('required')">
+								This value is required.
+							</div>
+						</div>
+
+						<!-- High-Protein value -->
+						<div *ngIf="filterForm.get('HealthAndNutrition')?.value === 'high-protein'" class="mt-3">
+							<label class="form-label mb-1">Minimum protein per serving (g)</label>
+							<input type="number" class="form-control" placeholder="e.g., 20" formControlName="HealthAndNutrition_highProteinValue" />
+							<div class="text-danger small mt-1" *ngIf="filterForm.get('HealthAndNutrition_highProteinValue')?.touched &&
+                  filterForm.get('HealthAndNutrition_highProteinValue')?.hasError('required')">
+								This value is required.
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Allergens -->
+				<div *ngIf="activeSection === 'allergens'">
+					<h6 class="mb-3">Allergens</h6>
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of allergensList">
+							<input class="form-check-input" type="radio" formControlName="allergens" [id]="'allergen_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'allergen_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+
+						<div *ngIf="filterForm.get('allergens')?.value === 'other'" class="mt-2">
+							<input type="text" class="form-control" placeholder="Specify other allergen restriction" formControlName="allergens_other" />
+							<div class="text-danger small mt-1" *ngIf="filterForm.get('allergens_other')?.touched &&
+                  filterForm.get('allergens_other')?.hasError('required')">
+								This field is required.
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+				<!-- Specials -->
+				<div *ngIf="activeSection === 'specials'">
+					<h6 class="mb-3">Specials</h6>
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of specialsList">
+							<input class="form-check-input" type="radio" formControlName="specials" [id]="'special_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'special_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+
+						<div *ngIf="filterForm.get('specials')?.value === 'other'" class="mt-2">
+							<input type="text" class="form-control" placeholder="Specify other special" formControlName="specials_other" />
+							<div class="text-danger small mt-1" *ngIf="filterForm.get('specials_other')?.touched &&
+                      filterForm.get('specials_other')?.hasError('required')">
+								This field is required.
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Price Range -->
+				<div *ngIf="activeSection === 'priceRange'">
+					<h6 class="mb-3">Price Range</h6>
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of priceRangeList">
+							<input class="form-check-input" type="radio" formControlName="priceRange" [id]="'price_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'price_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<!-- Ratings -->
+				<div *ngIf="activeSection === 'ratingsAndReviews'">
+					<h6 class="mb-3">Ratings & Reviews</h6>
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of ratingsAndReviewsList">
+							<input class="form-check-input" type="radio" formControlName="ratingsAndReviews" [id]="'rating_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'rating_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+					</div>
+				</div>
+
+				<!-- Apply button -->
+				<!-- <div class="mt-4">
+					<button class="btn btn-primary w-100" type="button" (click)="onSubmit()">
+						Apply Filters
+					</button>
+				</div> -->
+			</div>
+		</div>
+
+
+	</div>
+	<div class="modal-footer d-flex justify-content-between d-none">
+		<!-- <button type="button" class="btn btn-danger btn-sm" (click)="c('Confirm Logout')">Yes, Logout..!</button> -->
+
+
+		<button class="btn btn-primary w-100" type="button" (click)="onSubmit()">
+			Apply Filters
+		</button>
+		<!-- <button type="button" class="btn btn-sm btn-danger bg-gradient" (click)="d('Cancel Action')">Close</button> -->
+	</div>
+
+
+	<div class="modal-footer d-flex justify-content-between gap-2">
+		<!-- Prev (disabled on first tab) -->
+		<button type="button" class="btn btn-outline-secondary" [disabled]="!hasPrev" (click)="goPrev()">
+			Prev
+		</button>
+
+		<!-- Middle: Next OR Apply depending on last tab -->
+		<button *ngIf="hasNext" type="button" class="btn btn-primary" (click)="goNext()">
+			Next
+		</button>
+
+		<button *ngIf="!hasNext" type="button" class="btn btn-primary" (click)="onSubmit()">
+			Apply Filters
+		</button>
+
+		<!-- Skip & Apply (always available) -->
+		<!-- <button type="button" class="btn btn-link text-decoration-none flex-fill" (click)="skipAndApply()">
+			Skip & Apply
+		</button> -->
+	</div>
+
+</ng-template>

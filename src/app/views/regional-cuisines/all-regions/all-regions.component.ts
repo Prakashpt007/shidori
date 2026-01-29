@@ -11,5 +11,5 @@ import { ItemListComponent } from "../../../utility/item-list/item-list.componen
 })
 export class AllRegionsComponent {
 	listApi = "/assets/jsons/all-region-cuisines.json";
-	viewAllRouteLink = "/regional-cuisines/region";
+	viewAllRouteLink = "/regional-cuisines/type";
 }

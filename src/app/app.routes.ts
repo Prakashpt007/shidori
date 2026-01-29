@@ -56,7 +56,7 @@ export const routes: Routes = [
 			{
 				path: "regional-cuisines",
 				loadComponent: () => import('./views/regional-cuisines/template.component').then(c => c.TemplateComponent),
-				data: { title: "Regional Cuisines" },
+				data: { title: "Regional Cuisines", filter: true },
 				children: [
 					{
 						path: "",
@@ -73,7 +73,7 @@ export const routes: Routes = [
 			{
 				path: "international-cuisines",
 				loadComponent: () => import('./views/international-cuisines/template.component').then(c => c.TemplateComponent),
-				data: { title: "International Cuisines" },
+				data: { title: "International Cuisines", filter: true },
 				children: [
 					{
 						path: "",
@@ -91,7 +91,7 @@ export const routes: Routes = [
 			{
 				path: "special-cuisines",
 				loadComponent: () => import('./views/special-cuisines/template/template.component').then(c => c.TemplateComponent),
-				data: { title: "Special Cuisines" },
+				data: { title: "Special Cuisines", filter: true },
 				children: [
 					{
 						path: "",

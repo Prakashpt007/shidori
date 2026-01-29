@@ -1,20 +1,22 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ElementRef, inject, signal, viewChild } from '@angular/core';
+import { Component, computed, ElementRef, inject, signal, viewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
-import { map } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { GenericHttpService } from '../../services/generic-http.service';
 import { Store } from '@ngrx/store';
 import { AppState, setUserLocation, UserLocation } from '../../utility/store/store.reducer';
 import { selectCartlist, selectUserLocation, selectWishlist } from '../../utility/store/store.selectors';
 import { CommonModule } from '@angular/common';
+import { GenFiltersComponent } from "../../utility/gen-filters/gen-filters.component";
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
 	selector: 'app-header',
 	standalone: true,
-	imports: [CommonModule, RouterModule, FormsModule],
+	imports: [CommonModule, RouterModule, FormsModule, GenFiltersComponent],
 	templateUrl: './header.component.html',
 	styleUrl: './header.component.scss'
 })
@@ -25,6 +27,8 @@ export class HeaderComponent {
 	private store = inject(Store<AppState>);
 	private toastr = inject(ToastrService);
 	private genericHttp = inject(GenericHttpService);
+	private route = inject(ActivatedRoute);
+	private router = inject(Router);
 
 	listApi = '/assets/jsons/locations.json';
 	storeLocationApi = 'save-location';
@@ -39,6 +43,20 @@ export class HeaderComponent {
 	processToStore = signal<boolean>(false);
 	private suppressBlurClose = false;
 	currentLocationLabel = signal<string>('');
+
+	filterModalTrigger = false;
+
+
+	private filterSignal = toSignal(
+		this.router.events.pipe(
+			filter(e => e instanceof NavigationEnd),
+			map(() => this.route.firstChild?.snapshot.data['filter'] ?? false)
+		),
+		{ initialValue: false }
+	);
+
+	showFilter = computed(() => this.filterSignal());
+
 
 	wishlistCount$ = this.store.select(selectWishlist).pipe(
 		map(ids => ids?.length ?? 0)
@@ -63,6 +81,7 @@ export class HeaderComponent {
 	}
 
 	ngOnInit() {
+
 		// Hydrate from local/session storage only if store has no location yet
 		this.userLocation$.pipe(
 			map(loc => !!loc)
@@ -95,6 +114,9 @@ export class HeaderComponent {
 			}
 		});
 	}
+
+
+
 
 	onSearchChange(searchTxt: string): void {
 		this.inputSearchCity = searchTxt;

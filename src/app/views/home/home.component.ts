@@ -6,97 +6,95 @@ import { RegionalCuisinesSectionComponent } from "./regional-cuisines-section/re
 import { InternationalCuisinesSectionComponent } from "./international-cuisines-section/international-cuisines-section.component";
 import { SpecialCuisinesSectionComponent } from "./special-cuisines-section/special-cuisines-section.component";
 import { RecommendationSectionComponent } from "./recommendation-section/recommendation-section.component";
-import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
-import { CarouselComponent } from 'ngx-owl-carousel-o';
-import { ViewChild } from '@angular/core';
-import { SliderItem } from '../../utility/interfaces/sliderItem-interface';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import { GenFiltersComponent } from '../../utility/gen-filters/gen-filters.component';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [CommonModule, RouterModule, OurFeaturedSectionComponent, RegionalCuisinesSectionComponent, InternationalCuisinesSectionComponent, SpecialCuisinesSectionComponent, RecommendationSectionComponent, CarouselModule],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+	selector: 'app-home',
+	standalone: true,
+	imports: [CommonModule, RouterModule, OurFeaturedSectionComponent, RegionalCuisinesSectionComponent, InternationalCuisinesSectionComponent, SpecialCuisinesSectionComponent, RecommendationSectionComponent, CarouselModule, GenFiltersComponent],
+	templateUrl: './home.component.html',
+	styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 
 
-  constructor(private router: Router) {
+	constructor(private router: Router) {
 
 
-  }
+	}
 
-  // // Entry point
-  // getStarted() {
-  //   const storedCity = sessionStorage.getItem('location');
+	// // Entry point
+	// getStarted() {
+	//   const storedCity = sessionStorage.getItem('location');
 
-  //   if (storedCity) {
-  //     this.navigateWithLocation(storedCity);
-  //   } else {
-  //     this.askForLocation();
-  //   }
-  // }
+	//   if (storedCity) {
+	//     this.navigateWithLocation(storedCity);
+	//   } else {
+	//     this.askForLocation();
+	//   }
+	// }
 
-  // // Ask browser for location
-  // askForLocation() {
-  //   if (!navigator.geolocation) {
-  //     console.error('Geolocation not supported');
-  //     return;
-  //   }
+	// // Ask browser for location
+	// askForLocation() {
+	//   if (!navigator.geolocation) {
+	//     console.error('Geolocation not supported');
+	//     return;
+	//   }
 
-  //   navigator.geolocation.getCurrentPosition(
-  //     (position) => {
-  //       const lat = position.coords.latitude;
-  //       const lon = position.coords.longitude;
+	//   navigator.geolocation.getCurrentPosition(
+	//     (position) => {
+	//       const lat = position.coords.latitude;
+	//       const lon = position.coords.longitude;
 
-  //       this.getCityFromCoordinates(lat, lon);
-  //     },
-  //     (error) => {
-  //       console.error('Location permission denied', error);
-  //       alert('Please allow location access to continue');
-  //     }
-  //   );
-  // }
+	//       this.getCityFromCoordinates(lat, lon);
+	//     },
+	//     (error) => {
+	//       console.error('Location permission denied', error);
+	//       alert('Please allow location access to continue');
+	//     }
+	//   );
+	// }
 
-  // // Reverse geocoding → City name
-  // getCityFromCoordinates(lat: number, lon: number) {
-  //   const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
+	// // Reverse geocoding → City name
+	// getCityFromCoordinates(lat: number, lon: number) {
+	//   const url = `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`;
 
-  //   fetch(url)
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       const address = data.address;
+	//   fetch(url)
+	//     .then(res => res.json())
+	//     .then(data => {
+	//       const address = data.address;
 
-  //       const city =
-  //         address.city ||
-  //         address.town ||
-  //         address.village ||
-  //         address.state;
+	//       const city =
+	//         address.city ||
+	//         address.town ||
+	//         address.village ||
+	//         address.state;
 
-  //       if (city) {
-  //         sessionStorage.setItem('location', city);
-  //         this.navigateWithLocation(city);
-  //       } else {
-  //         console.error('City not found');
-  //       }
-  //     })
-  //     .catch(err => {
-  //       console.error('Reverse geocoding failed', err);
-  //     });
-  // }
+	//       if (city) {
+	//         sessionStorage.setItem('location', city);
+	//         this.navigateWithLocation(city);
+	//       } else {
+	//         console.error('City not found');
+	//       }
+	//     })
+	//     .catch(err => {
+	//       console.error('Reverse geocoding failed', err);
+	//     });
+	// }
 
-  // // Navigate with query param
-  // navigateWithLocation(city: string) {
-  //   this.router.navigate([], {
-  //     queryParams: { ref: city },
-  //     queryParamsHandling: 'merge'
-  //   });
-  // }
+	// // Navigate with query param
+	// navigateWithLocation(city: string) {
+	//   this.router.navigate([], {
+	//     queryParams: { ref: city },
+	//     queryParamsHandling: 'merge'
+	//   });
+	// }
 
 
-  getStarted() {
+	getStarted() {
 
-    alert('Get Started clicked!');
-  }
+		alert('Get Started clicked!');
+	}
 
 }
