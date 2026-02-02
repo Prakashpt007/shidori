@@ -1,0 +1,253 @@
+<form [formGroup]="filterForm" (ngSubmit)="onApply()">
+	<div class="accordion" id="filterAccordion">
+
+		<!-- Dietary -->
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingDiet">
+				<div class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDiet" aria-expanded="true" aria-controls="collapseDiet">
+					Dietary Preferences
+				</div>
+			</h2>
+			<div id="collapseDiet" class="accordion-collapse collapse show" aria-labelledby="headingDiet" data-bs-parent="#filterAccordion">
+				<div class="accordion-body">
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of dietaryPreferencesList">
+							<input class="form-check-input" type="radio" formControlName="dietaryPreferences" [id]="'diet_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'diet_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+
+						<div *ngIf="filterForm.get('dietaryPreferences')?.value === 'other'">
+							<input type="text" class="form-control form-control-sm" placeholder="Specify other dietary preference" formControlName="dietaryPreferences_other" />
+							<div class="text-danger small mt-1" *ngIf="filterForm.get('dietaryPreferences_other')?.touched &&
+                          filterForm.get('dietaryPreferences_other')?.hasError('required')">
+								This field is required.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Cuisine -->
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingCuisine">
+				<div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCuisine" aria-expanded="false" aria-controls="collapseCuisine">
+					Cuisine Types
+				</div>
+			</h2>
+			<div id="collapseCuisine" class="accordion-collapse collapse" aria-labelledby="headingCuisine" data-bs-parent="#filterAccordion">
+				<div class="accordion-body">
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of cuisineTypesList">
+							<input class="form-check-input" type="radio" formControlName="cuisineTypes" [id]="'cuis_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'cuis_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Meal Types -->
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingMeal">
+				<div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseMeal" aria-expanded="false" aria-controls="collapseMeal">
+					Meal Types
+				</div>
+			</h2>
+			<div id="collapseMeal" class="accordion-collapse collapse" aria-labelledby="headingMeal" data-bs-parent="#filterAccordion">
+				<div class="accordion-body">
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of mealTypesList">
+							<input class="form-check-input" type="radio" formControlName="mealTypes" [id]="'meal_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'meal_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Portion -->
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingPortion">
+				<div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePortion" aria-expanded="false" aria-controls="collapsePortion">
+					Portion Size
+				</div>
+			</h2>
+			<div id="collapsePortion" class="accordion-collapse collapse" aria-labelledby="headingPortion" data-bs-parent="#filterAccordion">
+				<div class="accordion-body">
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of portionList">
+							<input class="form-check-input" type="radio" formControlName="portion" [id]="'portion_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'portion_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Spice -->
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingSpice">
+				<div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpice" aria-expanded="false" aria-controls="collapseSpice">
+					Spice Level
+				</div>
+			</h2>
+			<div id="collapseSpice" class="accordion-collapse collapse" aria-labelledby="headingSpice" data-bs-parent="#filterAccordion">
+				<div class="accordion-body">
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of spiceList">
+							<input class="form-check-input" type="radio" formControlName="spice" [id]="'spice_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'spice_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Health & Nutrition -->
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingHealth">
+				<div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHealth" aria-expanded="false" aria-controls="collapseHealth">
+					Health & Nutrition
+				</div>
+			</h2>
+			<div id="collapseHealth" class="accordion-collapse collapse" aria-labelledby="headingHealth" data-bs-parent="#filterAccordion">
+				<div class="accordion-body">
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of HealthAndNutritionList">
+							<input class="form-check-input" type="radio" formControlName="HealthAndNutrition" [id]="'health_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'health_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+
+						<div *ngIf="filterForm.get('HealthAndNutrition')?.value === 'low-calorie'">
+							<label class="form-label mb-1">Max calories per serving</label>
+							<input type="number" class="form-control form-control-sm" placeholder="e.g., 300" formControlName="HealthAndNutrition_lowCalorieValue" />
+							<div class="text-danger small mt-1" *ngIf="filterForm.get('HealthAndNutrition_lowCalorieValue')?.touched &&
+                          filterForm.get('HealthAndNutrition_lowCalorieValue')?.hasError('required')">
+								This value is required.
+							</div>
+						</div>
+
+						<div *ngIf="filterForm.get('HealthAndNutrition')?.value === 'high-protein'">
+							<label class="form-label mb-1">Minimum protein per serving (g)</label>
+							<input type="number" class="form-control form-control-sm" placeholder="e.g., 20" formControlName="HealthAndNutrition_highProteinValue" />
+							<div class="text-danger small mt-1" *ngIf="filterForm.get('HealthAndNutrition_highProteinValue')?.touched && filterForm.get('HealthAndNutrition_highProteinValue')?.hasError('required')">
+								This value is required.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Allergens -->
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingAllergens">
+				<div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAllergens" aria-expanded="false" aria-controls="collapseAllergens">
+					Allergens
+				</div>
+			</h2>
+			<div id="collapseAllergens" class="accordion-collapse collapse" aria-labelledby="headingAllergens" data-bs-parent="#filterAccordion">
+				<div class="accordion-body">
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of allergensList">
+							<input class="form-check-input" type="radio" formControlName="allergens" [id]="'allergen_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'allergen_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+
+						<div *ngIf="filterForm.get('allergens')?.value === 'other'">
+							<input type="text" class="form-control form-control-sm" placeholder="Specify other allergen" formControlName="allergens_other" />
+							<div class="text-danger small mt-1" *ngIf="filterForm.get('allergens_other')?.touched && filterForm.get('allergens_other')?.hasError('required')">
+								This field is required.
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Specials -->
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingSpecials">
+				<div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSpecials" aria-expanded="false" aria-controls="collapseSpecials">
+					Specials
+				</div>
+			</h2>
+			<div id="collapseSpecials" class="accordion-collapse collapse" aria-labelledby="headingSpecials" data-bs-parent="#filterAccordion">
+				<div class="accordion-body">
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of specialsList">
+							<input class="form-check-input" type="radio" formControlName="specials" [id]="'special_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'special_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Price Range -->
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingPrice">
+				<div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrice" aria-expanded="false" aria-controls="collapsePrice">
+					Price Range
+				</div>
+			</h2>
+			<div id="collapsePrice" class="accordion-collapse collapse" aria-labelledby="headingPrice" data-bs-parent="#filterAccordion">
+				<div class="accordion-body">
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of priceRangeList">
+							<input class="form-check-input" type="radio" formControlName="priceRange" [id]="'price_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'price_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Ratings -->
+		<div class="accordion-item">
+			<h2 class="accordion-header" id="headingRatings">
+				<div class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRatings" aria-expanded="false" aria-controls="collapseRatings">
+					Ratings & Reviews
+				</div>
+			</h2>
+			<div id="collapseRatings" class="accordion-collapse collapse" aria-labelledby="headingRatings" data-bs-parent="#filterAccordion">
+				<div class="accordion-body">
+					<div class="d-flex flex-column gap-2">
+						<div class="form-check" *ngFor="let item of ratingsAndReviewsList">
+							<input class="form-check-input" type="radio" formControlName="ratingsAndReviews" [id]="'rating_'+item.value" [value]="item.value" />
+							<label class="form-check-label" [for]="'rating_'+item.value">
+								{{ item.label }}
+							</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="p-3">
+		<button type="submit" class="btn btn-primary btn-sm w-100">
+			Apply Filters
+		</button>
+	</div>
+</form>

@@ -1,26 +1,48 @@
 @if(pages() == 1){
 <div class="page page-1">
-	<h4>Page 1</h4>
+	<h4>Shidori</h4>
+	<h5>From regional Indian flavors to world cuisines, all in one app</h5>
+
+	<div class="pointsList">
+		<div class="active">Discover Diverse Cuisines</div>
+		<div>Flexible Meal Plans</div>
+		<div>Track Your Order Live</div>
+	</div>
 	<button type="button" class="pill btn btn-lg btn-secondary pill--light right" (click)="pages.set(2)">Next <i class="fa-solid fa-arrow-right-long"></i></button>
 </div>
 }
 @if(pages() == 2){
 <div class="page page-2">
-	<h4>Page 2</h4>
+	<h4>Shidori</h4>
+	<h5>From regional Indian flavors to world cuisines, all in one app</h5>
+	<div class="pointsList">
+		<div>Discover Diverse Cuisines</div>
+		<div class="active">Flexible Meal Plans</div>
+		<div>Track Your Order Live</div>
+	</div>
 	<button type="button" class="pill btn btn-lg btn-secondary pill--light left" (click)="pages.set(1)"><i class="fa-solid fa-arrow-left-long"></i> Prev</button>
 	<button type="button" class="pill btn btn-lg btn-secondary pill--light right" (click)="pages.set(3)">Next <i class="fa-solid fa-arrow-right-long"></i></button>
 </div>
 }
 @if(pages() == 3){
 <div class="page page-3">
-	<h4>Page 3</h4>
+	<h4>Shidori</h4>
+	<h5>Get real-time updates and enjoy your meals hassle-free.</h5>
+	<div class="pointsList">
+		<div>Discover Diverse Cuisines</div>
+		<div>Flexible Meal Plans</div>
+		<div class="active">Track Your Order Live</div>
+	</div>
 	<button type="button" class="pill btn btn-lg btn-secondary pill--light left" (click)="pages.set(2)"><i class="fa-solid fa-arrow-left-long"></i> Prev</button>
 	<button type="button" class="pill btn btn-lg btn-secondary pill--light right" (click)="pages.set(4)">Next <i class="fa-solid fa-arrow-right-long"></i></button>
 </div>
 }
 @if(pages() == 4){
 <div class="page page-4">
-	<h4>Page 4</h4>
+	<h4>Welcome to the Shidori</h4>
+	<div class="pointsList">
+		<div class="active" role="button" (click)="submit()">Start Browsing</div>
+	</div>
 	<button type="button" class="pill btn btn-lg btn-secondary pill--light left" (click)="pages.set(3)"><i class="fa-solid fa-arrow-left-long"></i> Prev</button>
 	<button type="button" class="pill btn btn-lg btn-secondary pill--light right" (click)="submit()">Submit <i class="fa-solid fa-arrow-right-long"></i></button>
 </div>

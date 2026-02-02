@@ -4,11 +4,12 @@ import { RouterModule } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { ScrollerBarListComponent } from '../../../utility/scroller-bar-list/scroller-bar-list.component';
 import { GenericHttpService } from '../../../services/generic-http.service';
+import { TemplateFilterComponent } from "../../../utility/template-filter/template-filter.component";
 
 @Component({
 	selector: 'app-template',
 	standalone: true,
-	imports: [CommonModule, RouterModule, ScrollerBarListComponent],
+	imports: [CommonModule, RouterModule, ScrollerBarListComponent, TemplateFilterComponent],
 	templateUrl: './template.component.html',
 	styleUrl: './template.component.scss'
 })

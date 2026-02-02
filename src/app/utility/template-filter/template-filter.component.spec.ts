@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { TemplateFilterComponent } from './template-filter.component';
+
+describe('TemplateFilterComponent', () => {
+  let component: TemplateFilterComponent;
+  let fixture: ComponentFixture<TemplateFilterComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TemplateFilterComponent]
+    })
+    .compileComponents();
+    
+    fixture = TestBed.createComponent(TemplateFilterComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

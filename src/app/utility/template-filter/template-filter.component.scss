@@ -1,0 +1,56 @@
+.accordion {
+	--bs-accordion-btn-icon-width: 0.875rem;
+	--bs-accordion-btn-padding-x: 1rem;
+	--bs-accordion-btn-padding-y: 0.6rem;
+	--bs-accordion-body-padding-x: 1rem;
+	--bs-accordion-body-padding-y: 1rem;
+	--bs-accordion-bg: #ffffff;
+	--bs-border-radius: 0;
+}
+
+.accordion-button {
+	font-size: 0.875rem;
+	gap: 1rem;
+}
+
+.accordion-item {
+	border-left: 0;
+	border-right: 0;
+}
+
+.accordion-body {
+	max-height: 200px;
+	overflow: auto;
+	padding: 0;
+	border: solid var(--bs-accordion-body-padding-x) transparent;
+	border-right-width: 0px;
+	border-left-width: 0px;
+	padding-inline: var(--bs-accordion-body-padding-x);
+
+	.form-check-input {
+		--bs-form-check-bg: rgb(0 0 0 / 35%);
+	}
+
+	.form-check {
+		display: block;
+		min-height: 1.5rem;
+		padding-left: 1.5em;
+		margin-bottom: 0.125rem;
+		font-size: 0.875rem;
+	}
+
+	.form-control-sm {
+		font-size: 0.75rem;
+	}
+
+	.form-check-label {
+		user-select: none;
+		cursor: pointer;
+	}
+
+	label,
+	.form-label {
+		font-size: 0.875rem;
+	}
+
+}

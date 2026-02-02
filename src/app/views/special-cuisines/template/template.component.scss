@@ -1,0 +1,41 @@
+// .leftPanel {
+// 	width: 0;
+
+
+// 	&.active {
+// 		width: 300px;
+// 	}
+// }
+
+
+.leftPanel {
+	padding: 0;
+	border-radius: 0.5rem;
+	/* border: 1px solid #e2e8f0; */
+	background-color: #ededed;
+	margin-top: 1rem;
+	width: 250px;
+	position: sticky;
+	top: 72px;
+	box-shadow: 0 0 20px rgb(0 0 0 / 50%);
+	margin-left: 12px;
+
+	.accordionHeader {
+		padding: 0.5rem 1rem;
+		border-bottom: solid 1px var(--bs-border-color);
+		font-size: 1rem;
+		font-weight: 500;
+		color: #000000;
+		line-height: normal;
+		display: flex;
+		gap: 0.25rem;
+
+	}
+}
+
+.rightPanel {
+	padding: 1.5rem 0;
+}
+
+
+.filterPanel {}

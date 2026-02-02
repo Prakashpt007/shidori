@@ -1,4 +1,24 @@
-<app-scroller-bar-list [data]="regionalCuisineList()" [link]="regionLink" />
+<app-scroller-bar-list [data]="regionalCuisineList()" [link]="regionLink"></app-scroller-bar-list>
 
+<div class="container-fluid">
+	<div class="row g-3 align-items-stretch">
 
-<router-outlet />
+		<!-- Left filter panel -->
+		<div class="col-12 col-lg-auto col-xl-auto filterPanel">
+			<div class="leftPanel">
+
+				<div class="accordionHeader">
+					<div class="icon"><i class="fa-solid fa-filter"></i></div>
+					<div class="label">Filter</div>
+				</div>
+				<app-template-filter />
+			</div>
+		</div>
+
+		<div class="col-12 col-lg col-xl" style="flex: 0 0 auto;width: calc(100% - 280px);padding-inline: 1.5rem;">
+			<div class="rightPanel">
+				<router-outlet></router-outlet>
+			</div>
+		</div>
+	</div>
+</div>
