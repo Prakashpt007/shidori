@@ -1,0 +1,88 @@
+<div class="container grid-container">
+	<div class="top">
+		<div class="employee-toolbar">
+			<!-- Role dropdown -->
+			<div class="dropdown">
+				<button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+					List of {{ getRoleButtonLabel() }}
+				</button>
+
+				<ul class="dropdown-menu">
+					@for (opt of roleOptions; track opt.value) {
+					<li>
+						<button type="button" class="dropdown-item" [class.active]="roleFilter() === opt.value" (click)="setRoleFilter(opt.value)">
+							{{ opt.label }}
+						</button>
+					</li>
+					}
+				</ul>
+			</div>
+
+			<!-- Assigned / Not Assigned toggle -->
+			<div class="view-toggle">
+				<div class="btn-group btn-group-sm" role="group" aria-label="Employee assignment filter">
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" [checked]="empStatus() === 'assigned'" (change)="setEmpStatus('assigned')">
+					<label class="btn" [ngClass]="empStatus() === 'assigned' ? 'btn-primary' : 'btn-outline-secondary'" for="btnradio1">
+						<i class="fa-solid fa-user-check me-1"></i>
+						Assigned
+					</label>
+
+					<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" [checked]="empStatus() === 'not-assigned'" (change)="setEmpStatus('not-assigned')">
+					<label class="btn" [ngClass]="empStatus() === 'not-assigned' ? 'btn-primary' : 'btn-outline-secondary'" for="btnradio2">
+						<i class="fa-regular fa-circle-xmark me-1"></i>
+						Not Assigned
+					</label>
+				</div>
+			</div>
+		</div>
+
+		<hr class="mb-0" />
+	</div>
+
+	<div class="middle">
+		<ul class="employee-list">
+			@for (item of list(); track item.emp_id) {
+			<li class="employee-card">
+				@if (item.thumbnail != '') {
+				<div class="avatar">
+					<img [src]="item.thumbnail" loading="lazy" [alt]="item.name" />
+				</div>
+				} @else {
+				<div class="avatar no-img"></div>
+				}
+
+				<div class="info">
+					<div class="name">{{ item.name }}</div>
+					<div class="position">{{ item.position }}</div>
+
+					<div class="meta">
+						<span class="meta-item">Kitchen: {{ item.kitchen_id }}</span>
+						<span class="meta-item">Emp ID: {{ item.emp_id }}</span>
+					</div>
+				</div>
+
+				<div class="actions">
+					<button type="button" class="btn btn-sm btn-outline-primary">
+						<i class="fa-regular fa-eye"></i> View
+					</button>
+					<button type="button" class="btn btn-sm btn-outline-secondary">
+						<i class="fa-regular fa-pen-to-square"></i> Edit
+					</button>
+				</div>
+			</li>
+			} @empty {
+			<li class="employee-empty">
+				<div class="text-muted text-center py-4">
+					No results found
+				</div>
+			</li>
+			}
+		</ul>
+	</div>
+
+	<div class="bottom" *ngIf="totalItems() > 0">
+		<hr class="mt-0" />
+		<app-pagination [totalRecords]="totalItems()" [currentPage]="page()" [recordsPerPage]="size()" [pageSizeList]="pageSizes" (onPageChange)="setPage($event)" (onPageSizeChange)="setSize($event)">
+		</app-pagination>
+	</div>
+</div>

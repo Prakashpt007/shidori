@@ -1,0 +1,277 @@
+{
+	"status": 200,
+	"success": true,
+	"message": "Success",
+	"data": [
+		{
+			"name": "Amit Sharma",
+			"thumbnail": "/assets/images/delivery-partner.jpg",
+			"position": "Delivery Partner",
+			"kitchen_id": "SHD-KCH001",
+			"emp_id": "SHD001",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Neha Verma",
+			"thumbnail": "/assets/images/chef.jpg",
+			"position": "Chef",
+			"kitchen_id": "SHD-KCH002",
+			"emp_id": "SHD002",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Rahul Mehta",
+			"thumbnail": "/assets/images/manager.jpg",
+			"position": "Manager",
+			"kitchen_id": "SHD-KCH003",
+			"emp_id": "SHD003",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Priya Singh",
+			"thumbnail": "/assets/images/delivery-partner.jpg",
+			"position": "Delivery Partner",
+			"kitchen_id": "SHD-KCH004",
+			"emp_id": "SHD004",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Karan Patel",
+			"thumbnail": "/assets/images/chef.jpg",
+			"position": "Chef",
+			"kitchen_id": "SHD-KCH005",
+			"emp_id": "SHD005",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Sneha Iyer",
+			"thumbnail": "/assets/images/manager.jpg",
+			"position": "Manager",
+			"kitchen_id": "SHD-KCH006",
+			"emp_id": "SHD006",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Vikas Reddy",
+			"thumbnail": "/assets/images/delivery-partner.jpg",
+			"position": "Delivery Partner",
+			"kitchen_id": "SHD-KCH007",
+			"emp_id": "SHD007",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Anjali Nair",
+			"thumbnail": "/assets/images/chef.jpg",
+			"position": "Chef",
+			"kitchen_id": "SHD-KCH008",
+			"emp_id": "SHD008",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Rohan Gupta",
+			"thumbnail": "/assets/images/manager.jpg",
+			"position": "Manager",
+			"kitchen_id": "SHD-KCH009",
+			"emp_id": "SHD009",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Meera Kulkarni",
+			"thumbnail": "/assets/images/delivery-partner.jpg",
+			"position": "Delivery Partner",
+			"kitchen_id": "SHD-KCH010",
+			"emp_id": "SHD010",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Sanjay Mishra",
+			"thumbnail": "/assets/images/chef.jpg",
+			"position": "Chef",
+			"kitchen_id": "SHD-KCH011",
+			"emp_id": "SHD011",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Divya Rao",
+			"thumbnail": "/assets/images/manager.jpg",
+			"position": "Manager",
+			"kitchen_id": "SHD-KCH012",
+			"emp_id": "SHD012",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Arjun Desai",
+			"thumbnail": "/assets/images/delivery-partner.jpg",
+			"position": "Delivery Partner",
+			"kitchen_id": "SHD-KCH013",
+			"emp_id": "SHD013",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Pooja Joshi",
+			"thumbnail": "/assets/images/chef.jpg",
+			"position": "Chef",
+			"kitchen_id": "SHD-KCH014",
+			"emp_id": "SHD014",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Nikhil Bansal",
+			"thumbnail": "/assets/images/manager.jpg",
+			"position": "Manager",
+			"kitchen_id": "SHD-KCH015",
+			"emp_id": "SHD015",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Isha Kulkarni",
+			"thumbnail": "/assets/images/delivery-partner.jpg",
+			"position": "Delivery Partner",
+			"kitchen_id": "SHD-KCH016",
+			"emp_id": "SHD016",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Aditya Jain",
+			"thumbnail": "/assets/images/chef.jpg",
+			"position": "Chef",
+			"kitchen_id": "SHD-KCH017",
+			"emp_id": "SHD017",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Simran Kaur",
+			"thumbnail": "/assets/images/manager.jpg",
+			"position": "Manager",
+			"kitchen_id": "SHD-KCH018",
+			"emp_id": "SHD018",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Harsh Vardhan",
+			"thumbnail": "/assets/images/delivery-partner.jpg",
+			"position": "Delivery Partner",
+			"kitchen_id": "SHD-KCH019",
+			"emp_id": "SHD019",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Ritu Malhotra",
+			"thumbnail": "/assets/images/chef.jpg",
+			"position": "Chef",
+			"kitchen_id": "SHD-KCH020",
+			"emp_id": "SHD020",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Varun Sinha",
+			"thumbnail": "/assets/images/manager.jpg",
+			"position": "Manager",
+			"kitchen_id": "SHD-KCH021",
+			"emp_id": "SHD021",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Anita Dixit",
+			"thumbnail": "/assets/images/delivery-partner.jpg",
+			"position": "Delivery Partner",
+			"kitchen_id": "SHD-KCH022",
+			"emp_id": "SHD022",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Shubham Goyal",
+			"thumbnail": "/assets/images/chef.jpg",
+			"position": "Chef",
+			"kitchen_id": "SHD-KCH023",
+			"emp_id": "SHD023",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Monica Agarwal",
+			"thumbnail": "/assets/images/manager.jpg",
+			"position": "Manager",
+			"kitchen_id": "SHD-KCH024",
+			"emp_id": "SHD024",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Deepak Yadav",
+			"thumbnail": "/assets/images/delivery-partner.jpg",
+			"position": "Delivery Partner",
+			"kitchen_id": "SHD-KCH025",
+			"emp_id": "SHD025",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Krishna Mohan",
+			"thumbnail": "/assets/images/chef.jpg",
+			"position": "Chef",
+			"kitchen_id": "SHD-KCH026",
+			"emp_id": "SHD026",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Sonal Chawla",
+			"thumbnail": "/assets/images/manager.jpg",
+			"position": "Manager",
+			"kitchen_id": "SHD-KCH027",
+			"emp_id": "SHD027",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Ajay Thakur",
+			"thumbnail": "/assets/images/delivery-partner.jpg",
+			"position": "Delivery Partner",
+			"kitchen_id": "SHD-KCH028",
+			"emp_id": "SHD028",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Lavanya Pillai",
+			"thumbnail": "/assets/images/chef.jpg",
+			"position": "Chef",
+			"kitchen_id": "SHD-KCH029",
+			"emp_id": "SHD029",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"name": "Raghav Saxena",
+			"thumbnail": "/assets/images/manager.jpg",
+			"position": "Manager",
+			"kitchen_id": "SHD-KCH030",
+			"emp_id": "SHD030",
+			"assigned": true,
+			"status": "ACTIVE"
+		}
+	]
+}

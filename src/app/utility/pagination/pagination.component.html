@@ -1,0 +1,48 @@
+<div class="d-flex justify-content-between align-items-center gap-2" style="flex-wrap: nowrap; overflow: auto; padding: 0 0.0625rem;">
+	<div class="small text-muted">
+		Showing
+		{{ totalRecords() ? showingFrom : 0 }}
+		–
+		{{ totalRecords() ? showingTo : 0 }}
+		of {{ totalRecords() }} records
+	</div>
+
+	<div class="col-auto">
+		@if (totalRecords() > recordsPerPage()) {
+		<nav aria-label="page navigation">
+			<ngb-pagination [collectionSize]="totalRecords()" [(page)]="activePage" [maxSize]="5" [rotate]="true" [boundaryLinks]="false" [pageSize]="recordsPerPage()" (pageChange)="pageChange($event)">
+				<ng-template ngbPaginationFirst>First</ng-template>
+				<ng-template ngbPaginationLast>Last</ng-template>
+
+				<ng-template ngbPaginationPrevious>
+					<span aria-hidden="true" class="mobile-view-only">«</span>
+					<span class="desktop-view-only">Prev</span>
+				</ng-template>
+
+				<ng-template ngbPaginationNext>
+					<span class="desktop-view-only">Next</span>
+					<span aria-hidden="true" class="mobile-view-only">»</span>
+				</ng-template>
+
+				<ng-template ngbPaginationEllipsis>...</ng-template>
+				<ng-template ngbPaginationNumber let-page>{{ page }}</ng-template>
+			</ngb-pagination>
+		</nav>
+		}
+	</div>
+
+	<div class="col-auto">
+		<div class="input-group input-group-sm">
+			<select class="form-select" (change)="pageSizeChange($event)">
+				@for (size of pageSizeList(); track size) {
+				<option [ngValue]="size" [selected]="recordsPerPage() == size">
+					{{ size }}
+				</option>
+				}
+			</select>
+			<span class="input-group-text">
+				Rows<span class="desktop-view-only ms-1">Per Page</span>
+			</span>
+		</div>
+	</div>
+</div>

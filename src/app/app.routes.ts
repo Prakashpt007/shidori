@@ -125,6 +125,64 @@ export const routes: Routes = [
 
 		]
 	},
+
+	{
+		path: "admin",
+		loadComponent: () => import('./structure/admin/layout/layout.component').then(c => c.LayoutComponent),
+		children: [
+			{
+				path: "",
+				redirectTo: "dashboard",
+				pathMatch: "full"
+			},
+			{
+				path: "dashboard",
+				loadComponent: () => import('./views/administrator/dashboard/dashboard.component').then(c => c.DashboardComponent),
+				data: { title: "Admin Dashboard" }
+			},
+			{
+				path: "registration",
+				children: [
+					{
+						path: "list",
+						loadComponent: () => import('./views/administrator/super-admin/employee/employee.component').then(c => c.EmployeeComponent),
+						data: { title: "Employe List" }
+					},
+				]
+			},
+			{
+				path: "cloud-kitchen",
+				children: [
+					{
+						path: "list",
+						loadComponent: () => import('./views/administrator/super-admin/cloud-kitchens/cloud-kitchens.component').then(c => c.CloudKitchensComponent),
+						data: { title: "Cloud Kitchens" }
+					},
+				]
+			},
+			{
+				path: "subscriber",
+				children: [
+					{
+						path: "list",
+						loadComponent: () => import('./views/administrator/super-admin/subscribers/subscribers.component').then(c => c.SubscribersComponent),
+						data: { title: "Subscribers List" }
+					},
+				]
+			},
+			{
+				path: "coupon",
+				children: [
+					{
+						path: "list",
+						loadComponent: () => import('./views/administrator/super-admin/coupons/coupons.component').then(c => c.CouponsComponent),
+						data: { title: "Coupons List" }
+					},
+				]
+			},
+
+		]
+	},
 	{
 		path: "**",
 		loadComponent: () => import('./core/error/error-404/error-404.component').then(c => c.Error404Component),

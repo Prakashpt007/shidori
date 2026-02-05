@@ -1,0 +1,247 @@
+{
+	"status": 200,
+	"success": true,
+	"message": "Success",
+	"data": [
+		{
+			"kitchen_id": "SHD-KCH001",
+			"state": "maharashtra",
+			"city": "pune",
+			"pincode": "411001",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH002",
+			"state": "maharashtra",
+			"city": "pune",
+			"pincode": "411002",
+			"assigned": true,
+			"status": "INACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH003",
+			"state": "maharashtra",
+			"city": "pune",
+			"pincode": "411003",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH004",
+			"state": "maharashtra",
+			"city": "pune",
+			"pincode": "411004",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH005",
+			"state": "maharashtra",
+			"city": "pune",
+			"pincode": "411005",
+			"assigned": true,
+			"status": "INACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH006",
+			"state": "maharashtra",
+			"city": "pune",
+			"pincode": "411006",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH007",
+			"state": "maharashtra",
+			"city": "pune",
+			"pincode": "411007",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH008",
+			"state": "maharashtra",
+			"city": "pune",
+			"pincode": "411008",
+			"assigned": true,
+			"status": "INACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH009",
+			"state": "maharashtra",
+			"city": "pune",
+			"pincode": "411009",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH010",
+			"state": "maharashtra",
+			"city": "pune",
+			"pincode": "411010",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH011",
+			"state": "maharashtra",
+			"city": "pune",
+			"pincode": "411011",
+			"assigned": false,
+			"status": "INACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH012",
+			"state": "maharashtra",
+			"city": "pune",
+			"pincode": "411012",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH013",
+			"state": "maharashtra",
+			"city": "pimpri-chinchwad",
+			"pincode": "411017",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH014",
+			"state": "maharashtra",
+			"city": "pimpri-chinchwad",
+			"pincode": "411018",
+			"assigned": false,
+			"status": "INACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH015",
+			"state": "maharashtra",
+			"city": "pimpri-chinchwad",
+			"pincode": "411019",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH016",
+			"state": "maharashtra",
+			"city": "pimpri-chinchwad",
+			"pincode": "411020",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH017",
+			"state": "maharashtra",
+			"city": "pimpri-chinchwad",
+			"pincode": "411021",
+			"assigned": false,
+			"status": "INACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH018",
+			"state": "maharashtra",
+			"city": "wakad",
+			"pincode": "411057",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH019",
+			"state": "maharashtra",
+			"city": "wakad",
+			"pincode": "411058",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH020",
+			"state": "maharashtra",
+			"city": "wakad",
+			"pincode": "411059",
+			"assigned": false,
+			"status": "INACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH021",
+			"state": "maharashtra",
+			"city": "hinjewadi",
+			"pincode": "411057",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH022",
+			"state": "maharashtra",
+			"city": "hinjewadi",
+			"pincode": "411057",
+			"assigned": false,
+			"status": "INACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH023",
+			"state": "maharashtra",
+			"city": "kothrud",
+			"pincode": "411038",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH024",
+			"state": "maharashtra",
+			"city": "kothrud",
+			"pincode": "411038",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH025",
+			"state": "maharashtra",
+			"city": "kothrud",
+			"pincode": "411038",
+			"assigned": false,
+			"status": "INACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH026",
+			"state": "maharashtra",
+			"city": "karvenagar",
+			"pincode": "411052",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH027",
+			"state": "maharashtra",
+			"city": "karvenagar",
+			"pincode": "411052",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH028",
+			"state": "maharashtra",
+			"city": "vimannagar",
+			"pincode": "411014",
+			"assigned": false,
+			"status": "INACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH029",
+			"state": "maharashtra",
+			"city": "vimannagar",
+			"pincode": "411014",
+			"assigned": true,
+			"status": "ACTIVE"
+		},
+		{
+			"kitchen_id": "SHD-KCH030",
+			"state": "maharashtra",
+			"city": "hadapsar",
+			"pincode": "411028",
+			"assigned": true,
+			"status": "ACTIVE"
+		}
+	]
+}
