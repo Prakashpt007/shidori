@@ -25,6 +25,12 @@ export class SidebarComponent {
 			});
 	}
 
+
+	collapsed = false;
+
+	toggleSidebar(): void {
+		this.collapsed = !this.collapsed;
+	}
 	ngOnInit(): void {
 		const menus: Menu[] = [
 			{
@@ -37,9 +43,9 @@ export class SidebarComponent {
 			},
 			{
 				icon: 'fa-regular fa-id-card',
-				name: 'emp-registration',
-				label: 'Emp Registration',
-				href: '/admin/registration/list',
+				name: 'Employee',
+				label: 'Employees',
+				href: '/admin/employee/list',
 				subMenu: [],
 				status: false
 			},
@@ -75,24 +81,27 @@ export class SidebarComponent {
 	}
 
 	updateActiveByUrl(url: string): void {
+		// strip query + fragment so /admin/dashboard?page=1 still matches /admin/dashboard
+		const cleanUrl = url.split('?')[0].split('#')[0];
+
 		const menus = this.menuList().map(menu => {
 			let isParentActive = false;
 
 			if (!menu.subMenu || menu.subMenu.length === 0) {
-				// direct menu
-				menu.status = url === menu.href;
+				// direct menu: active if path matches
+				menu.status = cleanUrl === menu.href;
 			} else {
 				// submenu items
 				menu.subMenu = menu.subMenu.map(sub => {
-					const active = url === sub.href;
+					const active = cleanUrl === sub.href;
 					if (active) {
 						isParentActive = true;
 					}
 					return { ...sub, status: active };
 				});
 
-				// parent active if any child active OR url matches parent href
-				menu.status = isParentActive || (menu.href !== '#' && url.startsWith(menu.href));
+				// parent open if any child active OR path starts with parent href
+				menu.status = isParentActive || (menu.href !== '#' && cleanUrl.startsWith(menu.href));
 			}
 
 			return { ...menu };
@@ -100,6 +109,7 @@ export class SidebarComponent {
 
 		this.menuList.set(menus);
 	}
+
 
 	// // parent "active" state (for li.active)
 	// isParentActive(item: Menu): boolean {

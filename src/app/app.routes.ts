@@ -141,12 +141,27 @@ export const routes: Routes = [
 				data: { title: "Admin Dashboard" }
 			},
 			{
-				path: "registration",
+				path: "employee",
 				children: [
 					{
 						path: "list",
 						loadComponent: () => import('./views/administrator/super-admin/employee/employee.component').then(c => c.EmployeeComponent),
-						data: { title: "Employe List" }
+						data: { title: "Employee List" }
+					},
+					{
+						path: "add-manager",
+						loadComponent: () => import('./views/administrator/super-admin/employee/manager/manager.component').then(c => c.ManagerComponent),
+						data: { title: "Add Manager" }
+					},
+					{
+						path: "add-chef",
+						loadComponent: () => import('./views/administrator/super-admin/employee/chef/chef.component').then(c => c.ChefComponent),
+						data: { title: "Add Chef" }
+					},
+					{
+						path: "add-delivery-partner",
+						loadComponent: () => import('./views/administrator/super-admin/employee/delivery-partner/delivery-partner.component').then(c => c.DeliveryPartnerComponent),
+						data: { title: "Add Delivery Partner" }
 					},
 				]
 			},

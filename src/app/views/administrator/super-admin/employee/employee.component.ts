@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
-import { PaginationComponent } from '../../../../utility/pagination/pagination.component';
-import { GenericHttpService } from '../../../../services/generic-http.service';
 import { Employee } from '../../../../utility/interfaces/gen-interface';
-
+import { GenericHttpService } from '../../../../services/generic-http.service';
+import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router, RouterLink, RouterModule } from '@angular/router';
+import { PaginationComponent } from '../../../../utility/pagination/pagination.component';
 
 
 type EmployeeRoleFilter = 'all' | 'manager' | 'chef' | 'delivery-partner';
@@ -14,7 +13,7 @@ type EmployeeAssignFilter = 'assigned' | 'not-assigned';
 @Component({
 	selector: 'app-employee',
 	standalone: true,
-	imports: [CommonModule, PaginationComponent],
+	imports: [CommonModule, PaginationComponent, RouterLink],
 	templateUrl: './employee.component.html',
 	styleUrl: './employee.component.scss'
 })
@@ -200,4 +199,6 @@ export class EmployeeComponent {
 			return assignedOk && roleOk;
 		});
 	}
+
 }
+

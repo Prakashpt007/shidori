@@ -1,74 +1,81 @@
-<div class="sidebar">
+<div class="sidebar-wrapper" [class.collapsed]="collapsed">
+	<div class="sidebar">
 
-	<div class="logo">
-		<a href="#">
-			<div class="icon"> <i class="fa-solid fa-rocket" style="color: var(--bs-link-color);"></i></div>
-			<div class="label">Shidori</div>
-		</a>
-	</div>
-
-	<div class="sectionSeperator"></div>
-
-
-	@defer (on viewport) {
-	<ul class="menuList">
-		@for (item of menuList(); track item.name; let idx = $index) {
-
-		@if (item.subMenu.length == 0) {
-
-		<!-- Top-level item without submenu -->
-		<li [class.active]="item.status">
-			<a [routerLink]="item.href" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="menus">
-				<div class="icon" [title]="item.name">
-					<i [class]="item.icon"></i>
-				</div>
-				<div class="label">{{ item.label }}</div>
+		<div class="logo">
+			<a href="#">
+				<div class="icon"> <i class="fa-solid fa-rocket" style="color: var(--bs-link-color);"></i></div>
+				<div class="label">Shidori</div>
 			</a>
-		</li>
 
-		} @else {
+			<!-- collapse / expand button -->
+			<button type="button" class="collapse-btn" (click)="toggleSidebar()" [attr.aria-label]="collapsed ? 'Expand sidebar' : 'Collapse sidebar'">
+				<i class="fa-solid" [ngClass]="collapsed ? 'fa-angle-right' : 'fa-angle-left'"></i>
+			</button>
+		</div>
 
-		<!-- Parent item with submenu -->
-		<li [class.active]="isParentActive(item)" [class.open]="item.status">
-			<!-- clickable header row (toggle only, not router link) -->
-			<div class="menus has-submenu" (click)="toggleStatus(idx)">
-				<div class="icon" [title]="item.name">
-					<i [class]="item.icon"></i>
+		<div class="sectionSeperator"></div>
+
+
+		@defer (on viewport) {
+		<ul class="menuList">
+			@for (item of menuList(); track item.name; let idx = $index) {
+
+			@if (item.subMenu.length == 0) {
+
+			<!-- Top-level item without submenu -->
+			<li [class.active]="item.status">
+				<a [routerLink]="item.href" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" class="menus">
+					<div class="icon" [title]="item.name">
+						<i [class]="item.icon"></i>
+					</div>
+					<div class="label">{{ item.label }}</div>
+				</a>
+			</li>
+
+			} @else {
+
+			<!-- Parent item with submenu -->
+			<li [class.active]="isParentActive(item)" [class.open]="item.status">
+				<!-- clickable header row (toggle only, not router link) -->
+				<div class="menus has-submenu" (click)="toggleStatus(idx)">
+					<div class="icon" [title]="item.name">
+						<i [class]="item.icon"></i>
+					</div>
+					<div class="label">
+						{{ item.label }}
+					</div>
+					<div class="toggle">
+						<i class="fa-solid" [ngClass]="item.status ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
+					</div>
 				</div>
-				<div class="label">
-					{{ item.label }}
-				</div>
-				<div class="toggle">
-					<i class="fa-solid" [ngClass]="item.status ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-				</div>
-			</div>
 
-			<!-- submenu: open when item.status true -->
-			<ul class="submenu" [class.hide]="!item.status">
-				@for (subItem of item.subMenu; track subItem.name; let idx2 = $index) {
-				<li [class.active]="subItem.status">
-					<a [routerLink]="subItem.href" routerLinkActive="active" class="submenu-item" (click)="$event.stopPropagation(); setSubStatus(idx, idx2)">
-						<div class="icon" [title]="subItem.name">
-							@if (subItem.status) {
-							<i class="fa-solid fa-circle"></i>
-							} @else {
-							<i class="fa-regular fa-circle"></i>
-							}
-						</div>
-						<div class="label">{{ subItem.label }}</div>
-					</a>
-				</li>
-				}
-			</ul>
-		</li>
+				<!-- submenu: open when item.status true -->
+				<ul class="submenu" [class.hide]="!item.status">
+					@for (subItem of item.subMenu; track subItem.name; let idx2 = $index) {
+					<li [class.active]="subItem.status">
+						<a [routerLink]="subItem.href" routerLinkActive="active" class="submenu-item" (click)="$event.stopPropagation(); setSubStatus(idx, idx2)">
+							<div class="icon" [title]="subItem.name">
+								@if (subItem.status) {
+								<i class="fa-solid fa-circle"></i>
+								} @else {
+								<i class="fa-regular fa-circle"></i>
+								}
+							</div>
+							<div class="label">{{ subItem.label }}</div>
+						</a>
+					</li>
+					}
+				</ul>
+			</li>
 
+			}
+
+			}
+		</ul>
+		} @placeholder {
+		<div class="text-center">Loading...</div>
 		}
 
-		}
-	</ul>
-	} @placeholder {
-	<div class="text-center">Loading...</div>
-	}
 
-
+	</div>
 </div>

@@ -4,18 +4,21 @@ import { Kitchen } from '../../../../utility/interfaces/gen-interface';
 import { GenericHttpService } from '../../../../services/generic-http.service';
 import { ToastrService } from 'ngx-toastr';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PaginationComponent } from '../../../../utility/pagination/pagination.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatMenuModule } from '@angular/material/menu';
 
 type KitchenAssignFilter = 'assigned' | 'not-assigned';
 
 @Component({
 	selector: 'app-cloud-kitchens',
 	standalone: true,
-	imports: [CommonModule],
+	imports: [CommonModule, PaginationComponent, MatButtonModule, MatIconModule, MatMenuModule],
 	templateUrl: './cloud-kitchens.component.html',
 	styleUrl: './cloud-kitchens.component.scss'
 })
 export class CloudKitchensComponent {
-
 	toastr = inject(ToastrService);
 	genericHttp = inject(GenericHttpService);
 	route = inject(ActivatedRoute);
@@ -26,6 +29,7 @@ export class CloudKitchensComponent {
 
 	page = signal<number>(1);
 	size = signal<number>(20);
+	pageSizes = [10, 20, 30, 50, 100];
 	totalItems = signal<number>(0);
 
 	private readonly listApi = '/assets/jsons/kitchen.json';
@@ -34,8 +38,8 @@ export class CloudKitchensComponent {
 		this.route.queryParamMap.subscribe(params => {
 			const pageParam = params.get('page');
 			const sizeParam = params.get('size');
+			const assignedParam = params.get('assigned');
 
-			// if present in URL, override defaults
 			if (pageParam) {
 				const p = Number(pageParam);
 				if (p > 0) this.page.set(p);
@@ -46,32 +50,31 @@ export class CloudKitchensComponent {
 				if (s > 0) this.size.set(s);
 			}
 
-			// if either missing, write current signal values back into URL once
-			if (!pageParam || !sizeParam) {
-				this.router.navigate([], {
-					relativeTo: this.route,
-					queryParams: {
-						page: this.page(),  // uses default 1 if not overridden
-						size: this.size()   // uses default 10/20 if not overridden
-					},
-					queryParamsHandling: 'merge',
-					replaceUrl: true
-				});
+			if (assignedParam === 'true') {
+				this.empStatus.set('assigned');
+			} else if (assignedParam === 'false') {
+				this.empStatus.set('not-assigned');
+			}
+
+			if (!pageParam || !sizeParam || !assignedParam) {
+				this.updateQueryParams(true);
 				return;
 			}
 
-			this.fetchKitchens(); // or fetchKitchens()
+			this.fetchKitchens();
 		});
 	}
 
-	private updateQueryParams() {
+	private updateQueryParams(replace = false) {
 		this.router.navigate([], {
 			relativeTo: this.route,
 			queryParams: {
 				page: this.page(),
-				size: this.size()
+				size: this.size(),
+				assigned: this.empStatus() === 'assigned' ? 'true' : 'false'
 			},
-			queryParamsHandling: 'merge'
+			queryParamsHandling: 'merge',
+			replaceUrl: replace
 		});
 	}
 
@@ -79,22 +82,18 @@ export class CloudKitchensComponent {
 		this.empStatus.set(value);
 		this.page.set(1);
 		this.updateQueryParams();
-		this.fetchKitchens();
 	}
 
 	setPage(page: number) {
 		if (page < 1) return;
 		this.page.set(page);
 		this.updateQueryParams();
-		this.fetchKitchens();
 	}
 
-	// if you later add page-size control:
 	setSize(size: number) {
-		this.size.set(size);
+		this.size.set(Number(size));
 		this.page.set(1);
 		this.updateQueryParams();
-		this.fetchKitchens();
 	}
 
 	fetchKitchens() {
