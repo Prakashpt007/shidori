@@ -34,7 +34,12 @@
 							"node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
 							"node_modules/animate.css/animate.min.css",
 							"node_modules/ngx-toastr/toastr.css",
-							"src/styles.scss"
+							"src/styles.scss",
+							{
+								"input": "src/admin-styles.scss",
+								"bundleName": "admin-theme",
+								"inject": false
+							}
 						],
 						"scripts": [
 							"node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
@@ -100,7 +105,12 @@
 							"node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.theme.default.min.css",
 							"node_modules/animate.css/animate.min.css",
 							"node_modules/ngx-toastr/toastr.css",
-							"src/styles.scss"
+							"src/styles.scss",
+							{
+								"input": "src/admin-styles.scss",
+								"bundleName": "admin-theme",
+								"inject": false
+							}
 						],
 						"scripts": [
 							"node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
