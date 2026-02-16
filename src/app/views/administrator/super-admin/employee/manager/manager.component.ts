@@ -13,9 +13,6 @@ import { validateImage, validatePdf } from '../../../../../utility/validators';
 	styleUrl: './manager.component.scss'
 })
 export class ManagerComponent implements OnInit, AfterViewInit, OnDestroy {
-
-
-
 	form!: FormGroup;
 	formSubmitHandler = signal(false);
 
