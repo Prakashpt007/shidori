@@ -1,84 +1,52 @@
-<div class="sidebar-wrapper" [class.collapsed]="collapsed">
-	<div class="sidebar">
+<!-- Navbar -->
+<!-- <nav class="site-nav">
+	<button class="sidebar-toggle" (click)="toggleSidebar()">
+		<span class="material-symbols-rounded">bar</span>
+	</button>
+</nav> -->
 
-		<div class="logo">
-			<a href="#">
-				<div class="icon"> <i class="fa-solid fa-rocket" style="color: var(--bs-link-color);"></i></div>
-				<div class="label">Shidori</div>
-			</a>
+<aside class="sidebar" [class.collapsed]="collapsed">
+	<!-- Sidebar header -->
+	<div class="sidebar-header">
+		<!-- <span class="material-symbols-outlined header-logo">
+			rocket_launch
+		</span> -->
+		<img src="./assets/images/logo.png" alt="Shidori" class="header-logo">
+		<button class="sidebar-toggle" type="button" (click)="toggleSidebar()">
+			<span class="material-symbols-outlined">chevron_left</span>
+		</button>
+	</div>
 
-			<!-- collapse / expand button -->
-			<!-- <button type="button" class="collapse-btn" (click)="toggleSidebar()" [attr.aria-label]="collapsed ? 'Expand sidebar' : 'Collapse sidebar'">
-				<i class="fa-solid" [ngClass]="collapsed ? 'fa-angle-right' : 'fa-angle-left'"></i>
-			</button> -->
+	<div class="sidebar-content">
+		<!-- Search Form -->
+		<form #searchForm action="#" class="search-form" (click)="onSearchClick()">
+			<span class="material-symbols-outlined">search</span>
+			<input type="search" placeholder="Search..." required />
+		</form>
 
-
-			<i class="fa-solid fa-angle-right toggle" (click)="toggleSidebar()"></i>
-		</div>
-
-		<div class="sectionSeperator"></div>
-
-
-		@defer (on viewport) {
-		<ul class="menuList">
+		<!-- Sidebar Menu -->
+		<ul class="menu-list">
 			@for (item of menuList(); track item.name; let idx = $index) {
-
-			@if (item.subMenu.length == 0) {
-
-			<!-- Top-level item without submenu -->
-			<li [class.active]="item.status">
-				<a [routerLink]="item.href" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" class="menus">
-					<div class="icon" [title]="item.name">
-						<i [class]="item.icon"></i>
-					</div>
-					<div class="label">{{ item.label }}</div>
+			<li class="menu-item">
+				<a [routerLink]="item.href" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: false }" class="menu-link">
+					<span class="material-symbols-outlined">{{ item.icon }}</span>
+					<span class="menu-label">{{ item.label }}</span>
 				</a>
 			</li>
-
-			} @else {
-
-			<!-- Parent item with submenu -->
-			<li [class.active]="isParentActive(item)" [class.open]="item.status">
-				<!-- clickable header row (toggle only, not router link) -->
-				<div class="menus has-submenu" (click)="toggleStatus(idx)">
-					<div class="icon" [title]="item.name">
-						<i [class]="item.icon"></i>
-					</div>
-					<div class="label">
-						{{ item.label }}
-					</div>
-					<div class="toggle">
-						<i class="fa-solid" [ngClass]="item.status ? 'fa-chevron-up' : 'fa-chevron-down'"></i>
-					</div>
-				</div>
-
-				<!-- submenu: open when item.status true -->
-				<ul class="submenu" [class.hide]="!item.status">
-					@for (subItem of item.subMenu; track subItem.name; let idx2 = $index) {
-					<li [class.active]="subItem.status">
-						<a [routerLink]="subItem.href" routerLinkActive="active" class="submenu-item" (click)="$event.stopPropagation(); setSubStatus(idx, idx2)">
-							<div class="icon" [title]="subItem.name">
-								@if (subItem.status) {
-								<i class="fa-solid fa-circle"></i>
-								} @else {
-								<i class="fa-regular fa-circle"></i>
-								}
-							</div>
-							<div class="label">{{ subItem.label }}</div>
-						</a>
-					</li>
-					}
-				</ul>
-			</li>
-
-			}
-
 			}
 		</ul>
-		} @placeholder {
-		<div class="text-center">Loading...</div>
-		}
-
-
 	</div>
-</div>
+
+	<!-- Sidebar Footer -->
+	<div class="sidebar-footer">
+		<button #themeToggleBtn type="button" class="theme-toggle" (click)="toggleTheme()">
+			<div class="theme-label">
+				<span #themeIcon class="theme-icon material-symbols-outlined">dark_mode</span>
+				<span class="theme-text">Dark Mode</span>
+			</div>
+			<div class="theme-toggle-track">
+				<div class="theme-toggle-indicator"></div>
+			</div>
+		</button>
+	</div>
+</aside>

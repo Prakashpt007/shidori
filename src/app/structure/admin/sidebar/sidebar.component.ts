@@ -1,9 +1,20 @@
-import { Component, signal } from '@angular/core';
-import { Menu } from '../../../utility/interfaces/gen-interface';
+import {
+	Component,
+	OnDestroy,
+	OnInit,
+	AfterViewInit,
+	signal,
+	ViewChild,
+	ElementRef,
+	Inject,
+	HostListener
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { NavigationEnd, Router, RouterModule } from '@angular/router';
-import { filter } from 'rxjs';
+import { filter, Subject, takeUntil } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
+import { Menu } from '../../../utility/interfaces/gen-interface';
 
 @Component({
 	selector: 'app-sidebar',
@@ -12,29 +23,36 @@ import { filter } from 'rxjs';
 	templateUrl: './sidebar.component.html',
 	styleUrl: './sidebar.component.scss'
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
 	menuList = signal<Menu[]>([]);
-
-	constructor(private router: Router) {
-		this.router.events
-			.pipe(
-				filter((event): event is NavigationEnd => event instanceof NavigationEnd)
-			)
-			.subscribe(event => {
-				this.updateActiveByUrl(event.urlAfterRedirects);
-			});
-	}
-
-
 	collapsed = false;
 
-	toggleSidebar(): void {
-		this.collapsed = !this.collapsed;
-	}
+	private readonly STORAGE_KEY = 'sidebar-collapsed';
+	private readonly THEME_KEY = 'theme';
+	private destroy$ = new Subject<void>();
+
+	@ViewChild('searchForm', { static: false }) searchForm!: ElementRef<HTMLFormElement>;
+	@ViewChild('themeIcon', { static: false }) themeIconEl!: ElementRef<HTMLElement>;
+	@ViewChild('themeToggleBtn', { static: false }) themeToggleBtn!: ElementRef<HTMLButtonElement>;
+
+	constructor(
+		private router: Router,
+		@Inject(DOCUMENT) private document: Document
+	) { }
+
+	// ---------- LIFECYCLE ----------
+
 	ngOnInit(): void {
+		// 1) collapsed from localStorage
+		this.collapsed = this.getCollapsedState();
+
+		// 2) init theme (html data-bs-theme)
+		this.initTheme();
+
+		// 3) menu data
 		const menus: Menu[] = [
 			{
-				icon: 'fa-solid fa-chart-line',
+				icon: 'dashboard',
 				name: 'dashboard',
 				label: 'Dashboard',
 				href: '/admin/dashboard',
@@ -42,7 +60,7 @@ export class SidebarComponent {
 				status: false
 			},
 			{
-				icon: 'fa-regular fa-id-card',
+				icon: 'badge',
 				name: 'Employee',
 				label: 'Employees',
 				href: '/admin/employee/list',
@@ -50,48 +68,167 @@ export class SidebarComponent {
 				status: false
 			},
 			{
-				icon: "fa-solid fa-kitchen-set",
-				name: "cloud-kitchens",
-				label: "Cloud Kitchens",
-				href: "/admin/cloud-kitchen/list",
+				icon: 'kitchen',
+				name: 'cloud-kitchens',
+				label: 'Cloud Kitchens',
+				href: '/admin/cloud-kitchen/list',
 				subMenu: [],
 				status: false
 			},
 			{
-				icon: "fa-solid fa-people-group",
-				// icon: "fa-solid fa-people-line",
-				name: "subscribers",
-				label: "Subscribers",
-				href: "/admin/subscriber/list",
+				icon: 'diversity_4',
+				name: 'subscribers',
+				label: 'Subscribers',
+				href: '/admin/subscriber/list',
 				subMenu: [],
 				status: false
 			},
 			{
-				icon: "fa-solid fa-gift",
-				name: "coupons",
-				label: "Coupons",
-				href: "/admin/coupon/list",
+				icon: 'local_activity',
+				name: 'coupons',
+				label: 'Coupons',
+				href: '/admin/coupon/list',
 				subMenu: [],
 				status: false
 			}
-			// other menus...
 		];
+
 		this.menuList.set(menus);
 		this.updateActiveByUrl(this.router.url);
+
+		// 4) router events
+		this.router.events
+			.pipe(
+				filter((event): event is NavigationEnd => event instanceof NavigationEnd),
+				takeUntil(this.destroy$)
+			)
+			.subscribe(event => this.updateActiveByUrl(event.urlAfterRedirects));
+
+		// 5) auto-expand on large screens
+		this.applyLargeScreenDefault();
 	}
 
+	ngAfterViewInit(): void {
+		// ViewChild is ready; ensure icon matches theme + collapsed
+		this.updateThemeIcon();
+	}
+
+	ngOnDestroy(): void {
+		this.destroy$.next();
+		this.destroy$.complete();
+	}
+
+	@HostListener('window:resize')
+	onResize(): void {
+		// this.applyLargeScreenDefault();
+	}
+
+	// ---------- SIDEBAR COLLAPSE ----------
+
+	toggleSidebar(): void {
+		this.collapsed = !this.collapsed;
+		this.setCollapsedState(this.collapsed);
+		this.updateThemeIcon();
+	}
+
+	private applyLargeScreenDefault(): void {
+		if (window.innerWidth > 768) {
+			this.collapsed = false;
+			this.setCollapsedState(false);
+			this.updateThemeIcon();
+		}
+	}
+
+	private getCollapsedState(): boolean {
+		try {
+			const raw = localStorage.getItem(this.STORAGE_KEY);
+			return raw ? JSON.parse(raw) : false;
+		} catch {
+			return false;
+		}
+	}
+
+	private setCollapsedState(collapsed: boolean): void {
+		try {
+			localStorage.setItem(this.STORAGE_KEY, JSON.stringify(collapsed));
+		} catch {
+			console.warn('localStorage unavailable');
+		}
+	}
+
+	// Expand sidebar when search clicked
+	onSearchClick(): void {
+		if (this.collapsed) {
+			this.collapsed = false;
+			this.setCollapsedState(false);
+			this.updateThemeIcon();
+		}
+		const input = this.searchForm?.nativeElement.querySelector('input');
+		input?.focus();
+	}
+
+	// ---------- THEME LOGIC (data-bs-theme on <html>) ----------
+
+	private initTheme(): void {
+		const savedTheme = localStorage.getItem(this.THEME_KEY);
+		const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+		const initialTheme: 'light' | 'dark' =
+			savedTheme === 'dark'
+				? 'dark'
+				: savedTheme === 'light'
+					? 'light'
+					: systemPrefersDark
+						? 'dark'
+						: 'light';
+
+		this.setHtmlTheme(initialTheme);
+	}
+
+	private setHtmlTheme(theme: 'light' | 'dark'): void {
+		const htmlEl = this.document.documentElement; // <html>
+		htmlEl.setAttribute('data-bs-theme', theme);
+		localStorage.setItem(this.THEME_KEY, theme);
+	}
+
+	private getHtmlTheme(): 'light' | 'dark' {
+		const htmlEl = this.document.documentElement;
+		return (htmlEl.getAttribute('data-bs-theme') as 'light' | 'dark') || 'light';
+	}
+
+	toggleTheme(): void {
+		const current = this.getHtmlTheme();
+		const next: 'light' | 'dark' = current === 'dark' ? 'light' : 'dark';
+		this.setHtmlTheme(next);
+		this.updateThemeIcon();
+	}
+
+	private isDarkTheme(): boolean {
+		return this.getHtmlTheme() === 'dark';
+	}
+
+	private updateThemeIcon(): void {
+		if (!this.themeIconEl) return; // ViewChild not ready (before AfterViewInit)
+		const isDark = this.isDarkTheme();
+		const el = this.themeIconEl.nativeElement;
+
+		// collapsed ? (isDark ? "light_mode" : "dark_mode") : "dark_mode";
+		el.textContent = this.collapsed
+			? (isDark ? 'light_mode' : 'dark_mode')
+			: 'dark_mode';
+	}
+
+	// ---------- MENUS / ACTIVE ----------
+
 	updateActiveByUrl(url: string): void {
-		// strip query + fragment so /admin/dashboard?page=1 still matches /admin/dashboard
 		const cleanUrl = url.split('?')[0].split('#')[0];
 
 		const menus = this.menuList().map(menu => {
 			let isParentActive = false;
 
 			if (!menu.subMenu || menu.subMenu.length === 0) {
-				// direct menu: active if path matches
 				menu.status = cleanUrl === menu.href;
 			} else {
-				// submenu items
 				menu.subMenu = menu.subMenu.map(sub => {
 					const active = cleanUrl === sub.href;
 					if (active) {
@@ -100,7 +237,6 @@ export class SidebarComponent {
 					return { ...sub, status: active };
 				});
 
-				// parent open if any child active OR path starts with parent href
 				menu.status = isParentActive || (menu.href !== '#' && cleanUrl.startsWith(menu.href));
 			}
 
@@ -110,28 +246,18 @@ export class SidebarComponent {
 		this.menuList.set(menus);
 	}
 
-
-	// // parent "active" state (for li.active)
-	// isParentActive(item: Menu): boolean {
-	// 	return !!item.status || !!item.subMenu?.some(s => s.status);
-	// }
-
-	// parent "active" state (for li.active)
 	isParentActive(item: Menu): boolean {
-		// active ONLY if any child is active
 		return !!item.subMenu?.some(s => s.status);
 	}
 
-	// open/close parent submenu
 	toggleStatus(index: number): void {
 		const menus = [...this.menuList()];
 		const item = menus[index];
 		if (!item.subMenu?.length) return;
-		item.status = !item.status; // controls open/close
+		item.status = !item.status;
 		this.menuList.set(menus);
 	}
 
-	// activate a specific child and open parent
 	setSubStatus(parentIndex: number, subIndex: number): void {
 		const menus = [...this.menuList()];
 		const parent = menus[parentIndex];
@@ -140,7 +266,7 @@ export class SidebarComponent {
 			...s,
 			status: i === subIndex
 		}));
-		parent.status = true; // open parent if clicked
+		parent.status = true;
 
 		this.menuList.set(menus);
 	}

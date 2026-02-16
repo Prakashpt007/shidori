@@ -1,1 +1,315 @@
-<p>chef works!</p>
+<form class="grid-container" [formGroup]="form" (ngSubmit)="formSubmit()" novalidate>
+	<div class="grid-container">
+
+
+		<div class="top">
+			<div class="container">
+				<div class="grid-container-toolbar">
+					<a [routerLink]="['/admin/employee/list']" type="button" class="btn btn-sm btn-secondary d-flex-btn">
+						<span class="material-symbols-outlined">arrow_left_alt</span>
+						<span class="desktop-view-only">Back To List</span>
+					</a>
+					<h4 class="m-0">Add Chef</h4>
+
+					<div class="dropdown">
+						<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+							<i class="fa-solid fa-plus"></i>
+							<span class="desktop-view-only">Add Employee</span>
+						</button>
+						<ul class="dropdown-menu">
+							<li>
+								<a class="dropdown-item" [routerLink]="['/admin/employee/add-manager']">Manager</a>
+							</li>
+							<li>
+								<a class="dropdown-item active disabled" [routerLink]="['/admin/employee/add-chef']">Chef</a>
+							</li>
+							<li>
+								<a class="dropdown-item" [routerLink]="['/admin/employee/add-delivery-partner']">Delivery Partner</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="middle">
+			<div class="container">
+				<div class="display-card">
+					<div class="row">
+						<div class="col-12 mb-3">
+							<h5 class="m-0">Personal & Bank Details</h5>
+						</div>
+
+						<!--Full Name-->
+						<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+							<label for="name" class="form-label"><span class="b">Full Name</span> (Official Name) <span class="required">*</span></label>
+							<input type="text" class="form-control" id="name" placeholder="Please Enter Full Name" maxlength="145" minlength="6" formControlName="name" [ngClass]="{'is-invalid': formSubmitHandler() && f['name'].errors}" [autocomplete]="0" />
+							@if (formSubmitHandler() && f['name'].errors) {
+							<div class="invalid-feedback">
+								@if (f['name'].errors['required']) {
+								<div>Please Enter Full Name</div>
+								}
+								@if (f['name'].errors['minlength']) {
+								<div>Please Enter Minimum 6 Character(s)</div>
+								}
+								@if (f['name'].errors['maxlength']) {
+								<div>Please Enter Maximum 145 Character(s)</div>
+								}
+							</div>
+							}
+						</div>
+
+						<!--Email-->
+						<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+							<label for="email" class="form-label"><span class="b">Email </span> <span class="required">*</span></label>
+							<input type="email" class="form-control" id="email" placeholder="Please Enter Email Address" maxlength="145" minlength="6" formControlName="email" [ngClass]="{'is-invalid': formSubmitHandler() && f['email'].errors}" [autocomplete]="0" />
+							@if (formSubmitHandler() && f['email'].errors) {
+							<div class="invalid-feedback">
+								@if (f['email'].errors['required']) {
+								<div>Please Enter Email Address</div>
+								}
+								@if (f['email'].errors['email']) {
+								<div>Please Enter Valid Email Address</div>
+								}
+								@if ( f['email'].errors['minlength']) {
+								<div>Please Enter Minimum 6 Character(s) Email Address</div>
+								}
+								@if (f['email'].errors['maxlength']) {
+								<div>Please Enter Maximum 145 Character(s) Email Address</div>
+								}
+							</div>
+							}
+						</div>
+
+						<!--DOB-->
+						<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+							<label for="dob" class="form-label"><span class="b">Date of Birth</span> <span class="required">*</span></label>
+							<input type="date" class="form-control" id="dob" [max]="maxDate" [min]="minDate" placeholder="Please Enter Date Of Birth" formControlName="dob" [ngClass]="{'is-invalid': formSubmitHandler() && f['dob'].errors}" [autocomplete]="0" />
+							@if (formSubmitHandler() && f['dob'].errors) {
+							<div class="invalid-feedback">
+								@if (f['dob'].errors['required']) {
+								<div>Please Enter Date Of Birth</div>
+								}
+							</div>
+							}
+						</div>
+
+						<!--Mobile No.-->
+						<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+							<label for="mobile" class="form-label"><span class="b">Mobile No.</span> <span class="required">*</span></label>
+							<input type="tel" class="form-control" id="mobile" placeholder="Please Enter Mobile No." maxlength="10" minlength="10" formControlName="mobile" [ngClass]="{'is-invalid': formSubmitHandler() && f['mobile'].errors}" [autocomplete]="0" />
+							@if (formSubmitHandler() && f['mobile'].errors) {
+							<div class="invalid-feedback">
+								@if (f['mobile'].errors['required']) {
+								<div>Please Enter Mobile No.</div>
+								}
+								@if (f['mobile'].errors['pattern']) {
+								<div>Please Enter Valid Mobile No.</div>
+								}
+								@if (f['mobile'].errors['minlength']) {
+								<div>Please Enter Valid 10 Digit Phone No.</div>
+								}
+								@if (f['mobile'].errors['maxlength']) {
+								<div>Please Enter Valid 10 Digit Mobile No.</div>
+								}
+							</div>
+							}
+						</div>
+
+
+						<!--Chef Specialization-->
+						<div class="col-12 mb-4">
+							<label for="chef_specialization" class="form-label"><span class="b">Chef Specialization </span> <span class="required">*</span></label>
+							<textarea autosize class="form-control" rows="3" id="chef_specialization" placeholder="Please Enter Chef Specialization" maxlength="145" minlength="6" formControlName="chef_specialization" [ngClass]="{'is-invalid': formSubmitHandler() && f['chef_specialization'].errors}" [autocomplete]="0"></textarea>
+							@if (formSubmitHandler() && f['chef_specialization'].errors) {
+							<div class="invalid-feedback">
+								@if (f['chef_specialization'].errors['required']) {
+								<div>Please Enter Chef Specialization</div>
+								}
+								@if (f['chef_specialization'].errors['minlength']) {
+								<div>Please Enter Minimum 6 Character(s)</div>
+								}
+								@if (f['chef_specialization'].errors['maxlength']) {
+								<div>Please Enter Maximum 145 Character(s)</div>
+								}
+							</div>
+							}
+						</div>
+
+
+						<!--Bank Account No.-->
+						<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+							<label for="bank_account_no" class="form-label"><span class="b">Bank Account No.</span> <span class="required">*</span></label>
+							<input type="tel" class="form-control" id="bank_account_no" placeholder="Please Enter Bank Account No" maxlength="20" minlength="12" formControlName="bank_account_no" [ngClass]="{'is-invalid': formSubmitHandler() && f['bank_account_no'].errors}" [autocomplete]="0" />
+							@if (formSubmitHandler() && f['bank_account_no'].errors) {
+							<div class="invalid-feedback">
+								@if (f['bank_account_no'].errors['required']) {
+								<div>Please Enter Bank Account No.</div>
+								}
+								@if (f['bank_account_no'].errors['minlength']) {
+								<div>Please Enter Minimum 12 Character(s)</div>
+								}
+								@if (f['bank_account_no'].errors['maxlength']) {
+								<div>Please Enter Maximum 20 Character(s)</div>
+								}
+							</div>
+							}
+						</div>
+
+						<!--IFSC Code-->
+						<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+							<label for="bank_account_no" class="form-label"><span class="b">IFSC Code</span> <span class="required">*</span></label>
+							<input type="tel" class="form-control" id="bank_account_no" placeholder="Please Enter IFSC Code" maxlength="11" minlength="11" formControlName="bank_account_no" [ngClass]="{'is-invalid': formSubmitHandler() && f['bank_account_no'].errors}" [autocomplete]="0" />
+							@if (formSubmitHandler() && f['bank_account_no'].errors) {
+							<div class="invalid-feedback">
+								@if (f['bank_account_no'].errors['required']) {
+								<div>Please Enter IFSC Code</div>
+								}
+								@if (f['bank_account_no'].errors['minlength']) {
+								<div>Please Enter Minimum 11 Character(s)</div>
+								}
+								@if (f['bank_account_no'].errors['maxlength']) {
+								<div>Please Enter Maximum 11 Character(s)</div>
+								}
+							</div>
+							}
+						</div>
+
+						<!--Permanent Address-->
+						<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+							<label for="permanent_address" class="form-label"><span class="b">Permanent Address </span> <span class="required">*</span></label>
+							<textarea autosize class="form-control" rows="3" id="permanent_address" placeholder="Please Enter Permanent Address" maxlength="145" minlength="6" formControlName="permanent_address" [ngClass]="{'is-invalid': formSubmitHandler() && f['permanent_address'].errors}" [autocomplete]="0"></textarea>
+							@if (formSubmitHandler() && f['permanent_address'].errors) {
+							<div class="invalid-feedback">
+								@if (f['permanent_address'].errors['required']) {
+								<div>Please Enter Permanent Address</div>
+								}
+								@if (f['permanent_address'].errors['minlength']) {
+								<div>Please Enter Minimum 6 Character(s)</div>
+								}
+								@if (f['permanent_address'].errors['maxlength']) {
+								<div>Please Enter Maximum 145 Character(s)</div>
+								}
+							</div>
+							}
+						</div>
+
+						<!--Current Address-->
+						<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+							<label for="current_address" class="form-label col-form-label"><span class="b">Current Address </span> <span class="required">*</span></label>
+							<textarea autosize class="form-control" rows="3" id="current_address" placeholder="Please Enter Current Address" maxlength="145" minlength="6" formControlName="current_address" [ngClass]="{'is-invalid': formSubmitHandler() && f['current_address'].errors}" [autocomplete]="0"></textarea>
+							@if (formSubmitHandler() && f['current_address'].errors) {
+							<div class="invalid-feedback">
+								@if (f['current_address'].errors['required']) {
+								<div>Please Enter Current Address</div>
+								}
+								@if (f['current_address'].errors['minlength']) {
+								<div>Please Enter Minimum 6 Character(s)</div>
+								}
+								@if (f['current_address'].errors['maxlength']) {
+								<div>Please Enter Maximum 145 Character(s)</div>
+								}
+							</div>
+							}
+						</div>
+
+						<hr />
+						<div class="col-12 mb-3">
+							<h5 class="m-0">Files</h5>
+						</div>
+
+						<!--Photo-->
+						<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+							<label for="photo" class="form-label"><span class="b">Photo </span> <span class="required">*</span></label>
+							<input type="file" class="form-control" accept="image/jpeg,image/png" (change)="onFileChange($event, 'photo')" id="photo" placeholder="Choose Photo" formControlName="photo" [ngClass]="{'is-invalid': formSubmitHandler() && f['photo'].errors}" />
+							@if (formSubmitHandler() && f['photo'].errors) {
+							<div class="invalid-feedback">
+								@if (f['photo'].errors['required']) {
+								<div>Please Upload Photo</div>
+								}
+								@if (f['photo'].errors['invalidImage']) {
+								<div>Photo must be JPEG or PNG.</div>
+								}
+							</div>
+							}
+						</div>
+
+
+						<!--Aadhar-->
+						<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+							<label for="aadhar" class="form-label"><span class="b">Aadhar </span> <span class="required">*</span></label>
+							<input type="file" class="form-control" accept=".pdf" (change)="onFileChange($event, 'aadhar')" id="aadhar" placeholder="Choose Aadhar" formControlName="aadhar" [ngClass]="{'is-invalid': formSubmitHandler() && f['aadhar'].errors}" />
+							@if (formSubmitHandler() && f['aadhar'].errors) {
+							<div class="invalid-feedback">
+								@if (f['aadhar'].errors['required']) {
+								<div>Please Upload Aadhar</div>
+								}
+								@if (f['aadhar'].errors['invalidPdf']) {
+								<div>Aadhar must be PDF only.</div>
+								}
+							</div>
+							}
+						</div>
+
+						<!--PAN-->
+						<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+							<label for="pan" class="form-label"><span class="b">PAN </span> <span class="required">*</span></label>
+							<input type="file" class="form-control" accept=".pdf" (change)="onFileChange($event, 'pan')" id="pan" placeholder="Choose PAN" formControlName="pan" [ngClass]="{'is-invalid': formSubmitHandler() && f['pan'].errors}" />
+							@if (formSubmitHandler() && f['pan'].errors) {
+							<div class="invalid-feedback">
+								@if (f['pan'].errors['required']) {
+								<div>Please Upload PAN</div>
+								}
+								@if (f['pan'].errors['invalidPdf']) {
+								<div>PAN must be PDF only.</div>
+								}
+							</div>
+							}
+						</div>
+
+						<!--Bank Cheque-->
+						<div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-6 mb-4">
+							<label for="cheque_book" class="form-label"><span class="b">Bank Cheque </span> <span class="required">*</span></label>
+							<input type="file" class="form-control" accept=".pdf" (change)="onFileChange($event, 'cheque_book')" id="cheque_book" placeholder="Choose Bank Cheque" formControlName="cheque_book" [ngClass]="{'is-invalid': formSubmitHandler() && f['cheque_book'].errors}" />
+							@if (formSubmitHandler() && f['cheque_book'].errors) {
+							<div class="invalid-feedback">
+								@if (f['cheque_book'].errors['required']) {
+								<div>Please Upload Bank Cheque</div>
+								}
+								@if (f['cheque_book'].errors['invalidPdf']) {
+								<div>Bank Cheque must be PDF only.</div>
+								}
+							</div>
+							}
+						</div>
+					</div>
+					<div class="desktop-view-only">
+						<hr class="mt-0" />
+						<div class="d-flex justify-content-between gap-2">
+							<button type="submit" class="btn btn-primary d-flex-btn">
+								<span class="material-symbols-outlined">backup</span>
+								<span class="desktop-view-only">Save Details</span>
+							</button>
+
+							<button type="button" class="btn btn-danger d-flex-btn">
+								<span class="material-symbols-outlined">restart_alt</span>
+								<span class="desktop-view-only">Reset</span>
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="bottom mobile-view-only">
+			<div class="container d-flex justify-content-between gap-2">
+				<button type="submit" class="btn btn-sm btn-primary d-flex-btn">
+					<span class="material-symbols-outlined">backup</span>
+					<span>Save Details</span>
+				</button>
+				<button type="button" class="btn btn-sm btn-danger d-flex-btn">
+					<span class="material-symbols-outlined">restart_alt</span>
+					<span class="desktop-view-only">Reset</span>
+				</button>
+			</div>
+		</div>
+	</div>
+</form>

@@ -26,6 +26,8 @@
     "@popperjs/core": "^2.11.8",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.3.8",
+    "material-symbols": "^0.40.2",
+    "ngx-autosize": "^2.0.4",
     "ngx-owl-carousel-o": "^17.0.1",
     "ngx-toastr": "^19.1.0",
     "rxjs": "~7.8.0",

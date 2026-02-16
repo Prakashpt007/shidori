@@ -23,15 +23,15 @@
 				<div class="view-toggle">
 					<div class="btn-group btn-group-sm" role="group" aria-label="Employee assignment filter">
 						<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" [checked]="empStatus() === 'assigned'" (change)="setEmpStatus('assigned')">
-						<label class="btn" [ngClass]="empStatus() === 'assigned' ? 'btn-primary' : 'btn-outline-secondary'" for="btnradio1">
+						<label class="btn" [ngClass]="empStatus() === 'assigned' ? 'btn-primary' : 'btn-secondary'" for="btnradio1">
 							<i class="fa-solid fa-user-check me-1"></i>
-							Assigned
+							<span class="desktop-view-only">Assigned</span>
 						</label>
 
 						<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" [checked]="empStatus() === 'not-assigned'" (change)="setEmpStatus('not-assigned')">
-						<label class="btn" [ngClass]="empStatus() === 'not-assigned' ? 'btn-primary' : 'btn-outline-secondary'" for="btnradio2">
+						<label class="btn" [ngClass]="empStatus() === 'not-assigned' ? 'btn-primary' : 'btn-secondary'" for="btnradio2">
 							<i class="fa-regular fa-circle-xmark me-1"></i>
-							Not Assigned
+							<span class="desktop-view-only">Not Assigned</span>
 						</label>
 					</div>
 
@@ -91,10 +91,10 @@
 					</div>
 
 					<div class="actions">
-						<button type="button" class="btn btn-sm btn-outline-primary">
+						<button type="button" class="btn btn-sm btn-secondary">
 							<i class="fa-regular fa-eye"></i> View
 						</button>
-						<button type="button" class="btn btn-sm btn-outline-secondary">
+						<button type="button" class="btn btn-sm btn-secondary">
 							<i class="fa-regular fa-pen-to-square"></i> Edit
 						</button>
 					</div>
