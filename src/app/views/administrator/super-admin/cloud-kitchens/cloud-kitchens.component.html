@@ -2,30 +2,61 @@
 	<div class="top">
 		<div class="container">
 			<div class="grid-container-toolbar">
+				<!-- Role dropdown -->
+				<div class="dropdown">
+					<button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						List of {{ getStateButtonLabel() }}
+					</button>
+
+					<ul class="dropdown-menu">
+						@for (opt of stateOptions(); track opt.value) {
+						<li>
+							<button type="button" class="dropdown-item" [class.active]="stateFilter() === opt.value" (click)="setStateFilter(opt.value)">
+								{{ opt.label }}
+							</button>
+						</li>
+						}
+					</ul>
+				</div>
+
+				<!-- Assigned / Not Assigned toggle -->
 				<div class="view-toggle">
-					<div class="btn-group btn-group-sm" role="group" aria-label="Kitchen assignment filter">
+					<div class="btn-group btn-group-sm" role="group" aria-label="Employee assignment filter">
 						<input type="radio" class="btn-check" name="btnradio" id="btnradio1" autocomplete="off" [checked]="empStatus() === 'assigned'" (change)="setEmpStatus('assigned')">
-						<label class="btn" [ngClass]="empStatus() === 'assigned' ? 'btn-primary' : 'btn-outline-secondary'" for="btnradio1">
+						<label class="btn" [ngClass]="empStatus() === 'assigned' ? 'btn-primary' : 'btn-secondary'" for="btnradio1">
 							<i class="fa-solid fa-user-check me-1"></i>
-							Assigned
+							<span class="desktop-view-only">Assigned</span>
 						</label>
 
 						<input type="radio" class="btn-check" name="btnradio" id="btnradio2" autocomplete="off" [checked]="empStatus() === 'not-assigned'" (change)="setEmpStatus('not-assigned')">
-						<label class="btn" [ngClass]="empStatus() === 'not-assigned' ? 'btn-primary' : 'btn-outline-secondary'" for="btnradio2">
+						<label class="btn" [ngClass]="empStatus() === 'not-assigned' ? 'btn-primary' : 'btn-secondary'" for="btnradio2">
 							<i class="fa-regular fa-circle-xmark me-1"></i>
-							Not Assigned
+							<span class="desktop-view-only">Not Assigned</span>
 						</label>
 					</div>
+
+					<div class="vr"></div>
+
+					<a [routerLink]="['/admin/cloud-kitchen/add']" type="button" class="btn btn-sm btn-secondary d-flex-btn">
+						<i class="fa-solid fa-plus"></i>
+						<span class="desktop-view-only">Add New Kitchen</span>
+					</a>
+
+					<!-- <button class="btn btn-secondary btn-sm">
+						<i class="fa-solid fa-plus"></i>
+						<span class="desktop-view-only">Add Employee</span>
+					</button> -->
 				</div>
 			</div>
 		</div>
-	</div>
 
+		<!-- <hr class="mb-0" /> -->
+	</div>
 	<div class="middle">
 		<div class="container">
-			<ul class="default-item-list">
+			<ul class="default-item-list" [class.no-results]="list().length == 0">
 				@for (item of list(); track item.kitchen_id) {
-				<li class="default-item-card">
+				<li class="default-item-card cols-2">
 					<div class="info">
 						<div class="name">{{ item.kitchen_id }}</div>
 						<div class="position text-capitalize">
@@ -44,10 +75,10 @@
 					</div>
 
 					<div class="actions">
-						<button type="button" class="btn btn-sm btn-outline-primary">
+						<button type="button" class="btn btn-sm btn-secondary">
 							<i class="fa-regular fa-eye"></i> View
 						</button>
-						<button type="button" class="btn btn-sm btn-outline-secondary">
+						<button type="button" class="btn btn-sm btn-secondary">
 							<i class="fa-regular fa-pen-to-square"></i> Edit
 						</button>
 					</div>
@@ -64,42 +95,13 @@
 	</div>
 
 
-
-
-	<div class="bottom" *ngIf="totalItems() > 0">
+	@if(totalItems() > 0){
+	<div class="bottom">
 		<!-- <hr class="mt-0" /> -->
 		<div class="container">
 			<app-pagination [totalRecords]="totalItems()" [currentPage]="page()" [recordsPerPage]="size()" [pageSizeList]="pageSizes" (onPageChange)="setPage($event)" (onPageSizeChange)="setSize($event)">
 			</app-pagination>
 		</div>
 	</div>
-
-
-
-	<div style="    position: fixed;
-    right: 1rem;
-    bottom: 85px;
-    background-color: #ffffff;
-    border-radius: 100%;
-    box-shadow: 0 0 40px #000000;">
-
-		<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon button with a vertical three dot icon">
-			<mat-icon>more_vert</mat-icon>
-		</button>
-
-		<mat-menu #menu="matMenu">
-			<button mat-menu-item>
-				<mat-icon>dialpad</mat-icon>
-				<span>Redial</span>
-			</button>
-			<button mat-menu-item disabled>
-				<mat-icon>voicemail</mat-icon>
-				<span>Check voice mail</span>
-			</button>
-			<button mat-menu-item>
-				<mat-icon>notifications_off</mat-icon>
-				<span>Disable alerts</span>
-			</button>
-		</mat-menu>
-	</div>
+	}
 </div>

@@ -35,7 +35,7 @@
 						</label>
 					</div>
 
-					<div class="vr d-none d-lg-block"></div>
+					<div class="vr"></div>
 
 
 					<div class="dropdown">
@@ -69,7 +69,7 @@
 
 	<div class="middle">
 		<div class="container">
-			<ul class="default-item-list">
+			<ul class="default-item-list" [class.no-results]="list().length == 0">
 				@for (item of list(); track item.emp_id) {
 				<li class="default-item-card">
 					@if (item.thumbnail != '') {
@@ -110,11 +110,13 @@
 		</div>
 	</div>
 
-	<div class="bottom" *ngIf="totalItems() > 0">
+	@if(totalItems() > 0){
+	<div class="bottom">
 		<!-- <hr class="mt-0" /> -->
 		<div class="container">
 			<app-pagination [totalRecords]="totalItems()" [currentPage]="page()" [recordsPerPage]="size()" [pageSizeList]="pageSizes" (onPageChange)="setPage($event)" (onPageSizeChange)="setSize($event)">
 			</app-pagination>
 		</div>
 	</div>
+	}
 </div>

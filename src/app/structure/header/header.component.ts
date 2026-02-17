@@ -155,7 +155,7 @@ export class HeaderComponent {
 
 		this.genericHttp.getDataUsingURL(url).subscribe({
 			next: (response: any) => {
-				if (response.success === 200 || response.success === true) {
+				if (response.status === 200 && response.success === true) {
 					this.cityList.set(response.data || []);
 				} else {
 					this.cityList.set([]);

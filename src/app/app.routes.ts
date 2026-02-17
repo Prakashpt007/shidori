@@ -173,6 +173,11 @@ export const routes: Routes = [
 						loadComponent: () => import('./views/administrator/super-admin/cloud-kitchens/cloud-kitchens.component').then(c => c.CloudKitchensComponent),
 						data: { title: "Cloud Kitchens" }
 					},
+					{
+						path: "add",
+						loadComponent: () => import('./views/administrator/super-admin/cloud-kitchens/kitchen/kitchen.component').then(c => c.KitchenComponent),
+						data: { title: "Add Kitchen" }
+					},
 				]
 			},
 			{

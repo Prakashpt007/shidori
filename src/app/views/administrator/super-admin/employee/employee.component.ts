@@ -156,7 +156,7 @@ export class EmployeeComponent {
 
 		this.genericHttp.getDataUsingURL(urlWithParams).subscribe({
 			next: (response: any) => {
-				if (response.success === 200 || response.success === true) {
+				if (response.status === 200 && response.success === true) {
 					const all: Employee[] = response.data;
 					const filtered = this.applyClientFilters(all, empStatus, role); // temp client-side
 					this.totalItems.set(filtered.length);

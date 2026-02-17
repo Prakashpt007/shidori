@@ -60,18 +60,18 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnDestroy {
 				status: false
 			},
 			{
-				icon: 'badge',
-				name: 'Employee',
-				label: 'Employees',
-				href: '/admin/employee/list',
-				subMenu: [],
-				status: false
-			},
-			{
 				icon: 'kitchen',
 				name: 'cloud-kitchens',
 				label: 'Cloud Kitchens',
 				href: '/admin/cloud-kitchen/list',
+				subMenu: [],
+				status: false
+			},
+			{
+				icon: 'badge',
+				name: 'Employee',
+				label: 'Employees',
+				href: '/admin/employee/list',
 				subMenu: [],
 				status: false
 			},

@@ -117,6 +117,7 @@ a {
 	justify-content: center;
 	align-items: center;
 	gap: 0.25rem;
+	min-height: 31px;
 }
 
 
@@ -568,6 +569,10 @@ label {
 
 /* ================= RESPONSIVE ================= */
 
+.dropdown-menu {
+	max-height: 350px;
+	overflow: auto;
+}
 
 .default-item-list {
 	list-style: none;
@@ -580,11 +585,22 @@ label {
 	@media (min-width: 768px) {
 		// tablet: still 1 column
 		grid-template-columns: repeat(1, minmax(0, 1fr));
+
+		&.no-results {
+			grid-template-columns: 1fr;
+		}
 	}
 
 	@media (min-width: 1200px) {
+
 		// large desktop: 2 columns
+
 		grid-template-columns: repeat(2, minmax(0, 1fr));
+
+		&.no-results {
+			grid-template-columns: 1fr;
+		}
+
 	}
 
 	.default-item-card {
@@ -598,6 +614,11 @@ label {
 		// box-shadow: 0 1px 3px rgba(15, 23, 42, 0.08);
 		box-shadow: rgba(0, 0, 0, 0.4) 0 0.125rem 0.25rem, rgba(0, 0, 0, 0.3019607843) 0 0.4375rem 0.8125rem -0.1875rem, rgba(0, 0, 0, 0.2) 0 -0.1875rem inset;
 		min-height: 80px;
+
+
+		&.cols-2 {
+			grid-template-columns: minmax(0, 1fr) auto;
+		}
 
 		@media (max-width: 576px) {
 			grid-template-columns: 1fr;
@@ -723,15 +744,23 @@ label {
 
 	.view-toggle {
 		display: flex;
-		justify-content: flex-end;
-		flex: 1 1 auto;
+		// justify-content: flex-end;
+		// flex: 1 1 auto;
 		gap: 1rem;
+		align-items: center;
+
+		span {
+			&.b {
+				font-weight: 500;
+			}
+		}
 
 		.btn {
 			display: flex;
 			gap: 5px;
 			justify-items: center;
 			align-items: center;
+			min-height: 31px;
 		}
 	}
 

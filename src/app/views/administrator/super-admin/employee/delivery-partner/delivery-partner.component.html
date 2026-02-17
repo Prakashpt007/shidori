@@ -4,17 +4,19 @@
 			<div class="container">
 				<div class="grid-container-toolbar">
 					<a [routerLink]="['/admin/employee/list']" type="button" class="btn btn-sm btn-secondary d-flex-btn">
-						<span class="material-symbols-outlined">arrow_left_alt</span>
+						<i class="fa-solid fa-arrow-left"></i>
 						<span class="desktop-view-only">Back To List</span>
 					</a>
 
 					<h4 class="m-0">Add Delivery Partner</h4>
 
 					<div class="dropdown">
-						<button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<button class="btn btn-secondary btn-sm dropdown-toggle d-flex-btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 							<i class="fa-solid fa-plus"></i>
 							<span class="desktop-view-only">Add Employee</span>
 						</button>
+
+
 						<ul class="dropdown-menu">
 							<li>
 								<a class="dropdown-item" [routerLink]="['/admin/employee/add-manager']">Manager</a>

@@ -72,7 +72,7 @@ export class WishlistComponent {
 		this.genericHttp.postDataWithBody(this.listApi(), { ids })
 			.subscribe({
 				next: (response: any) => {
-					if (response.success === 200 || response.success === true) {
+					if (response.status === 200 && response.success === true) {
 						this.wishlistItems.set(response.data as Item[]);
 					} else {
 						this.toastr.error(response.message, response.status);
