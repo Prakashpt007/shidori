@@ -1,0 +1,34 @@
+<div class="dropdown">
+	<button class="btn btn-sm btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+		List of {{ buttonLabel() }}
+	</button>
+
+	<ul class="dropdown-menu" style="min-width: 250px;">
+		<!-- Search -->
+		<li class="fix border-bottom" *ngIf="options().length > 5">
+			<div class="input-group input-group-sm">
+				<span class="input-group-text">
+					<i class="fas fa-search"></i>
+				</span>
+				<input type="search" class="form-control" [placeholder]="'Search ' + placeholder()" [(ngModel)]="searchTerm" (input)="filterOptions()">
+			</div>
+		</li>
+
+		<!-- Results -->
+		<div class="items">
+			<ng-container *ngFor="let opt of filteredOptions();">
+
+				<li>
+					<button type="button" class="dropdown-item" [class.active]="selectedValue() === opt.value" (click)="selectOption(opt.value)">
+						{{ opt.label }}
+					</button>
+				</li>
+			</ng-container>
+		</div>
+
+		<!-- Empty state -->
+		<li class="no-result" *ngIf="filteredOptions().length === 0">
+			No {{ placeholder() }} match "{{ searchTerm() }}"
+		</li>
+	</ul>
+</div>

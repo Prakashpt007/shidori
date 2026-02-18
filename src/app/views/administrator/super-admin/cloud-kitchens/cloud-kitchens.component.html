@@ -3,7 +3,7 @@
 		<div class="container">
 			<div class="grid-container-toolbar">
 				<!-- Role dropdown -->
-				<div class="dropdown">
+				<!-- <div class="dropdown">
 					<button class="btn btn-sm btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 						List of {{ getStateButtonLabel() }}
 					</button>
@@ -17,7 +17,9 @@
 						</li>
 						}
 					</ul>
-				</div>
+				</div> -->
+
+				<app-searchable-dropdown [options]="stateOptions()" [selectedValue]="stateFilter()" placeholder="State" buttonPrefix="State" (valueChange)="setStateFilter($event)" />
 
 				<!-- Assigned / Not Assigned toggle -->
 				<div class="view-toggle">

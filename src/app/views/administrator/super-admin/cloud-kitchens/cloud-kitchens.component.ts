@@ -7,14 +7,14 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { PaginationComponent } from '../../../../utility/pagination/pagination.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { take } from 'rxjs/operators';
+import { SearchableDropdownComponent } from "../../../../utility/components/searchable-dropdown/searchable-dropdown.component";
 
 type KitchenAssignFilter = 'assigned' | 'not-assigned';
 
 @Component({
 	selector: 'app-cloud-kitchens',
 	standalone: true,
-	imports: [CommonModule, RouterLink, PaginationComponent, MatButtonModule, MatIconModule],
+	imports: [CommonModule, RouterLink, PaginationComponent, MatButtonModule, MatIconModule, SearchableDropdownComponent],
 	templateUrl: './cloud-kitchens.component.html',
 	styleUrl: './cloud-kitchens.component.scss'
 })
@@ -27,10 +27,13 @@ export class CloudKitchensComponent {
 	list = signal<Kitchen[]>([]);
 	empStatus = signal<KitchenAssignFilter>('assigned');
 	stateFilter = signal<string>('all');
+
+	// pagination
 	page = signal<number>(1);
 	size = signal<number>(20);
 	pageSizes = [10, 20, 30, 50, 100];
 	totalItems = signal<number>(0);
+
 	stateOptions = signal<{ id: number; label: string; value: string }[]>([]);
 
 	private readonly listApi = '/assets/jsons/kitchen.json';
@@ -40,43 +43,40 @@ export class CloudKitchensComponent {
 		// Load states first
 		this.loadStates();
 
-		// Subscribe to query param changes
 		this.route.queryParamMap.subscribe(params => {
-			this.updateFromQueryParams(params);
-		});
-	}
+			const pageParam = params.get('page');
+			const sizeParam = params.get('size');
+			const assignedParam = params.get('assigned');
+			const stateParam = params.get('state') || 'all';
 
-	private updateFromQueryParams(params: any) {
-		// Handle pagination params
-		const pageParam = params.get('page');
-		const sizeParam = params.get('size');
-		if (pageParam) {
-			const p = Number(pageParam);
-			if (p > 0) this.page.set(p);
-		}
-		if (sizeParam) {
-			const s = Number(sizeParam);
-			if (s > 0) this.size.set(s);
-		}
+			// page / size (override defaults if present)
+			if (pageParam) {
+				const p = Number(pageParam);
+				if (p > 0) this.page.set(p);
+			}
+			if (sizeParam) {
+				const s = Number(sizeParam);
+				if (s > 0) this.size.set(s);
+			}
 
-		// Handle assigned filter
-		const assignedParam = params.get('assigned');
-		if (assignedParam === 'true') {
-			this.empStatus.set('assigned');
-		} else if (assignedParam === 'false') {
-			this.empStatus.set('not-assigned');
-		}
+			// assigned filter
+			if (assignedParam === 'true') {
+				this.empStatus.set('assigned');
+			} else if (assignedParam === 'false') {
+				this.empStatus.set('not-assigned');
+			}
 
-		// Handle state filter - SET IMMEDIATELY from URL
-		const stateParam = params.get('state') || 'all';
-		this.stateFilter.set(stateParam);
+			this.stateFilter.set(stateParam);
 
-		// Fetch if core params present
-		if (pageParam && sizeParam && assignedParam) {
+
+			// normalize URL if any param is missing
+			if (!pageParam || !sizeParam || !assignedParam || !stateParam) {
+				this.updateQueryParams(true); // replaceUrl to avoid extra history entry
+				return;
+			}
+
 			this.fetchKitchens();
-		} else {
-			this.updateQueryParams(true);
-		}
+		});
 	}
 
 	private loadStates() {
@@ -102,8 +102,6 @@ export class CloudKitchensComponent {
 			}
 		});
 	}
-
-
 	private updateQueryParams(replace = false) {
 		this.router.navigate([], {
 			relativeTo: this.route,
@@ -124,16 +122,12 @@ export class CloudKitchensComponent {
 		this.updateQueryParams();
 	}
 
+
 	setStateFilter(value: string) {
 		this.stateFilter.set(value);
-		this.empStatus.set('assigned');
+		// this.empStatus.set('assigned');
 		this.page.set(1);
 		this.updateQueryParams();
-	}
-
-	getStateButtonLabel(): string {
-		const option = this.stateOptions().find(opt => opt.value === this.stateFilter());
-		return option?.label || 'All States';
 	}
 
 	setPage(page: number) {
@@ -142,10 +136,16 @@ export class CloudKitchensComponent {
 		this.updateQueryParams();
 	}
 
-	setSize(size: number) {
-		this.size.set(Number(size));
+	setSize(event: any) {
+		const size = Number(event.target?.value ?? event);
+		this.size.set(size);
 		this.page.set(1);
 		this.updateQueryParams();
+	}
+
+	getStateButtonLabel(): string {
+		const option = this.stateOptions().find(opt => opt.value === this.stateFilter());
+		return option?.label || 'All States';
 	}
 
 	fetchKitchens() {

@@ -122,8 +122,7 @@ export class EmployeeComponent {
 	}
 
 	setSize(event: any) {
-		const size = Number(event.target ? event.target.value : event);
-		if (!size) return;
+		const size = Number(event.target?.value ?? event);
 		this.size.set(size);
 		this.page.set(1);
 		this.updateQueryParams();
